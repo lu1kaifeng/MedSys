@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="medModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="med">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="内部ID" Type="float" />
+          <Property Name="报告表编码" Type="nvarchar" MaxLength="255" />
+          <Property Name="首次/跟踪报告" Type="nvarchar" MaxLength="255" />
+          <Property Name="新的" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告类型" Type="nvarchar" MaxLength="255" />
+          <Property Name="严重不良反应" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告单位类别" Type="nvarchar" MaxLength="255" />
+          <Property Name="性别" Type="nvarchar" MaxLength="255" />
+          <Property Name="出生日期" Type="datetime" />
+          <Property Name="年龄" Type="float" />
+          <Property Name="年龄单位" Type="nvarchar" MaxLength="255" />
+          <Property Name="名族" Type="nvarchar" MaxLength="255" />
+          <Property Name="体重" Type="nvarchar" MaxLength="255" />
+          <Property Name="原患疾病" Type="nvarchar" MaxLength="255" />
+          <Property Name="医院名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="既往药品不良反应/事件" Type="nvarchar" MaxLength="255" />
+          <Property Name="家族药品不良反应/事件" Type="nvarchar" MaxLength="255" />
+          <Property Name="相关重要信息" Type="nvarchar" MaxLength="255" />
+          <Property Name="怀疑/并用" Type="nvarchar" MaxLength="255" />
+          <Property Name="序号" Type="float" />
+          <Property Name="批准文号" Type="nvarchar" MaxLength="255" />
+          <Property Name="商品名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="通用名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="剂型" Type="nvarchar" MaxLength="255" />
+          <Property Name="生产厂家" Type="nvarchar" MaxLength="255" />
+          <Property Name="生产批号" Type="float" />
+          <Property Name="用量" Type="float" />
+          <Property Name="用量单位" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药-日" Type="float" />
+          <Property Name="用药-次" Type="float" />
+          <Property Name="给药途径" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药开始时间" Type="datetime" />
+          <Property Name="用药结束时间" Type="datetime" />
+          <Property Name="用药原因" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应/事件发生时间" Type="datetime" />
+          <Property Name="不良反应/事件过程描述" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应结果" Type="nvarchar" MaxLength="255" />
+          <Property Name="后遗症表现" Type="nvarchar" MaxLength="255" />
+          <Property Name="死亡时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="死亡原因" Type="nvarchar" MaxLength="255" />
+          <Property Name="停药减药后反应是否减轻或消失" Type="nvarchar" MaxLength="255" />
+          <Property Name="再次使用可疑药是否出现同样反应" Type="nvarchar" MaxLength="255" />
+          <Property Name="对原患疾病影响" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告人评价" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告单位评价" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告日期" Type="datetime" />
+          <Property Name="报告单位请填写信息来源" Type="nvarchar" MaxLength="255" />
+          <Property Name="备注" Type="nvarchar" MaxLength="255" />
+          <Property Name="国家中心接收时间" Type="datetime" />
+          <Property Name="报告地区名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="县评价" Type="nvarchar" MaxLength="255" />
+          <Property Name="市评价" Type="nvarchar" MaxLength="255" />
+          <Property Name="省评价" Type="nvarchar" MaxLength="255" />
+          <Property Name="国家评价" Type="nvarchar" MaxLength="255" />
+          <Property Name="县评价时间" Type="datetime" />
+          <Property Name="市评价时间" Type="datetime" />
+          <Property Name="省评价时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="国家评价时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="medModelStoreContainer">
+          <EntitySet Name="med" EntityType="Self.med" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [med].[内部ID] AS [内部ID], 
+    [med].[报告表编码] AS [报告表编码], 
+    [med].[首次/跟踪报告] AS [首次/跟踪报告], 
+    [med].[新的] AS [新的], 
+    [med].[报告类型] AS [报告类型], 
+    [med].[严重不良反应] AS [严重不良反应], 
+    [med].[报告单位类别] AS [报告单位类别], 
+    [med].[性别] AS [性别], 
+    [med].[出生日期] AS [出生日期], 
+    [med].[年龄] AS [年龄], 
+    [med].[年龄单位] AS [年龄单位], 
+    [med].[名族] AS [名族], 
+    [med].[体重] AS [体重], 
+    [med].[原患疾病] AS [原患疾病], 
+    [med].[医院名称] AS [医院名称], 
+    [med].[既往药品不良反应/事件] AS [既往药品不良反应/事件], 
+    [med].[家族药品不良反应/事件] AS [家族药品不良反应/事件], 
+    [med].[相关重要信息] AS [相关重要信息], 
+    [med].[怀疑/并用] AS [怀疑/并用], 
+    [med].[序号] AS [序号], 
+    [med].[批准文号] AS [批准文号], 
+    [med].[商品名称] AS [商品名称], 
+    [med].[通用名称] AS [通用名称], 
+    [med].[剂型] AS [剂型], 
+    [med].[生产厂家] AS [生产厂家], 
+    [med].[生产批号] AS [生产批号], 
+    [med].[用量] AS [用量], 
+    [med].[用量单位] AS [用量单位], 
+    [med].[用药-日] AS [用药-日], 
+    [med].[用药-次] AS [用药-次], 
+    [med].[给药途径] AS [给药途径], 
+    [med].[用药开始时间] AS [用药开始时间], 
+    [med].[用药结束时间] AS [用药结束时间], 
+    [med].[用药原因] AS [用药原因], 
+    [med].[不良反应名称] AS [不良反应名称], 
+    [med].[不良反应/事件发生时间] AS [不良反应/事件发生时间], 
+    [med].[不良反应/事件过程描述] AS [不良反应/事件过程描述], 
+    [med].[不良反应结果] AS [不良反应结果], 
+    [med].[后遗症表现] AS [后遗症表现], 
+    [med].[死亡时间] AS [死亡时间], 
+    [med].[死亡原因] AS [死亡原因], 
+    [med].[停药减药后反应是否减轻或消失] AS [停药减药后反应是否减轻或消失], 
+    [med].[再次使用可疑药是否出现同样反应] AS [再次使用可疑药是否出现同样反应], 
+    [med].[对原患疾病影响] AS [对原患疾病影响], 
+    [med].[报告人评价] AS [报告人评价], 
+    [med].[报告单位评价] AS [报告单位评价], 
+    [med].[报告日期] AS [报告日期], 
+    [med].[报告单位请填写信息来源] AS [报告单位请填写信息来源], 
+    [med].[备注] AS [备注], 
+    [med].[国家中心接收时间] AS [国家中心接收时间], 
+    [med].[报告地区名称] AS [报告地区名称], 
+    [med].[县评价] AS [县评价], 
+    [med].[市评价] AS [市评价], 
+    [med].[省评价] AS [省评价], 
+    [med].[国家评价] AS [国家评价], 
+    [med].[县评价时间] AS [县评价时间], 
+    [med].[市评价时间] AS [市评价时间], 
+    [med].[省评价时间] AS [省评价时间], 
+    [med].[国家评价时间] AS [国家评价时间], 
+    [med].[ID] AS [ID]
+    FROM [dbo].[med] AS [med]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="medModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="med">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="内部ID" Type="Double" />
+          <Property Name="报告表编码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="首次_跟踪报告" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="新的" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告类型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="严重不良反应" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告单位类别" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="性别" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="出生日期" Type="DateTime" Precision="3" />
+          <Property Name="年龄" Type="Double" />
+          <Property Name="年龄单位" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="名族" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="体重" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="原患疾病" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="医院名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="既往药品不良反应_事件" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="家族药品不良反应_事件" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="相关重要信息" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="怀疑_并用" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="序号" Type="Double" />
+          <Property Name="批准文号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="商品名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="通用名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="剂型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="生产厂家" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="生产批号" Type="Double" />
+          <Property Name="用量" Type="Double" />
+          <Property Name="用量单位" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药_日" Type="Double" />
+          <Property Name="用药_次" Type="Double" />
+          <Property Name="给药途径" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药开始时间" Type="DateTime" Precision="3" />
+          <Property Name="用药结束时间" Type="DateTime" Precision="3" />
+          <Property Name="用药原因" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应_事件发生时间" Type="DateTime" Precision="3" />
+          <Property Name="不良反应_事件过程描述" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应结果" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="后遗症表现" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="死亡时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="死亡原因" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="停药减药后反应是否减轻或消失" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="再次使用可疑药是否出现同样反应" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="对原患疾病影响" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告人评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告单位评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告日期" Type="DateTime" Precision="3" />
+          <Property Name="报告单位请填写信息来源" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="备注" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="国家中心接收时间" Type="DateTime" Precision="3" />
+          <Property Name="报告地区名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="县评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="市评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="省评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="国家评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="县评价时间" Type="DateTime" Precision="3" />
+          <Property Name="市评价时间" Type="DateTime" Precision="3" />
+          <Property Name="省评价时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="国家评价时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="medEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="meds" EntityType="Self.med" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="medModelStoreContainer" CdmEntityContainer="medEntities1">
+          <EntitySetMapping Name="meds">
+            <EntityTypeMapping TypeName="medModel.med">
+              <MappingFragment StoreEntitySet="med">
+                <ScalarProperty Name="内部ID" ColumnName="内部ID" />
+                <ScalarProperty Name="报告表编码" ColumnName="报告表编码" />
+                <ScalarProperty Name="首次_跟踪报告" ColumnName="首次/跟踪报告" />
+                <ScalarProperty Name="新的" ColumnName="新的" />
+                <ScalarProperty Name="报告类型" ColumnName="报告类型" />
+                <ScalarProperty Name="严重不良反应" ColumnName="严重不良反应" />
+                <ScalarProperty Name="报告单位类别" ColumnName="报告单位类别" />
+                <ScalarProperty Name="性别" ColumnName="性别" />
+                <ScalarProperty Name="出生日期" ColumnName="出生日期" />
+                <ScalarProperty Name="年龄" ColumnName="年龄" />
+                <ScalarProperty Name="年龄单位" ColumnName="年龄单位" />
+                <ScalarProperty Name="名族" ColumnName="名族" />
+                <ScalarProperty Name="体重" ColumnName="体重" />
+                <ScalarProperty Name="原患疾病" ColumnName="原患疾病" />
+                <ScalarProperty Name="医院名称" ColumnName="医院名称" />
+                <ScalarProperty Name="既往药品不良反应_事件" ColumnName="既往药品不良反应/事件" />
+                <ScalarProperty Name="家族药品不良反应_事件" ColumnName="家族药品不良反应/事件" />
+                <ScalarProperty Name="相关重要信息" ColumnName="相关重要信息" />
+                <ScalarProperty Name="怀疑_并用" ColumnName="怀疑/并用" />
+                <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="批准文号" ColumnName="批准文号" />
+                <ScalarProperty Name="商品名称" ColumnName="商品名称" />
+                <ScalarProperty Name="通用名称" ColumnName="通用名称" />
+                <ScalarProperty Name="剂型" ColumnName="剂型" />
+                <ScalarProperty Name="生产厂家" ColumnName="生产厂家" />
+                <ScalarProperty Name="生产批号" ColumnName="生产批号" />
+                <ScalarProperty Name="用量" ColumnName="用量" />
+                <ScalarProperty Name="用量单位" ColumnName="用量单位" />
+                <ScalarProperty Name="用药_日" ColumnName="用药-日" />
+                <ScalarProperty Name="用药_次" ColumnName="用药-次" />
+                <ScalarProperty Name="给药途径" ColumnName="给药途径" />
+                <ScalarProperty Name="用药开始时间" ColumnName="用药开始时间" />
+                <ScalarProperty Name="用药结束时间" ColumnName="用药结束时间" />
+                <ScalarProperty Name="用药原因" ColumnName="用药原因" />
+                <ScalarProperty Name="不良反应名称" ColumnName="不良反应名称" />
+                <ScalarProperty Name="不良反应_事件发生时间" ColumnName="不良反应/事件发生时间" />
+                <ScalarProperty Name="不良反应_事件过程描述" ColumnName="不良反应/事件过程描述" />
+                <ScalarProperty Name="不良反应结果" ColumnName="不良反应结果" />
+                <ScalarProperty Name="后遗症表现" ColumnName="后遗症表现" />
+                <ScalarProperty Name="死亡时间" ColumnName="死亡时间" />
+                <ScalarProperty Name="死亡原因" ColumnName="死亡原因" />
+                <ScalarProperty Name="停药减药后反应是否减轻或消失" ColumnName="停药减药后反应是否减轻或消失" />
+                <ScalarProperty Name="再次使用可疑药是否出现同样反应" ColumnName="再次使用可疑药是否出现同样反应" />
+                <ScalarProperty Name="对原患疾病影响" ColumnName="对原患疾病影响" />
+                <ScalarProperty Name="报告人评价" ColumnName="报告人评价" />
+                <ScalarProperty Name="报告单位评价" ColumnName="报告单位评价" />
+                <ScalarProperty Name="报告日期" ColumnName="报告日期" />
+                <ScalarProperty Name="报告单位请填写信息来源" ColumnName="报告单位请填写信息来源" />
+                <ScalarProperty Name="备注" ColumnName="备注" />
+                <ScalarProperty Name="国家中心接收时间" ColumnName="国家中心接收时间" />
+                <ScalarProperty Name="报告地区名称" ColumnName="报告地区名称" />
+                <ScalarProperty Name="县评价" ColumnName="县评价" />
+                <ScalarProperty Name="市评价" ColumnName="市评价" />
+                <ScalarProperty Name="省评价" ColumnName="省评价" />
+                <ScalarProperty Name="国家评价" ColumnName="国家评价" />
+                <ScalarProperty Name="县评价时间" ColumnName="县评价时间" />
+                <ScalarProperty Name="市评价时间" ColumnName="市评价时间" />
+                <ScalarProperty Name="省评价时间" ColumnName="省评价时间" />
+                <ScalarProperty Name="国家评价时间" ColumnName="国家评价时间" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
