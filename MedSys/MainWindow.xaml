@@ -28,8 +28,9 @@
             <Label Content="药品名称:"/>
             <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" />
             <TextBox  Name="MedName" Text="{Binding Path=MedName}" TextWrapping="Wrap" Width="120"/>
-            <RadioButton Name="MedQueyTypeExact" Content="精确" GroupName="MedQueyType"  IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
-            <RadioButton Name="MedQueyTypeContain" Content="包含" GroupName="MedQueyType" IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>
+            <!--<RadioButton Name="MedQueyTypeExact" Content="精确" GroupName="MedQueyType"  IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
+            <RadioButton Name="MedQueyTypeContain" Content="包含" GroupName="MedQueyType" IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
+            <local:ExactOrContain  GroupName="MedQueyType" IsExact="{Binding Path=MedNameTypeExactOrContain,Mode=OneWayToSource}" />
             <Label Content="生产批号:"/>
             <TextBox Name="MedBatchNo" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120"/>
           
@@ -38,8 +39,9 @@
             <Label Content="生产厂家:"/>
 
             <TextBox Name="ManufacturerName" TextWrapping="Wrap" Text="{Binding Path=ManufacturerName}" Width="120"/>
-            <RadioButton Content="精确" Name="ManufacturerQueyTypeExact" GroupName="ManufacturerQueyType" IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
-            <RadioButton Content="包含" Name="ManufacturerQueyTypeContain" GroupName="ManufacturerQueyType"  IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>
+            <!--<RadioButton Content="精确" Name="ManufacturerQueyTypeExact" GroupName="ManufacturerQueyType" IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
+            <RadioButton Content="包含" Name="ManufacturerQueyTypeContain" GroupName="ManufacturerQueyType"  IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
+            <local:ExactOrContain  GroupName="ManufacturerQueyType" IsExact="{Binding Path=ManufacturerQueyTypeExactOrContain,Mode=OneWayToSource}" />
             <Label Content="批准文号:"/>
             <TextBox Name="ApprovalNo" Text="{Binding Path=ApprovalNo}" TextWrapping="Wrap" Width="120"/>
         </StackPanel>
