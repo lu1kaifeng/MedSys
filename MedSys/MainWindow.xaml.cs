@@ -1,10 +1,12 @@
 ﻿using MedSys.Converters;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -17,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MedSys.MedNameListView;
+using static MedSys.TextInputListView;
 
 namespace MedSys
 {
@@ -216,6 +220,50 @@ namespace MedSys
                 OnPropertyChanged();
             }
         }
+
+
+        private ObservableCollection<MedNameListViewModel> _medNameList = new ObservableCollection<MedNameListViewModel>(new MedNameListViewModel[] { new MedNameListViewModel() });
+        public ObservableCollection<MedNameListViewModel> MedNameList
+        {
+            get
+            {
+                return _medNameList;
+            }
+            set
+            {
+                _medNameList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<TextInputListViewModel> _manufacturerNameList  = new ObservableCollection<TextInputListViewModel>(new TextInputListViewModel[] { new TextInputListViewModel() });
+        public ObservableCollection<TextInputListViewModel> ManufacturerNameList
+        {
+            get
+            {
+                return _manufacturerNameList;
+            }
+            set
+            {
+                _manufacturerNameList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<TextInputListViewModel> _commercialNameList = new ObservableCollection<TextInputListViewModel>(new TextInputListViewModel[] { new TextInputListViewModel() });
+        public ObservableCollection<TextInputListViewModel> CommercialNameList
+        {
+            get
+            {
+                return _commercialNameList;
+            }
+            set
+            {
+                _commercialNameList = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)

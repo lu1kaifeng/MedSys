@@ -5,61 +5,193 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MedSys" xmlns:local1="clr-namespace:MedSys.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <local1:RadioIntToBoolConverter x:Key="radioBoolToIntConverter" />
         <local1:CheckBoxesToListConverter x:Key="checkBoxesToListConverter" />
     </Window.Resources>
 
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <Label Content="时间类型:"/>
-            <ComboBox Name="TimeType" Width="120" ItemsSource="{Binding Path=TimeTypeEntries}" SelectedValue="{Binding Path=TimeTypeEntry}">
-               
-                
-            </ComboBox>
-            <ComboBox Name="TimeRange" Width="120"  ItemsSource="{Binding Path=TimeRangeEntries}" SelectedValue="{Binding Path=TimeRangeEntry}"/>
-            <DatePicker Name="FromTimePicker" IsEnabled="{Binding Path=DatePickerEnabled}" SelectedDate="{Binding Path=FromDate}" Text="由日期" />
-            <Label Content="-"/>
-            <DatePicker  Name="ToTimePicker" IsEnabled="{Binding Path=DatePickerEnabled}"  SelectedDate="{Binding Path=ToDate}" Text="至日期"  />
-           
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="药品名称:"/>
-            <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" />
-            <TextBox  Name="MedName" Text="{Binding Path=MedName}" TextWrapping="Wrap" Width="120"/>
-            <!--<RadioButton Name="MedQueyTypeExact" Content="精确" GroupName="MedQueyType"  IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
-            <RadioButton Name="MedQueyTypeContain" Content="包含" GroupName="MedQueyType" IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
-            <local:ExactOrContain  GroupName="MedQueyType" IsExact="{Binding Path=MedNameTypeExactOrContain,Mode=OneWayToSource}" />
-            <Label Content="生产批号:"/>
-            <TextBox Name="MedBatchNo" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120"/>
-          
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="生产厂家:"/>
+    
+    <StackPanel>
+    <TabControl>
+        <TabItem Header="普通筛选">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="时间类型:"/>
+                        <ComboBox Name="TimeType" Width="120" ItemsSource="{Binding Path=TimeTypeEntries}" SelectedValue="{Binding Path=TimeTypeEntry}">
 
-            <TextBox Name="ManufacturerName" TextWrapping="Wrap" Text="{Binding Path=ManufacturerName}" Width="120"/>
-            <!--<RadioButton Content="精确" Name="ManufacturerQueyTypeExact" GroupName="ManufacturerQueyType" IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
-            <RadioButton Content="包含" Name="ManufacturerQueyTypeContain" GroupName="ManufacturerQueyType"  IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
-            <local:ExactOrContain  GroupName="ManufacturerQueyType" IsExact="{Binding Path=ManufacturerQueyTypeExactOrContain,Mode=OneWayToSource}" />
-            <Label Content="批准文号:"/>
-            <TextBox Name="ApprovalNo" Text="{Binding Path=ApprovalNo}" TextWrapping="Wrap" Width="120"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="不良反应名称:"/>
-            <TextBox Name="AdverseEffectName" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120"/>
-            <Button Content="MedDRA搜索"/>
-            <Label Content="不良反应结果:"/>
-            <ComboBox Name="AdverseEffectResult" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="报告对象:"/>
-            <CheckBox Name="SubjectInstitution" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}"/>
-            <CheckBox Name="SubjectHolderInitiated" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}"/>
-            <CheckBox Name="SubjectEnterprise" Content="经营企业"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=经营企业}"/>
-                <CheckBox Name="SubjectHolderFeedback" Content="持有人反馈上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人反馈上报}"/>
-            <CheckBox Name="SubjectOther" Content="其他"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=其他}"/>
-        </StackPanel>
-        <Button Content="Button" Click="Button_Click"/>
+
+                        </ComboBox>
+                        <ComboBox Name="TimeRange" Width="120"  ItemsSource="{Binding Path=TimeRangeEntries}" SelectedValue="{Binding Path=TimeRangeEntry}"/>
+                        <DatePicker Name="FromTimePicker" IsEnabled="{Binding Path=DatePickerEnabled}" SelectedDate="{Binding Path=FromDate}" Text="由日期" />
+                        <Label Content="-"/>
+                        <DatePicker  Name="ToTimePicker" IsEnabled="{Binding Path=DatePickerEnabled}"  SelectedDate="{Binding Path=ToDate}" Text="至日期"  />
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="药品名称:"/>
+                        <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" />
+                        <TextBox  Name="MedName" Text="{Binding Path=MedName}" TextWrapping="Wrap" Width="120"/>
+                        <!--<RadioButton Name="MedQueyTypeExact" Content="精确" GroupName="MedQueyType"  IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
+        <RadioButton Name="MedQueyTypeContain" Content="包含" GroupName="MedQueyType" IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
+                        <local:ExactOrContain  GroupName="MedQueyType" IsExact="{Binding Path=MedNameTypeExactOrContain,Mode=OneWayToSource}" />
+                        <Label Content="生产批号:"/>
+                        <TextBox Name="MedBatchNo" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120"/>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="生产厂家:"/>
+
+                        <TextBox Name="ManufacturerName" TextWrapping="Wrap" Text="{Binding Path=ManufacturerName}" Width="120"/>
+                        <!--<RadioButton Content="精确" Name="ManufacturerQueyTypeExact" GroupName="ManufacturerQueyType" IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
+        <RadioButton Content="包含" Name="ManufacturerQueyTypeContain" GroupName="ManufacturerQueyType"  IsChecked="{Binding Path=ManufacturerQueyTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
+                        <local:ExactOrContain  GroupName="ManufacturerQueyType" IsExact="{Binding Path=ManufacturerQueyTypeExactOrContain,Mode=OneWayToSource}" />
+                        <Label Content="批准文号:"/>
+                        <TextBox Name="ApprovalNo" Text="{Binding Path=ApprovalNo}" TextWrapping="Wrap" Width="120"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="不良反应名称:"/>
+                        <TextBox Name="AdverseEffectName" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120"/>
+                        <Button Content="MedDRA搜索"/>
+                        <Label Content="不良反应结果:"/>
+                        <ComboBox Name="AdverseEffectResult" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="报告对象:"/>
+                        <CheckBox Name="SubjectInstitution" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}"/>
+                        <CheckBox Name="SubjectHolderInitiated" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}"/>
+                        <CheckBox Name="SubjectEnterprise" Content="经营企业"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=经营企业}"/>
+                        <CheckBox Name="SubjectHolderFeedback" Content="持有人反馈上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人反馈上报}"/>
+                        <CheckBox Name="SubjectOther" Content="其他"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=其他}"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        <TabItem Header="高级筛选">
+                <StackPanel>
+                    <GroupBox Header="数据范围">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="报告对象:"/>
+                            <CheckBox Name="SubjectInstitutionAdvanced" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}"/>
+                            <CheckBox Name="SubjectHolderInitiatedAdvanced" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}"/>
+                            <CheckBox Name="SubjectEnterpriseAdvanced" Content="经营企业"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=经营企业}"/>
+                            <CheckBox Name="SubjectHolderFeedbackAdvanced" Content="持有人反馈上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人反馈上报}"/>
+                            <CheckBox Name="SubjectOtherAdvanced" Content="其他"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=其他}"/>
+                          
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="报告信息">
+                        <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="时间类型:"/>
+                            <ComboBox Name="TimeTypeAdvanced" Width="120" ItemsSource="{Binding Path=TimeTypeEntries}" SelectedValue="{Binding Path=TimeTypeEntry}">
+
+
+                            </ComboBox>
+                            <ComboBox Name="TimeRangeAdvanced" Width="120"  ItemsSource="{Binding Path=TimeRangeEntries}" SelectedValue="{Binding Path=TimeRangeEntry}"/>
+                            <DatePicker Name="FromTimePickerAdvanced" IsEnabled="{Binding Path=DatePickerEnabled}" SelectedDate="{Binding Path=FromDate}" Text="由日期" />
+                            <Label Content="-"/>
+                            <DatePicker  Name="ToTimePickerAdvanced" IsEnabled="{Binding Path=DatePickerEnabled}"  SelectedDate="{Binding Path=ToDate}" Text="至日期"  />
+
+                        </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="信息来源:"/>
+                                <ComboBox Name="InfoSourceAdvanced" Width="120"  />
+                                <!--ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}"-->
+                                <Label Content="报告预期:"/>
+                                <RadioButton Content="全部"/>
+                                <RadioButton Content="预期（已知）"/>
+                                <RadioButton Content="非预期（新的）"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="报告编码:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                <Label Content="至"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                <Label Content="报告类型:"/>
+                                <RadioButton Content="全部"/>
+                                <RadioButton Content="严重"/>
+                                <RadioButton Content="一般"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="境内外选择:"/>
+                                <RadioButton Content="全部"/>
+                                <RadioButton Content="境外报告"/>
+                                <RadioButton Content="境内报告"/>
+                                <Label Content="报告地区:"/>
+                                <ComboBox Name="ReportRegion" Width="120" />
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="药品信息">
+                        <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="药品名称：" />
+                            <local:MedNameListView Contents="{Binding Path=MedNameList}"/>
+                        </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="生产厂家：" />
+                                <local:TextInputListView x:Name="ManufacturerNameControl" Contents="{Binding Path=ManufacturerNameList}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="商品名称：" />
+                                <local:TextInputListView  x:Name="CommercialNameControl" Contents="{Binding Path=CommercialNameList}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="医院、患者信息">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="患者姓名:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                <Label Content="至"/>
+                                <Label Content="性别:"/>
+                                <RadioButton Content="全部"/>
+                                <RadioButton Content="男"/>
+                                <RadioButton Content="女"/>
+                                <RadioButton Content="不详"/>
+
+                                <Label Content="年龄（岁）:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                <Label Content="至"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="报告单位名称:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                <Label Content="医院名称:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                <Label Content="原患疾病:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="用药原因:"/>
+                                <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+                                
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="不良反应信息">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="不良反应名称:"/>
+                                <TextBox Name="AdverseEffectNameAdvanced" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120"/>
+                                <Button Content="MedDRA搜索"/>
+                                <Label Content="不良反应结果:"/>
+                                <ComboBox Name="AdverseEffectResultAdvanced" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="SMQ名称:"/>
+                                <TextBox Name="SMQName" Text="" TextWrapping="Wrap" Width="120"/>
+                                <Button Content="MedDRA搜索"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="其他选项">
+                    </GroupBox>
+                </StackPanel>
+        </TabItem>
+    </TabControl>
+    <Button Content="Button" Click="Button_Click"/>
     </StackPanel>
 </Window>

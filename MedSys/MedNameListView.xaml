@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="MedSys.MedNameListView"
+             x:Name="MedNameListViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MedSys"
+             mc:Ignorable="d" 
+             >
+    <StackPanel>
+        <ListView Margin="10" Name="PenisDataBinding" ItemsSource="{Binding ElementName=MedNameListViewControl, Path=Contents}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                        <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" />
+                        <TextBox Text="{Binding Path=Content}"  TextWrapping="Wrap" Width="120"/>
+                        <local:ExactOrContain IsExact="{Binding Path=IsExact,Mode=OneWayToSource}" />
+                </StackPanel>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="新增" Click="Button_Click" />
+            <Button Name="Remove" Content="移除" Click="Button_Click_1" IsEnabled="False"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
