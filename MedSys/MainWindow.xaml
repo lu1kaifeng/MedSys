@@ -95,12 +95,13 @@
                         </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="信息来源:"/>
-                                <ComboBox Name="InfoSourceAdvanced" Width="120"  />
+                                <ComboBox Name="InfoSource" Width="120"    ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}" />
                                 <!--ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}"-->
                                 <Label Content="报告预期:"/>
-                                <RadioButton Content="全部"/>
+                                <ComboBox Name="ReportEstimate" Width="120" ItemsSource="{Binding Path=ReportEstimateEntries}" SelectedValue="{Binding Path=ReportEstimateEntry}" />
+                                <!--<RadioButton Content="全部"/>
                                 <RadioButton Content="预期（已知）"/>
-                                <RadioButton Content="非预期（新的）"/>
+                                <RadioButton Content="非预期（新的）"/>-->
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="报告编码:"/>
@@ -108,15 +109,17 @@
                                 <Label Content="至"/>
                                 <TextBox TextWrapping="Wrap" Text="" Width="120"/>
                                 <Label Content="报告类型:"/>
-                                <RadioButton Content="全部"/>
+                                <ComboBox Name="ReportType" Width="120"   ItemsSource="{Binding Path=ReportTypeEntries}" SelectedValue="{Binding Path=ReportTypeEntry}" />
+                                <!--<RadioButton Content="全部"/>
                                 <RadioButton Content="严重"/>
-                                <RadioButton Content="一般"/>
+                                <RadioButton Content="一般"/>-->
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="境内外选择:"/>
-                                <RadioButton Content="全部"/>
+                                <ComboBox Name="IsDomestic" Width="120"  ItemsSource="{Binding Path=IsDomesticEntries}" SelectedValue="{Binding Path=IsDomesticEntry}" />
+                                <!--<RadioButton Content="全部"/>
                                 <RadioButton Content="境外报告"/>
-                                <RadioButton Content="境内报告"/>
+                                <RadioButton Content="境内报告"/>-->
                                 <Label Content="报告地区:"/>
                                 <ComboBox Name="ReportRegion" Width="120" />
                             </StackPanel>
@@ -124,7 +127,15 @@
                     </GroupBox>
                     <GroupBox Header="药品信息">
                         <StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="批准文号:"/>
+                                <TextBox Name="ApprovalNoAdvanced"  Text="{Binding Path=ApprovalNo}" TextWrapping="Wrap" Width="120"/>
+                                <Label Content="生产批号:"/>
+                                <TextBox Name="MedBatchNoAdvanced" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120"/>
+                                <Label Content="药品类型:"/>
+                                <ComboBox Name="MedType" Width="120" ItemsSource="{Binding Path=MedTypeEntries}" SelectedValue="{Binding Path=MedTypeEntry}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
                             <Label Content="药品名称：" />
                             <local:MedNameListView Contents="{Binding Path=MedNameList}"/>
                         </StackPanel>
@@ -136,6 +147,24 @@
                                 <Label Content="商品名称：" />
                                 <local:TextInputListView  x:Name="CommercialNameControl" Contents="{Binding Path=CommercialNameList}"/>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="药品分类:"/>
+                                <TextBox Name="MedClassification" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="基本药物:"/>
+                                <ComboBox Name="BaseMed" Width="120"  ItemsSource="{Binding Path=BaseMedEntries}" SelectedValue="{Binding Path=BaseMedEntry}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="剂型:"/>
+                                <TextBox Name="DosageForm" TextWrapping="Wrap" Width="120"/>
+                                <Label Content="给药途径:"/>
+                                <ComboBox Name="Delivery" Width="120"  ItemsSource="{Binding Path=DeliveryEntries}" SelectedValue="{Binding Path=DeliveryEntry}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="关注类别:"/>
+                                <ComboBox Name="FocusType" Width="120"  ItemsSource="{Binding Path=FocusTypeEntries}" SelectedValue="{Binding Path=FocusTypeEntry}"/>
+                            </StackPanel>
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="医院、患者信息">
@@ -145,10 +174,11 @@
                                 <TextBox TextWrapping="Wrap" Text="" Width="120"/>
                                 <Label Content="至"/>
                                 <Label Content="性别:"/>
-                                <RadioButton Content="全部"/>
+                                <ComboBox Name="Sex" Width="120" ItemsSource="{Binding Path=SexEntries}" SelectedValue="{Binding Path=SexEntry}" />
+                                <!--<RadioButton Content="全部"/>
                                 <RadioButton Content="男"/>
                                 <RadioButton Content="女"/>
-                                <RadioButton Content="不详"/>
+                                <RadioButton Content="不详"/>-->
 
                                 <Label Content="年龄（岁）:"/>
                                 <TextBox TextWrapping="Wrap" Text="" Width="120"/>
@@ -188,6 +218,13 @@
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="其他选项">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="OtherUnique" Content="剔除重复报告"  />
+                            <CheckBox Name="OtherNoOutlier" Content="剔除不标准数据"  />
+                            <Label Content="评价意见状态："/>
+                            <CheckBox Name="CommentStateCityCommented" Content="市级已评价"  />
+                            <CheckBox Name="CommentStateProvinceCommented" Content="省级已评价"  />
+                        </StackPanel>
                     </GroupBox>
                 </StackPanel>
         </TabItem>

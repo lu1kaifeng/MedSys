@@ -271,6 +271,177 @@ namespace MedSys
             }
         }
 
+        private readonly CollectionView _reportEstimateEntries = new CollectionView(Typing.ReportEstimateType);
+        private string _reportEstimateEntry = Typing.ReportEstimateType[0];
+
+        public CollectionView ReportEstimateEntries
+        {
+            get { return _reportEstimateEntries; }
+        }
+
+        public string ReportEstimateEntry
+        {
+            get { return _reportEstimateEntry; }
+            set
+            {
+                if (_reportEstimateEntry == value) return;
+                _reportEstimateEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _sexEntries = new CollectionView(Typing.SexType);
+        private string _sexEntry = Typing.SexType[0];
+
+        public CollectionView SexEntries
+        {
+            get { return _sexEntries; }
+        }
+
+        public string SexEntry
+        {
+            get { return _sexEntry; }
+            set
+            {
+                if (_sexEntry == value) return;
+                _sexEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _isDomesticEntries = new CollectionView(Typing.IsDomesticType);
+        private string _isDomesticEntry = Typing.IsDomesticType[0];
+
+        public CollectionView IsDomesticEntries
+        {
+            get { return _isDomesticEntries; }
+        }
+
+        public string IsDomesticEntry
+        {
+            get { return _isDomesticEntry; }
+            set
+            {
+                if (_isDomesticEntry == value) return;
+                _isDomesticEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _reportTypeEntries = new CollectionView(Typing.ReportTypeType);
+        private string _reportTypeEntry = Typing.ReportTypeType[0];
+
+        public CollectionView ReportTypeEntries
+        {
+            get { return _reportTypeEntries; }
+        }
+
+        public string ReportTypeEntry
+        {
+            get { return _reportTypeEntry; }
+            set
+            {
+                if (_reportTypeEntry == value) return;
+                _reportTypeEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _infoSourceEntries = new CollectionView(Typing.InfoSourceType);
+        private string _infoSourceEntry = Typing.InfoSourceType[0];
+
+        public CollectionView InfoSourceEntries
+        {
+            get { return _infoSourceEntries; }
+        }
+
+        public string InfoSourceEntry
+        {
+            get { return _infoSourceEntry; }
+            set
+            {
+                if (_infoSourceEntry == value) return;
+                _infoSourceEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _medTypeEntries = new CollectionView(Typing.MedTypeType);
+        private string _medTypeEntry = Typing.MedTypeType[0];
+
+        public CollectionView MedTypeEntries
+        {
+            get { return _medTypeEntries; }
+        }
+
+        public string MedTypeEntry
+        {
+            get { return _medTypeEntry; }
+            set
+            {
+                if (_medTypeEntry == value) return;
+                _medTypeEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _baseMedEntries = new CollectionView(Typing.BaseMedType);
+        private string _baseMedEntry = Typing.BaseMedType[0];
+
+        public CollectionView BaseMedEntries
+        {
+            get { return _baseMedEntries; }
+        }
+
+        public string BaseMedEntry
+        {
+            get { return _baseMedEntry; }
+            set
+            {
+                if (_baseMedEntry == value) return;
+                _baseMedEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _deliveryEntries = new CollectionView(Typing.DeliveryType);
+        private string _deliveryEntry = Typing.DeliveryType[0];
+
+        public CollectionView DeliveryEntries
+        {
+            get { return _deliveryEntries; }
+        }
+
+        public string DeliveryEntry
+        {
+            get { return _deliveryEntry; }
+            set
+            {
+                if (_deliveryEntry == value) return;
+                _deliveryEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private readonly CollectionView _focusTypeEntries = new CollectionView(Typing.FocusTypeType);
+        private string _focusTypeEntry = Typing.FocusTypeType[0];
+
+        public CollectionView FocusTypeEntries
+        {
+            get { return _focusTypeEntries; }
+        }
+
+        public string FocusTypeEntry
+        {
+            get { return _focusTypeEntry; }
+            set
+            {
+                if (_focusTypeEntry == value) return;
+                _focusTypeEntry = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)
