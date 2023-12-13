@@ -3,24 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static MedSys.MedNameListView;
 using static MedSys.TextInputListView;
 
@@ -47,8 +35,8 @@ namespace MedSys
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.All),
                 WriteIndented = false
             };
-            string json = JsonSerializer.Serialize(this.DataContext,options1);
-            
+            string json = JsonSerializer.Serialize(this.DataContext, options1);
+
             MessageBox.Show(json);
         }
     }
@@ -56,7 +44,7 @@ namespace MedSys
     {
         public MainWindowViewModel()
         {
-            
+
         }
         public bool DatePickerEnabled
         {
@@ -64,17 +52,17 @@ namespace MedSys
             {
                 return TimeRangeEntry == "自定义";
             }
-           
+
         }
 
         private DateTime _fromDate = DateTime.MinValue;
         public DateTime FromDate
         {
-            set { _fromDate = value;OnPropertyChanged(); }
+            set { _fromDate = value; OnPropertyChanged(); }
             get { return _fromDate; }
         }
 
-        private DateTime _toDate=DateTime.Now;
+        private DateTime _toDate = DateTime.Now;
         public DateTime ToDate
         {
             set { _toDate = value; OnPropertyChanged(); }
@@ -84,23 +72,25 @@ namespace MedSys
         private List<string> _reportSubject = new List<string>();
         public List<string> ReportSubject
         {
-            set { 
+            set
+            {
                 _reportSubject = value;
                 OnPropertyChanged();
             }
             get { return _reportSubject; }
         }
-        private string _medName="";
+        private string _medName = "";
         public string MedName
         {
-             get { return _medName; }
-            set {
+            get { return _medName; }
+            set
+            {
                 _medName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _medBatchNo="";
+        private string _medBatchNo = "";
         public string MedBatchNo
         {
             get { return _medBatchNo; }
@@ -110,15 +100,15 @@ namespace MedSys
                 OnPropertyChanged();
             }
         }
-        
-            private string _manufacturerName = "";
-              public string ManufacturerName
+
+        private string _manufacturerName = "";
+        public string ManufacturerName
         {
-            set { _manufacturerName = value; OnPropertyChanged();}
+            set { _manufacturerName = value; OnPropertyChanged(); }
             get { return _manufacturerName; }
         }
 
-            private string _approvalNo = "";
+        private string _approvalNo = "";
         public string ApprovalNo
         {
             set { _approvalNo = value; OnPropertyChanged(); }
@@ -126,7 +116,7 @@ namespace MedSys
         }
 
 
-        private string _adverseEffectName="";
+        private string _adverseEffectName = "";
         public string AdverseEffectName
         {
             set { _adverseEffectName = value; OnPropertyChanged(); }
@@ -146,10 +136,15 @@ namespace MedSys
         }
 
         private bool _manufacturerQueyTypeExactOrContain = true;
-        public bool ManufacturerQueyTypeExactOrContain { get { return _manufacturerQueyTypeExactOrContain; } set {
+        public bool ManufacturerQueyTypeExactOrContain
+        {
+            get { return _manufacturerQueyTypeExactOrContain; }
+            set
+            {
                 _manufacturerQueyTypeExactOrContain = value;
                 OnPropertyChanged();
-            } }
+            }
+        }
 
         private readonly CollectionView _timeTypeEntries = new CollectionView(Typing.TimeType);
         private string _timeTypeEntry = Typing.TimeType[0];
@@ -208,8 +203,8 @@ namespace MedSys
                 OnPropertyChanged(nameof(DatePickerEnabled));
             }
         }
-        
-            private readonly CollectionView _adverseEffectResultTypeEntries = new CollectionView(Typing.AdverseEffectResultType);
+
+        private readonly CollectionView _adverseEffectResultTypeEntries = new CollectionView(Typing.AdverseEffectResultType);
         private string _adverseEffectResultTypeEntry = Typing.AdverseEffectResultType[0];
 
         public CollectionView AdverseEffectResultTypeEntries
@@ -243,7 +238,7 @@ namespace MedSys
             }
         }
 
-        private ObservableCollection<TextInputListViewModel> _manufacturerNameList  = new ObservableCollection<TextInputListViewModel>(new TextInputListViewModel[] { new TextInputListViewModel() });
+        private ObservableCollection<TextInputListViewModel> _manufacturerNameList = new ObservableCollection<TextInputListViewModel>(new TextInputListViewModel[] { new TextInputListViewModel() });
         public ObservableCollection<TextInputListViewModel> ManufacturerNameList
         {
             get
@@ -442,6 +437,143 @@ namespace MedSys
             }
         }
 
+        private string _reportNoFrom = "";
+        public string ReportNoFrom
+        {
+            get { return _reportNoFrom; }
+            set
+            {
+                _reportNoFrom = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _reportNoTo = "";
+        public string ReportNoTo
+        {
+            get { return _reportNoTo; }
+            set
+            {
+                _reportNoTo = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _dosageForm = "";
+        public string DosageForm
+        {
+            get { return _dosageForm; }
+            set
+            {
+                _dosageForm = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _patientName = "";
+        public string PatientName
+        {
+            get { return _patientName; }
+            set
+            {
+                _patientName = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _ageFrom = "";
+        public string AgeFrom
+        {
+            get { return _ageFrom; }
+            set
+            {
+                _ageFrom = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _ageTo = "";
+        public string AgeTo
+        {
+            get { return _ageTo; }
+            set
+            {
+                _ageTo = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _reportUnitName = "";
+        public string ReportUnitName
+        {
+            get { return _reportUnitName; }
+            set
+            {
+                _reportUnitName = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _hospitalName = "";
+        public string HospitalName
+        {
+            get { return _hospitalName; }
+            set
+            {
+                _hospitalName = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _preexistingCondition = "";
+        public string PreexistingCondition
+        {
+            get { return _preexistingCondition; }
+            set
+            {
+                _preexistingCondition = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _medReason = "";
+        public string MedReason
+        {
+            get { return _medReason; }
+            set
+            {
+                _medReason = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _sMQName = "";
+        public string SMQName
+        {
+            get { return _sMQName; }
+            set
+            {
+                _sMQName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _otherUnique = false;
+        public bool OtherUnique
+        {
+            set { _otherUnique = value; OnPropertyChanged();}
+            get { return _otherUnique; }
+        }
+        private bool _otherNoOutlier = false;
+        public bool OtherNoOutlier
+        {
+            set { _otherNoOutlier = value; OnPropertyChanged(); }
+            get { return _otherNoOutlier; }
+        }
+
+        private bool _commentStateCityCommented = true;
+        public bool CommentStateCityCommented
+        {
+            set { _commentStateCityCommented = value; OnPropertyChanged(); }
+            get { return _commentStateCityCommented; }
+        }
+
+        private bool _commentStateProvinceCommented = true;
+        public bool CommentStateProvinceCommented
+        {
+            set { _commentStateProvinceCommented = value; OnPropertyChanged(); }
+            get { return _commentStateProvinceCommented; }
+        }
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)
@@ -449,5 +581,5 @@ namespace MedSys
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }
-    
+
 }
