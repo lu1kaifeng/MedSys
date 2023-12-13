@@ -8,7 +8,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,7 +42,12 @@ namespace MedSys
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string json = JsonSerializer.Serialize(this.DataContext);
+            var options1 = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.All),
+                WriteIndented = false
+            };
+            string json = JsonSerializer.Serialize(this.DataContext,options1);
             
             MessageBox.Show(json);
         }
