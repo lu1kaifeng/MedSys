@@ -13,10 +13,10 @@ namespace MedSys
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class medEntities1 : DbContext
+    public partial class medEntities : DbContext
     {
-        public medEntities1()
-            : base("name=medEntities1")
+        public medEntities()
+            : base("name=medEntities")
         {
         }
     
@@ -25,6 +25,6 @@ namespace MedSys
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<medEntities1> meds { get; set; }
+        public virtual DbSet<med> meds { get; set; }
     }
 }

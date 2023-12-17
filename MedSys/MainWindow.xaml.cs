@@ -11,6 +11,9 @@ using System.Windows;
 using System.Windows.Data;
 using static MedSys.MedNameListView;
 using static MedSys.TextInputListView;
+using System.Linq;
+using System.Data.Linq.SqlClient;
+using ScottPlot;
 
 namespace MedSys
 {
@@ -21,10 +24,12 @@ namespace MedSys
     {
         RadioIntToBoolConverter radioBoolToIntConverter = new RadioIntToBoolConverter();
         CheckBoxesToListConverter checkBoxesToListConverter = new CheckBoxesToListConverter();
+        CheckBoxesToListConverter baseMedConverter = new CheckBoxesToListConverter();
+        MainWindowViewModel viewModel = new MainWindowViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel viewModel = new MainWindowViewModel();
+          
             DataContext = viewModel;
         }
 
@@ -36,11 +41,50 @@ namespace MedSys
                 WriteIndented = false
             };
             string json = JsonSerializer.Serialize(this.DataContext, options1);
-
             MessageBox.Show(json);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var options1 = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.All),
+                WriteIndented = false
+            };
+            using (medEntities context = new medEntities())
+            {
+                var query = from med in context.meds select med;
+                var json = viewModel.Query();
+                Plot(json);
+                //MessageBox.Show(json);
+                // context.meds.Where((a) => SqlMethods.Like("",""));
+                return;
+            }
+        }
+
+        private void Plot(List<med> data)
+        {
+            List<double> dataX = new List<double>();
+            List<double> dataY = new List<double>();
+            foreach (var med in data)
+            {
+                int age = 0;
+                if (int.TryParse(med.年龄, out age))
+                {
+                    double weight = 0;
+                    if (double.TryParse(med.体重kg, out weight))
+                    {
+                        dataX.Add(age);
+                        dataY.Add(weight);
+                    }
+                }
+            }
+            WpfPlot.Plot.AddScatter(dataX.ToArray(),dataY.ToArray());
+            WpfPlot.Plot.AxisAuto();
+            WpfPlot.Refresh();
+        }
     }
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public partial class MainWindowViewModel : INotifyPropertyChanged
     {
         public MainWindowViewModel()
         {
@@ -50,12 +94,12 @@ namespace MedSys
         {
             get
             {
-                return TimeRangeEntry == "自定义";
+                return TimeRangeEntry == Typing.TimeRangeType[0];
             }
 
         }
 
-        private DateTime _fromDate = DateTime.MinValue;
+        private DateTime _fromDate = DateTime.Now.AddYears(-10);
         public DateTime FromDate
         {
             set { _fromDate = value; OnPropertyChanged(); }
@@ -380,23 +424,15 @@ namespace MedSys
             }
         }
 
-        private readonly CollectionView _baseMedEntries = new CollectionView(Typing.BaseMedType);
-        private string _baseMedEntry = Typing.BaseMedType[0];
-
-        public CollectionView BaseMedEntries
+        private List<string> _baseMed = new List<string>();
+        public List<string> BaseMed
         {
-            get { return _baseMedEntries; }
-        }
-
-        public string BaseMedEntry
-        {
-            get { return _baseMedEntry; }
             set
             {
-                if (_baseMedEntry == value) return;
-                _baseMedEntry = value;
+                _baseMed = value;
                 OnPropertyChanged();
             }
+            get { return _baseMed; }
         }
 
         private readonly CollectionView _deliveryEntries = new CollectionView(Typing.DeliveryType);

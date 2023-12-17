@@ -12,9 +12,9 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <StackPanel Orientation="Horizontal">
-                        <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" />
-                        <TextBox Text="{Binding Path=Content}"  TextWrapping="Wrap" Width="120"/>
-                        <local:ExactOrContain IsExact="{Binding Path=IsExact,Mode=OneWayToSource}" />
+                        <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding Path=Content}"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <local:ExactOrContain IsExact="{Binding Path=IsExact,Mode=OneWayToSource}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </StackPanel>
             </DataTemplate>
         </ListView.ItemTemplate>

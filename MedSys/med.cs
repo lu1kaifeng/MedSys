@@ -14,65 +14,115 @@ namespace MedSys
     
     public partial class med
     {
-        public Nullable<double> 内部ID { get; set; }
         public string 报告表编码 { get; set; }
-        public string 首次_跟踪报告 { get; set; }
-        public string 新的 { get; set; }
+        public string 首次或跟踪报告 { get; set; }
+        public string 是否境外报告 { get; set; }
+        public string 是否非预期 { get; set; }
         public string 报告类型 { get; set; }
-        public string 严重不良反应 { get; set; }
+        public string 不良反应严重性 { get; set; }
         public string 报告单位类别 { get; set; }
+        public string 患者姓名 { get; set; }
         public string 性别 { get; set; }
-        public Nullable<System.DateTime> 出生日期 { get; set; }
-        public Nullable<double> 年龄 { get; set; }
+        public string 出生日期 { get; set; }
+        public string 年龄 { get; set; }
         public string 年龄单位 { get; set; }
-        public string 名族 { get; set; }
-        public string 体重 { get; set; }
-        public string 原患疾病 { get; set; }
-        public string 医院名称 { get; set; }
-        public string 既往药品不良反应_事件 { get; set; }
-        public string 家族药品不良反应_事件 { get; set; }
+        public string 国籍 { get; set; }
+        public string 民族 { get; set; }
+        public string 种族 { get; set; }
+        public string 体重kg { get; set; }
+        public string 身高cm { get; set; }
+        public string 患者联系方式 { get; set; }
+        public string 疾病名称 { get; set; }
+        public string 疾病名称代码 { get; set; }
+        public string 相关疾病信息开始日期 { get; set; }
+        public string 相关疾病信息结束日期 { get; set; }
+        public string 报告当时疾病是否仍存在 { get; set; }
+        public string 既往药品史 { get; set; }
+        public string 既往药品史开始日期 { get; set; }
+        public string 既往药品史结束日期 { get; set; }
+        public string 治疗疾病药品史 { get; set; }
+        public string 治疗疾病药品史代码 { get; set; }
+        public string 医疗机构名称 { get; set; }
+        public string 病历号或门诊号 { get; set; }
+        public string 既往药品不良反应事件 { get; set; }
+        public string 家族药品不良反应事件 { get; set; }
         public string 相关重要信息 { get; set; }
-        public string 怀疑_并用 { get; set; }
-        public Nullable<double> 序号 { get; set; }
+        public string 怀疑或并用 { get; set; }
+        public string 药品序号 { get; set; }
         public string 批准文号 { get; set; }
         public string 商品名称 { get; set; }
         public string 通用名称 { get; set; }
+        public string 规格 { get; set; }
         public string 剂型 { get; set; }
-        public string 生产厂家 { get; set; }
-        public Nullable<double> 生产批号 { get; set; }
-        public Nullable<double> 用量 { get; set; }
-        public string 用量单位 { get; set; }
-        public Nullable<double> 用药_日 { get; set; }
-        public Nullable<double> 用药_次 { get; set; }
+        public string 持有人或生产厂家 { get; set; }
+        public string 失效期或有效期至 { get; set; }
+        public string 生产批号 { get; set; }
+        public string 用法用量 { get; set; }
         public string 给药途径 { get; set; }
-        public Nullable<System.DateTime> 用药开始时间 { get; set; }
-        public Nullable<System.DateTime> 用药结束时间 { get; set; }
-        public string 用药原因 { get; set; }
-        public string 不良反应名称 { get; set; }
-        public Nullable<System.DateTime> 不良反应_事件发生时间 { get; set; }
-        public string 不良反应_事件过程描述 { get; set; }
+        public string 用药开始时间选项 { get; set; }
+        public string 用药开始时间 { get; set; }
+        public string 用药结束时间选项 { get; set; }
+        public string 用药结束时间 { get; set; }
+        public string 用药时间 { get; set; }
+        public string 治疗适应症术语 { get; set; }
+        public string 治疗适应症 { get; set; }
+        public string 是否存在以下情况 { get; set; }
+        public string 对药物采取措施 { get; set; }
+        public string 相关器械 { get; set; }
+        public string 不良反应术语 { get; set; }
+        public string 不良反应术语1 { get; set; }
+        public string 不良反应术语代码 { get; set; }
+        public string 不良反应发生时间 { get; set; }
+        public string 不良反应发生时间1 { get; set; }
+        public string 不良反应持续时间 { get; set; }
+        public string 不良反应过程描述 { get; set; }
         public string 不良反应结果 { get; set; }
         public string 后遗症表现 { get; set; }
         public string 死亡时间 { get; set; }
-        public string 死亡原因 { get; set; }
+        public string 直接死因 { get; set; }
+        public string 是否尸检 { get; set; }
+        public string 尸检结果 { get; set; }
         public string 停药减药后反应是否减轻或消失 { get; set; }
         public string 再次使用可疑药是否出现同样反应 { get; set; }
         public string 对原患疾病影响 { get; set; }
-        public string 报告人评价 { get; set; }
         public string 报告单位评价 { get; set; }
-        public Nullable<System.DateTime> 报告日期 { get; set; }
-        public string 报告单位请填写信息来源 { get; set; }
+        public string 初始报告人职业 { get; set; }
+        public string 报告日期 { get; set; }
+        public string 报告来源 { get; set; }
+        public string 父母姓名 { get; set; }
+        public string 父母性别 { get; set; }
+        public string 父母出生日期 { get; set; }
+        public string 父母年龄 { get; set; }
+        public string 父母身高cm { get; set; }
+        public string 父母体重kg { get; set; }
+        public string 母亲末次月经时间 { get; set; }
+        public string 妊娠相关描述项 { get; set; }
+        public string 事件发生地 { get; set; }
+        public string 首次获知时间 { get; set; }
+        public string 企业病例编码 { get; set; }
+        public string 最近一次获知时间 { get; set; }
+        public string 报告单位名称 { get; set; }
+        public string 报告单位联系人 { get; set; }
+        public string 报告单位电话 { get; set; }
+        public string 报告单位地址 { get; set; }
         public string 备注 { get; set; }
-        public Nullable<System.DateTime> 国家中心接收时间 { get; set; }
+        public string 国家中心接收时间 { get; set; }
+        public string 首次报告时间 { get; set; }
+        public string 最后一次跟踪报告时间 { get; set; }
         public string 报告地区名称 { get; set; }
+        public string 最后修改时间 { get; set; }
         public string 县评价 { get; set; }
         public string 市评价 { get; set; }
         public string 省评价 { get; set; }
         public string 国家评价 { get; set; }
-        public Nullable<System.DateTime> 县评价时间 { get; set; }
-        public Nullable<System.DateTime> 市评价时间 { get; set; }
+        public string 县评价人姓名 { get; set; }
+        public string 市评价人姓名 { get; set; }
+        public string 省评价人姓名 { get; set; }
+        public string 国家评价人姓名 { get; set; }
+        public string 县评价时间 { get; set; }
+        public string 市评价时间 { get; set; }
         public string 省评价时间 { get; set; }
         public string 国家评价时间 { get; set; }
-        public long ID { get; set; }
+        public int ID { get; set; }
     }
 }

@@ -11,125 +11,225 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="内部ID" Type="float" />
           <Property Name="报告表编码" Type="nvarchar" MaxLength="255" />
-          <Property Name="首次/跟踪报告" Type="nvarchar" MaxLength="255" />
-          <Property Name="新的" Type="nvarchar" MaxLength="255" />
+          <Property Name="首次或跟踪报告" Type="nvarchar" MaxLength="255" />
+          <Property Name="是否境外报告" Type="nvarchar" MaxLength="255" />
+          <Property Name="是否非预期" Type="nvarchar" MaxLength="255" />
           <Property Name="报告类型" Type="nvarchar" MaxLength="255" />
-          <Property Name="严重不良反应" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应严重性" Type="nvarchar" MaxLength="255" />
           <Property Name="报告单位类别" Type="nvarchar" MaxLength="255" />
+          <Property Name="患者姓名" Type="nvarchar" MaxLength="255" />
           <Property Name="性别" Type="nvarchar" MaxLength="255" />
-          <Property Name="出生日期" Type="datetime" />
-          <Property Name="年龄" Type="float" />
+          <Property Name="出生日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="年龄" Type="nvarchar" MaxLength="255" />
           <Property Name="年龄单位" Type="nvarchar" MaxLength="255" />
-          <Property Name="名族" Type="nvarchar" MaxLength="255" />
-          <Property Name="体重" Type="nvarchar" MaxLength="255" />
-          <Property Name="原患疾病" Type="nvarchar" MaxLength="255" />
-          <Property Name="医院名称" Type="nvarchar" MaxLength="255" />
-          <Property Name="既往药品不良反应/事件" Type="nvarchar" MaxLength="255" />
-          <Property Name="家族药品不良反应/事件" Type="nvarchar" MaxLength="255" />
+          <Property Name="国籍" Type="nvarchar" MaxLength="255" />
+          <Property Name="民族" Type="nvarchar" MaxLength="255" />
+          <Property Name="种族" Type="nvarchar" MaxLength="255" />
+          <Property Name="体重kg" Type="nvarchar" MaxLength="255" />
+          <Property Name="身高cm" Type="nvarchar" MaxLength="255" />
+          <Property Name="患者联系方式" Type="nvarchar" MaxLength="255" />
+          <Property Name="疾病名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="疾病名称代码" Type="nvarchar" MaxLength="255" />
+          <Property Name="相关疾病信息开始日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="相关疾病信息结束日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告当时疾病是否仍存在" Type="nvarchar" MaxLength="255" />
+          <Property Name="既往药品史" Type="nvarchar" MaxLength="255" />
+          <Property Name="既往药品史开始日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="既往药品史结束日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="治疗疾病药品史" Type="nvarchar" MaxLength="255" />
+          <Property Name="治疗疾病药品史代码" Type="nvarchar" MaxLength="255" />
+          <Property Name="医疗机构名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="病历号或门诊号" Type="nvarchar" MaxLength="255" />
+          <Property Name="既往药品不良反应事件" Type="nvarchar" MaxLength="255" />
+          <Property Name="家族药品不良反应事件" Type="nvarchar" MaxLength="255" />
           <Property Name="相关重要信息" Type="nvarchar" MaxLength="255" />
-          <Property Name="怀疑/并用" Type="nvarchar" MaxLength="255" />
-          <Property Name="序号" Type="float" />
+          <Property Name="怀疑或并用" Type="nvarchar" MaxLength="255" />
+          <Property Name="药品序号" Type="nvarchar" MaxLength="255" />
           <Property Name="批准文号" Type="nvarchar" MaxLength="255" />
           <Property Name="商品名称" Type="nvarchar" MaxLength="255" />
           <Property Name="通用名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="规格" Type="nvarchar" MaxLength="255" />
           <Property Name="剂型" Type="nvarchar" MaxLength="255" />
-          <Property Name="生产厂家" Type="nvarchar" MaxLength="255" />
-          <Property Name="生产批号" Type="float" />
-          <Property Name="用量" Type="float" />
-          <Property Name="用量单位" Type="nvarchar" MaxLength="255" />
-          <Property Name="用药-日" Type="float" />
-          <Property Name="用药-次" Type="float" />
+          <Property Name="持有人或生产厂家" Type="nvarchar" MaxLength="255" />
+          <Property Name="失效期或有效期至" Type="nvarchar" MaxLength="255" />
+          <Property Name="生产批号" Type="nvarchar" MaxLength="255" />
+          <Property Name="用法用量" Type="nvarchar" MaxLength="255" />
           <Property Name="给药途径" Type="nvarchar" MaxLength="255" />
-          <Property Name="用药开始时间" Type="datetime" />
-          <Property Name="用药结束时间" Type="datetime" />
-          <Property Name="用药原因" Type="nvarchar" MaxLength="255" />
-          <Property Name="不良反应名称" Type="nvarchar" MaxLength="255" />
-          <Property Name="不良反应/事件发生时间" Type="datetime" />
-          <Property Name="不良反应/事件过程描述" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药开始时间选项" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药开始时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药结束时间选项" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药结束时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="用药时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="治疗适应症术语" Type="nvarchar" MaxLength="255" />
+          <Property Name="治疗适应症" Type="nvarchar" MaxLength="255" />
+          <Property Name="是否存在以下情况" Type="nvarchar" MaxLength="255" />
+          <Property Name="对药物采取措施" Type="nvarchar" MaxLength="255" />
+          <Property Name="相关器械" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应术语" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应术语1" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应术语代码" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应发生时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应发生时间1" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应持续时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="不良反应过程描述" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应结果" Type="nvarchar" MaxLength="255" />
           <Property Name="后遗症表现" Type="nvarchar" MaxLength="255" />
           <Property Name="死亡时间" Type="nvarchar" MaxLength="255" />
-          <Property Name="死亡原因" Type="nvarchar" MaxLength="255" />
+          <Property Name="直接死因" Type="nvarchar" MaxLength="255" />
+          <Property Name="是否尸检" Type="nvarchar" MaxLength="255" />
+          <Property Name="尸检结果" Type="nvarchar" MaxLength="255" />
           <Property Name="停药减药后反应是否减轻或消失" Type="nvarchar" MaxLength="255" />
           <Property Name="再次使用可疑药是否出现同样反应" Type="nvarchar" MaxLength="255" />
           <Property Name="对原患疾病影响" Type="nvarchar" MaxLength="255" />
-          <Property Name="报告人评价" Type="nvarchar" MaxLength="255" />
           <Property Name="报告单位评价" Type="nvarchar" MaxLength="255" />
-          <Property Name="报告日期" Type="datetime" />
-          <Property Name="报告单位请填写信息来源" Type="nvarchar" MaxLength="255" />
+          <Property Name="初始报告人职业" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告来源" Type="nvarchar" MaxLength="255" />
+          <Property Name="父母姓名" Type="nvarchar" MaxLength="255" />
+          <Property Name="父母性别" Type="nvarchar" MaxLength="255" />
+          <Property Name="父母出生日期" Type="nvarchar" MaxLength="255" />
+          <Property Name="父母年龄" Type="nvarchar" MaxLength="255" />
+          <Property Name="父母身高cm" Type="nvarchar" MaxLength="255" />
+          <Property Name="父母体重kg" Type="nvarchar" MaxLength="255" />
+          <Property Name="母亲末次月经时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="妊娠相关描述项" Type="nvarchar" MaxLength="255" />
+          <Property Name="事件发生地" Type="nvarchar" MaxLength="255" />
+          <Property Name="首次获知时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="企业病例编码" Type="nvarchar" MaxLength="255" />
+          <Property Name="最近一次获知时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告单位名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告单位联系人" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告单位电话" Type="nvarchar" MaxLength="255" />
+          <Property Name="报告单位地址" Type="nvarchar" MaxLength="255" />
           <Property Name="备注" Type="nvarchar" MaxLength="255" />
-          <Property Name="国家中心接收时间" Type="datetime" />
+          <Property Name="国家中心接收时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="首次报告时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="最后一次跟踪报告时间" Type="nvarchar" MaxLength="255" />
           <Property Name="报告地区名称" Type="nvarchar" MaxLength="255" />
+          <Property Name="最后修改时间" Type="nvarchar" MaxLength="255" />
           <Property Name="县评价" Type="nvarchar" MaxLength="255" />
           <Property Name="市评价" Type="nvarchar" MaxLength="255" />
           <Property Name="省评价" Type="nvarchar" MaxLength="255" />
           <Property Name="国家评价" Type="nvarchar" MaxLength="255" />
-          <Property Name="县评价时间" Type="datetime" />
-          <Property Name="市评价时间" Type="datetime" />
+          <Property Name="县评价人姓名" Type="nvarchar" MaxLength="255" />
+          <Property Name="市评价人姓名" Type="nvarchar" MaxLength="255" />
+          <Property Name="省评价人姓名" Type="nvarchar" MaxLength="255" />
+          <Property Name="国家评价人姓名" Type="nvarchar" MaxLength="255" />
+          <Property Name="县评价时间" Type="nvarchar" MaxLength="255" />
+          <Property Name="市评价时间" Type="nvarchar" MaxLength="255" />
           <Property Name="省评价时间" Type="nvarchar" MaxLength="255" />
           <Property Name="国家评价时间" Type="nvarchar" MaxLength="255" />
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityContainer Name="medModelStoreContainer">
           <EntitySet Name="med" EntityType="Self.med" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [med].[内部ID] AS [内部ID], 
     [med].[报告表编码] AS [报告表编码], 
-    [med].[首次/跟踪报告] AS [首次/跟踪报告], 
-    [med].[新的] AS [新的], 
+    [med].[首次或跟踪报告] AS [首次或跟踪报告], 
+    [med].[是否境外报告] AS [是否境外报告], 
+    [med].[是否非预期] AS [是否非预期], 
     [med].[报告类型] AS [报告类型], 
-    [med].[严重不良反应] AS [严重不良反应], 
+    [med].[不良反应严重性] AS [不良反应严重性], 
     [med].[报告单位类别] AS [报告单位类别], 
+    [med].[患者姓名] AS [患者姓名], 
     [med].[性别] AS [性别], 
     [med].[出生日期] AS [出生日期], 
     [med].[年龄] AS [年龄], 
     [med].[年龄单位] AS [年龄单位], 
-    [med].[名族] AS [名族], 
-    [med].[体重] AS [体重], 
-    [med].[原患疾病] AS [原患疾病], 
-    [med].[医院名称] AS [医院名称], 
-    [med].[既往药品不良反应/事件] AS [既往药品不良反应/事件], 
-    [med].[家族药品不良反应/事件] AS [家族药品不良反应/事件], 
+    [med].[国籍] AS [国籍], 
+    [med].[民族] AS [民族], 
+    [med].[种族] AS [种族], 
+    [med].[体重kg] AS [体重kg], 
+    [med].[身高cm] AS [身高cm], 
+    [med].[患者联系方式] AS [患者联系方式], 
+    [med].[疾病名称] AS [疾病名称], 
+    [med].[疾病名称代码] AS [疾病名称代码], 
+    [med].[相关疾病信息开始日期] AS [相关疾病信息开始日期], 
+    [med].[相关疾病信息结束日期] AS [相关疾病信息结束日期], 
+    [med].[报告当时疾病是否仍存在] AS [报告当时疾病是否仍存在], 
+    [med].[既往药品史] AS [既往药品史], 
+    [med].[既往药品史开始日期] AS [既往药品史开始日期], 
+    [med].[既往药品史结束日期] AS [既往药品史结束日期], 
+    [med].[治疗疾病药品史] AS [治疗疾病药品史], 
+    [med].[治疗疾病药品史代码] AS [治疗疾病药品史代码], 
+    [med].[医疗机构名称] AS [医疗机构名称], 
+    [med].[病历号或门诊号] AS [病历号或门诊号], 
+    [med].[既往药品不良反应事件] AS [既往药品不良反应事件], 
+    [med].[家族药品不良反应事件] AS [家族药品不良反应事件], 
     [med].[相关重要信息] AS [相关重要信息], 
-    [med].[怀疑/并用] AS [怀疑/并用], 
-    [med].[序号] AS [序号], 
+    [med].[怀疑或并用] AS [怀疑或并用], 
+    [med].[药品序号] AS [药品序号], 
     [med].[批准文号] AS [批准文号], 
     [med].[商品名称] AS [商品名称], 
     [med].[通用名称] AS [通用名称], 
+    [med].[规格] AS [规格], 
     [med].[剂型] AS [剂型], 
-    [med].[生产厂家] AS [生产厂家], 
+    [med].[持有人或生产厂家] AS [持有人或生产厂家], 
+    [med].[失效期或有效期至] AS [失效期或有效期至], 
     [med].[生产批号] AS [生产批号], 
-    [med].[用量] AS [用量], 
-    [med].[用量单位] AS [用量单位], 
-    [med].[用药-日] AS [用药-日], 
-    [med].[用药-次] AS [用药-次], 
+    [med].[用法用量] AS [用法用量], 
     [med].[给药途径] AS [给药途径], 
+    [med].[用药开始时间选项] AS [用药开始时间选项], 
     [med].[用药开始时间] AS [用药开始时间], 
+    [med].[用药结束时间选项] AS [用药结束时间选项], 
     [med].[用药结束时间] AS [用药结束时间], 
-    [med].[用药原因] AS [用药原因], 
-    [med].[不良反应名称] AS [不良反应名称], 
-    [med].[不良反应/事件发生时间] AS [不良反应/事件发生时间], 
-    [med].[不良反应/事件过程描述] AS [不良反应/事件过程描述], 
+    [med].[用药时间] AS [用药时间], 
+    [med].[治疗适应症术语] AS [治疗适应症术语], 
+    [med].[治疗适应症] AS [治疗适应症], 
+    [med].[是否存在以下情况] AS [是否存在以下情况], 
+    [med].[对药物采取措施] AS [对药物采取措施], 
+    [med].[相关器械] AS [相关器械], 
+    [med].[不良反应术语] AS [不良反应术语], 
+    [med].[不良反应术语1] AS [不良反应术语1], 
+    [med].[不良反应术语代码] AS [不良反应术语代码], 
+    [med].[不良反应发生时间] AS [不良反应发生时间], 
+    [med].[不良反应发生时间1] AS [不良反应发生时间1], 
+    [med].[不良反应持续时间] AS [不良反应持续时间], 
+    [med].[不良反应过程描述] AS [不良反应过程描述], 
     [med].[不良反应结果] AS [不良反应结果], 
     [med].[后遗症表现] AS [后遗症表现], 
     [med].[死亡时间] AS [死亡时间], 
-    [med].[死亡原因] AS [死亡原因], 
+    [med].[直接死因] AS [直接死因], 
+    [med].[是否尸检] AS [是否尸检], 
+    [med].[尸检结果] AS [尸检结果], 
     [med].[停药减药后反应是否减轻或消失] AS [停药减药后反应是否减轻或消失], 
     [med].[再次使用可疑药是否出现同样反应] AS [再次使用可疑药是否出现同样反应], 
     [med].[对原患疾病影响] AS [对原患疾病影响], 
-    [med].[报告人评价] AS [报告人评价], 
     [med].[报告单位评价] AS [报告单位评价], 
+    [med].[初始报告人职业] AS [初始报告人职业], 
     [med].[报告日期] AS [报告日期], 
-    [med].[报告单位请填写信息来源] AS [报告单位请填写信息来源], 
+    [med].[报告来源] AS [报告来源], 
+    [med].[父母姓名] AS [父母姓名], 
+    [med].[父母性别] AS [父母性别], 
+    [med].[父母出生日期] AS [父母出生日期], 
+    [med].[父母年龄] AS [父母年龄], 
+    [med].[父母身高cm] AS [父母身高cm], 
+    [med].[父母体重kg] AS [父母体重kg], 
+    [med].[母亲末次月经时间] AS [母亲末次月经时间], 
+    [med].[妊娠相关描述项] AS [妊娠相关描述项], 
+    [med].[事件发生地] AS [事件发生地], 
+    [med].[首次获知时间] AS [首次获知时间], 
+    [med].[企业病例编码] AS [企业病例编码], 
+    [med].[最近一次获知时间] AS [最近一次获知时间], 
+    [med].[报告单位名称] AS [报告单位名称], 
+    [med].[报告单位联系人] AS [报告单位联系人], 
+    [med].[报告单位电话] AS [报告单位电话], 
+    [med].[报告单位地址] AS [报告单位地址], 
     [med].[备注] AS [备注], 
     [med].[国家中心接收时间] AS [国家中心接收时间], 
+    [med].[首次报告时间] AS [首次报告时间], 
+    [med].[最后一次跟踪报告时间] AS [最后一次跟踪报告时间], 
     [med].[报告地区名称] AS [报告地区名称], 
+    [med].[最后修改时间] AS [最后修改时间], 
     [med].[县评价] AS [县评价], 
     [med].[市评价] AS [市评价], 
     [med].[省评价] AS [省评价], 
     [med].[国家评价] AS [国家评价], 
+    [med].[县评价人姓名] AS [县评价人姓名], 
+    [med].[市评价人姓名] AS [市评价人姓名], 
+    [med].[省评价人姓名] AS [省评价人姓名], 
+    [med].[国家评价人姓名] AS [国家评价人姓名], 
     [med].[县评价时间] AS [县评价时间], 
     [med].[市评价时间] AS [市评价时间], 
     [med].[省评价时间] AS [省评价时间], 
@@ -147,68 +247,118 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="内部ID" Type="Double" />
           <Property Name="报告表编码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="首次_跟踪报告" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="新的" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="首次或跟踪报告" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="是否境外报告" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="是否非预期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="报告类型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="严重不良反应" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应严重性" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="报告单位类别" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="患者姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="性别" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="出生日期" Type="DateTime" Precision="3" />
-          <Property Name="年龄" Type="Double" />
+          <Property Name="出生日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="年龄" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="年龄单位" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="名族" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="体重" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="原患疾病" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="医院名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="既往药品不良反应_事件" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="家族药品不良反应_事件" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="国籍" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="民族" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="种族" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="体重kg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="身高cm" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="患者联系方式" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="疾病名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="疾病名称代码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="相关疾病信息开始日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="相关疾病信息结束日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告当时疾病是否仍存在" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="既往药品史" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="既往药品史开始日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="既往药品史结束日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="治疗疾病药品史" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="治疗疾病药品史代码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="医疗机构名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="病历号或门诊号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="既往药品不良反应事件" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="家族药品不良反应事件" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="相关重要信息" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="怀疑_并用" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="序号" Type="Double" />
+          <Property Name="怀疑或并用" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="药品序号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="批准文号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="商品名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="通用名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="规格" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="剂型" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="生产厂家" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="生产批号" Type="Double" />
-          <Property Name="用量" Type="Double" />
-          <Property Name="用量单位" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="用药_日" Type="Double" />
-          <Property Name="用药_次" Type="Double" />
+          <Property Name="持有人或生产厂家" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="失效期或有效期至" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="生产批号" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用法用量" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="给药途径" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="用药开始时间" Type="DateTime" Precision="3" />
-          <Property Name="用药结束时间" Type="DateTime" Precision="3" />
-          <Property Name="用药原因" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="不良反应名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="不良反应_事件发生时间" Type="DateTime" Precision="3" />
-          <Property Name="不良反应_事件过程描述" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药开始时间选项" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药开始时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药结束时间选项" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药结束时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="用药时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="治疗适应症术语" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="治疗适应症" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="是否存在以下情况" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="对药物采取措施" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="相关器械" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应术语" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应术语1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应术语代码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应发生时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应发生时间1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应持续时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="不良反应过程描述" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应结果" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="后遗症表现" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="死亡时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="死亡原因" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="直接死因" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="是否尸检" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="尸检结果" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="停药减药后反应是否减轻或消失" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="再次使用可疑药是否出现同样反应" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="对原患疾病影响" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="报告人评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="报告单位评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="报告日期" Type="DateTime" Precision="3" />
-          <Property Name="报告单位请填写信息来源" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="初始报告人职业" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告来源" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="父母姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="父母性别" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="父母出生日期" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="父母年龄" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="父母身高cm" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="父母体重kg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="母亲末次月经时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="妊娠相关描述项" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="事件发生地" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="首次获知时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="企业病例编码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="最近一次获知时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告单位名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告单位联系人" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告单位电话" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="报告单位地址" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="备注" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="国家中心接收时间" Type="DateTime" Precision="3" />
+          <Property Name="国家中心接收时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="首次报告时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="最后一次跟踪报告时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="报告地区名称" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="最后修改时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="县评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="市评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="省评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="国家评价" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="县评价时间" Type="DateTime" Precision="3" />
-          <Property Name="市评价时间" Type="DateTime" Precision="3" />
+          <Property Name="县评价人姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="市评价人姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="省评价人姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="国家评价人姓名" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="县评价时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="市评价时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="省评价时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="国家评价时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
-        <EntityContainer Name="medEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="medEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="meds" EntityType="Self.med" />
         </EntityContainer>
       </Schema>
@@ -216,65 +366,115 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="medModelStoreContainer" CdmEntityContainer="medEntities1">
+        <EntityContainerMapping StorageEntityContainer="medModelStoreContainer" CdmEntityContainer="medEntities">
           <EntitySetMapping Name="meds">
             <EntityTypeMapping TypeName="medModel.med">
               <MappingFragment StoreEntitySet="med">
-                <ScalarProperty Name="内部ID" ColumnName="内部ID" />
                 <ScalarProperty Name="报告表编码" ColumnName="报告表编码" />
-                <ScalarProperty Name="首次_跟踪报告" ColumnName="首次/跟踪报告" />
-                <ScalarProperty Name="新的" ColumnName="新的" />
+                <ScalarProperty Name="首次或跟踪报告" ColumnName="首次或跟踪报告" />
+                <ScalarProperty Name="是否境外报告" ColumnName="是否境外报告" />
+                <ScalarProperty Name="是否非预期" ColumnName="是否非预期" />
                 <ScalarProperty Name="报告类型" ColumnName="报告类型" />
-                <ScalarProperty Name="严重不良反应" ColumnName="严重不良反应" />
+                <ScalarProperty Name="不良反应严重性" ColumnName="不良反应严重性" />
                 <ScalarProperty Name="报告单位类别" ColumnName="报告单位类别" />
+                <ScalarProperty Name="患者姓名" ColumnName="患者姓名" />
                 <ScalarProperty Name="性别" ColumnName="性别" />
                 <ScalarProperty Name="出生日期" ColumnName="出生日期" />
                 <ScalarProperty Name="年龄" ColumnName="年龄" />
                 <ScalarProperty Name="年龄单位" ColumnName="年龄单位" />
-                <ScalarProperty Name="名族" ColumnName="名族" />
-                <ScalarProperty Name="体重" ColumnName="体重" />
-                <ScalarProperty Name="原患疾病" ColumnName="原患疾病" />
-                <ScalarProperty Name="医院名称" ColumnName="医院名称" />
-                <ScalarProperty Name="既往药品不良反应_事件" ColumnName="既往药品不良反应/事件" />
-                <ScalarProperty Name="家族药品不良反应_事件" ColumnName="家族药品不良反应/事件" />
+                <ScalarProperty Name="国籍" ColumnName="国籍" />
+                <ScalarProperty Name="民族" ColumnName="民族" />
+                <ScalarProperty Name="种族" ColumnName="种族" />
+                <ScalarProperty Name="体重kg" ColumnName="体重kg" />
+                <ScalarProperty Name="身高cm" ColumnName="身高cm" />
+                <ScalarProperty Name="患者联系方式" ColumnName="患者联系方式" />
+                <ScalarProperty Name="疾病名称" ColumnName="疾病名称" />
+                <ScalarProperty Name="疾病名称代码" ColumnName="疾病名称代码" />
+                <ScalarProperty Name="相关疾病信息开始日期" ColumnName="相关疾病信息开始日期" />
+                <ScalarProperty Name="相关疾病信息结束日期" ColumnName="相关疾病信息结束日期" />
+                <ScalarProperty Name="报告当时疾病是否仍存在" ColumnName="报告当时疾病是否仍存在" />
+                <ScalarProperty Name="既往药品史" ColumnName="既往药品史" />
+                <ScalarProperty Name="既往药品史开始日期" ColumnName="既往药品史开始日期" />
+                <ScalarProperty Name="既往药品史结束日期" ColumnName="既往药品史结束日期" />
+                <ScalarProperty Name="治疗疾病药品史" ColumnName="治疗疾病药品史" />
+                <ScalarProperty Name="治疗疾病药品史代码" ColumnName="治疗疾病药品史代码" />
+                <ScalarProperty Name="医疗机构名称" ColumnName="医疗机构名称" />
+                <ScalarProperty Name="病历号或门诊号" ColumnName="病历号或门诊号" />
+                <ScalarProperty Name="既往药品不良反应事件" ColumnName="既往药品不良反应事件" />
+                <ScalarProperty Name="家族药品不良反应事件" ColumnName="家族药品不良反应事件" />
                 <ScalarProperty Name="相关重要信息" ColumnName="相关重要信息" />
-                <ScalarProperty Name="怀疑_并用" ColumnName="怀疑/并用" />
-                <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="怀疑或并用" ColumnName="怀疑或并用" />
+                <ScalarProperty Name="药品序号" ColumnName="药品序号" />
                 <ScalarProperty Name="批准文号" ColumnName="批准文号" />
                 <ScalarProperty Name="商品名称" ColumnName="商品名称" />
                 <ScalarProperty Name="通用名称" ColumnName="通用名称" />
+                <ScalarProperty Name="规格" ColumnName="规格" />
                 <ScalarProperty Name="剂型" ColumnName="剂型" />
-                <ScalarProperty Name="生产厂家" ColumnName="生产厂家" />
+                <ScalarProperty Name="持有人或生产厂家" ColumnName="持有人或生产厂家" />
+                <ScalarProperty Name="失效期或有效期至" ColumnName="失效期或有效期至" />
                 <ScalarProperty Name="生产批号" ColumnName="生产批号" />
-                <ScalarProperty Name="用量" ColumnName="用量" />
-                <ScalarProperty Name="用量单位" ColumnName="用量单位" />
-                <ScalarProperty Name="用药_日" ColumnName="用药-日" />
-                <ScalarProperty Name="用药_次" ColumnName="用药-次" />
+                <ScalarProperty Name="用法用量" ColumnName="用法用量" />
                 <ScalarProperty Name="给药途径" ColumnName="给药途径" />
+                <ScalarProperty Name="用药开始时间选项" ColumnName="用药开始时间选项" />
                 <ScalarProperty Name="用药开始时间" ColumnName="用药开始时间" />
+                <ScalarProperty Name="用药结束时间选项" ColumnName="用药结束时间选项" />
                 <ScalarProperty Name="用药结束时间" ColumnName="用药结束时间" />
-                <ScalarProperty Name="用药原因" ColumnName="用药原因" />
-                <ScalarProperty Name="不良反应名称" ColumnName="不良反应名称" />
-                <ScalarProperty Name="不良反应_事件发生时间" ColumnName="不良反应/事件发生时间" />
-                <ScalarProperty Name="不良反应_事件过程描述" ColumnName="不良反应/事件过程描述" />
+                <ScalarProperty Name="用药时间" ColumnName="用药时间" />
+                <ScalarProperty Name="治疗适应症术语" ColumnName="治疗适应症术语" />
+                <ScalarProperty Name="治疗适应症" ColumnName="治疗适应症" />
+                <ScalarProperty Name="是否存在以下情况" ColumnName="是否存在以下情况" />
+                <ScalarProperty Name="对药物采取措施" ColumnName="对药物采取措施" />
+                <ScalarProperty Name="相关器械" ColumnName="相关器械" />
+                <ScalarProperty Name="不良反应术语" ColumnName="不良反应术语" />
+                <ScalarProperty Name="不良反应术语1" ColumnName="不良反应术语1" />
+                <ScalarProperty Name="不良反应术语代码" ColumnName="不良反应术语代码" />
+                <ScalarProperty Name="不良反应发生时间" ColumnName="不良反应发生时间" />
+                <ScalarProperty Name="不良反应发生时间1" ColumnName="不良反应发生时间1" />
+                <ScalarProperty Name="不良反应持续时间" ColumnName="不良反应持续时间" />
+                <ScalarProperty Name="不良反应过程描述" ColumnName="不良反应过程描述" />
                 <ScalarProperty Name="不良反应结果" ColumnName="不良反应结果" />
                 <ScalarProperty Name="后遗症表现" ColumnName="后遗症表现" />
                 <ScalarProperty Name="死亡时间" ColumnName="死亡时间" />
-                <ScalarProperty Name="死亡原因" ColumnName="死亡原因" />
+                <ScalarProperty Name="直接死因" ColumnName="直接死因" />
+                <ScalarProperty Name="是否尸检" ColumnName="是否尸检" />
+                <ScalarProperty Name="尸检结果" ColumnName="尸检结果" />
                 <ScalarProperty Name="停药减药后反应是否减轻或消失" ColumnName="停药减药后反应是否减轻或消失" />
                 <ScalarProperty Name="再次使用可疑药是否出现同样反应" ColumnName="再次使用可疑药是否出现同样反应" />
                 <ScalarProperty Name="对原患疾病影响" ColumnName="对原患疾病影响" />
-                <ScalarProperty Name="报告人评价" ColumnName="报告人评价" />
                 <ScalarProperty Name="报告单位评价" ColumnName="报告单位评价" />
+                <ScalarProperty Name="初始报告人职业" ColumnName="初始报告人职业" />
                 <ScalarProperty Name="报告日期" ColumnName="报告日期" />
-                <ScalarProperty Name="报告单位请填写信息来源" ColumnName="报告单位请填写信息来源" />
+                <ScalarProperty Name="报告来源" ColumnName="报告来源" />
+                <ScalarProperty Name="父母姓名" ColumnName="父母姓名" />
+                <ScalarProperty Name="父母性别" ColumnName="父母性别" />
+                <ScalarProperty Name="父母出生日期" ColumnName="父母出生日期" />
+                <ScalarProperty Name="父母年龄" ColumnName="父母年龄" />
+                <ScalarProperty Name="父母身高cm" ColumnName="父母身高cm" />
+                <ScalarProperty Name="父母体重kg" ColumnName="父母体重kg" />
+                <ScalarProperty Name="母亲末次月经时间" ColumnName="母亲末次月经时间" />
+                <ScalarProperty Name="妊娠相关描述项" ColumnName="妊娠相关描述项" />
+                <ScalarProperty Name="事件发生地" ColumnName="事件发生地" />
+                <ScalarProperty Name="首次获知时间" ColumnName="首次获知时间" />
+                <ScalarProperty Name="企业病例编码" ColumnName="企业病例编码" />
+                <ScalarProperty Name="最近一次获知时间" ColumnName="最近一次获知时间" />
+                <ScalarProperty Name="报告单位名称" ColumnName="报告单位名称" />
+                <ScalarProperty Name="报告单位联系人" ColumnName="报告单位联系人" />
+                <ScalarProperty Name="报告单位电话" ColumnName="报告单位电话" />
+                <ScalarProperty Name="报告单位地址" ColumnName="报告单位地址" />
                 <ScalarProperty Name="备注" ColumnName="备注" />
                 <ScalarProperty Name="国家中心接收时间" ColumnName="国家中心接收时间" />
+                <ScalarProperty Name="首次报告时间" ColumnName="首次报告时间" />
+                <ScalarProperty Name="最后一次跟踪报告时间" ColumnName="最后一次跟踪报告时间" />
                 <ScalarProperty Name="报告地区名称" ColumnName="报告地区名称" />
+                <ScalarProperty Name="最后修改时间" ColumnName="最后修改时间" />
                 <ScalarProperty Name="县评价" ColumnName="县评价" />
                 <ScalarProperty Name="市评价" ColumnName="市评价" />
                 <ScalarProperty Name="省评价" ColumnName="省评价" />
                 <ScalarProperty Name="国家评价" ColumnName="国家评价" />
+                <ScalarProperty Name="县评价人姓名" ColumnName="县评价人姓名" />
+                <ScalarProperty Name="市评价人姓名" ColumnName="市评价人姓名" />
+                <ScalarProperty Name="省评价人姓名" ColumnName="省评价人姓名" />
+                <ScalarProperty Name="国家评价人姓名" ColumnName="国家评价人姓名" />
                 <ScalarProperty Name="县评价时间" ColumnName="县评价时间" />
                 <ScalarProperty Name="市评价时间" ColumnName="市评价时间" />
                 <ScalarProperty Name="省评价时间" ColumnName="省评价时间" />
