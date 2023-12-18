@@ -18,6 +18,7 @@ namespace MedSys
         {
             
                 List<SqlParameter> paramList = new List<SqlParameter>();
+            
                 DateTime fromDate = FromDate;
                 DateTime toDate = ToDate;
                 string queryString =
@@ -71,21 +72,36 @@ namespace MedSys
                 }
             paramList.Add(new SqlParameter("@fromDate",fromDate));
             paramList.Add(new SqlParameter("@toDate", toDate));
-                if(MedName != string.Empty)
+            if (SelectedTabIndex == 0)
             {
-                if(MedNameTypeEntry == "通用名称")
+                if (MedName != string.Empty)
                 {
-                    queryString += " and 通用名称 like @medName";
+                    if (MedNameTypeEntry == "通用名称")
+                    {
+                        queryString += " and 通用名称 like @medName";
+                    }
+                    if (MedNameTypeExactOrContain)
+                    {
+                        paramList.Add(new SqlParameter("@medName", MedName));
+                    }
+                    else
+                    {
+                        paramList.Add(new SqlParameter("@medName", "%" + MedName + "%"));
+                    }
                 }
-                if (MedNameTypeExactOrContain)
+                if (ManufacturerName != string.Empty)
                 {
-                    paramList.Add(new SqlParameter("@medName", MedName));
+                    queryString += " and 持有人/生产厂家 like @manufacturerName";
+                    if (ManufacturerQueyTypeExactOrContain)
+                    {
+                        paramList.Add(new SqlParameter("@manufacturerName", ManufacturerName));
+                    }
+                    else
+                    {
+                        paramList.Add(new SqlParameter("@manufacturerName", "%" + ManufacturerName + "%"));
+                    }
                 }
-                else
-                {
-                    paramList.Add(new SqlParameter("@medName", "%" + MedName + "%"));
-                }
-            }
+            }      
             
             if(ApprovalNo != string.Empty)
             {
@@ -99,25 +115,16 @@ namespace MedSys
                 paramList.Add(new SqlParameter("@medBatchNo", MedBatchNo));
             }
 
-            if (ManufacturerName != string.Empty)
-            {
-                queryString += " and 持有人/生产厂家 like @manufacturerName";
-                if (ManufacturerQueyTypeExactOrContain)
-                {
-                    paramList.Add(new SqlParameter("@manufacturerName", ManufacturerName));
-                }
-                else
-                {
-                    paramList.Add(new SqlParameter("@manufacturerName", "%" + ManufacturerName + "%"));
-                }
-            }
-
             if (AdverseEffectName != string.Empty)
             {
-                queryString += " and 不良反应-术语(原始术语) like @adverseEffectName";
+                queryString += " and 不良反应术语 like @adverseEffectName";
                 paramList.Add(new SqlParameter("@adverseEffectName", AdverseEffectName));
             }
-
+            if(AdverseEffectResultTypeEntry != string.Empty)
+            {
+                queryString += " and 不良反应结果 like @adverseEffectResultTypeEntry";
+                paramList.Add(new SqlParameter("@adverseEffectResultTypeEntry",AdverseEffectResultTypeEntry));
+            }
             List<med> medList = new List<med>();
             using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)
             {

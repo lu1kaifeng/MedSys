@@ -79,7 +79,7 @@ namespace MedSys
                     }
                 }
             }
-            WpfPlot.Plot.AddScatter(dataX.ToArray(),dataY.ToArray());
+            WpfPlot.Plot.AddScatterPoints(dataX.ToArray(),dataY.ToArray());
             WpfPlot.Plot.AxisAuto();
             WpfPlot.Refresh();
         }
@@ -89,6 +89,16 @@ namespace MedSys
         public MainWindowViewModel()
         {
 
+        }
+        private int _selectedTabIndex = 0;
+        public int SelectedTabIndex
+        {
+            get { return _selectedTabIndex; }
+            set
+            {
+                _selectedTabIndex = value;
+                OnPropertyChanged();
+            }
         }
         public bool DatePickerEnabled
         {

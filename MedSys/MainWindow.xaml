@@ -16,7 +16,7 @@
 
 
     <StackPanel>
-        <TabControl>
+        <TabControl SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Header="普通筛选">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
