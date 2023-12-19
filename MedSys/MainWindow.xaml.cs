@@ -55,34 +55,15 @@ namespace MedSys
             {
                 var query = from med in context.meds select med;
                 var json = viewModel.Query();
-                Plot(json);
+                viewModel.DataList = json;
+                //Plot(json);
                 //MessageBox.Show(json);
                 // context.meds.Where((a) => SqlMethods.Like("",""));
                 return;
             }
         }
 
-        private void Plot(List<med> data)
-        {
-            List<double> dataX = new List<double>();
-            List<double> dataY = new List<double>();
-            foreach (var med in data)
-            {
-                int age = 0;
-                if (int.TryParse(med.年龄, out age))
-                {
-                    double weight = 0;
-                    if (double.TryParse(med.体重kg, out weight))
-                    {
-                        dataX.Add(age);
-                        dataY.Add(weight);
-                    }
-                }
-            }
-            WpfPlot.Plot.AddScatterPoints(dataX.ToArray(),dataY.ToArray());
-            WpfPlot.Plot.AxisAuto();
-            WpfPlot.Refresh();
-        }
+        
     }
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {
@@ -100,6 +81,7 @@ namespace MedSys
                 OnPropertyChanged();
             }
         }
+        
         public bool DatePickerEnabled
         {
             get

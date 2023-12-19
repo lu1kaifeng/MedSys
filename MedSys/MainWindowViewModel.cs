@@ -144,6 +144,15 @@ namespace MedSys
 
         }
 
+        private List<dataModel> _dataList = new List<dataModel>();
+        public List<dataModel> DataList
+        {
+            get
+            {
+                return _dataList;
+            }
+            set { _dataList = value; OnPropertyChanged(); }
+        }
 
         public T ConvertToObject<T>(SqlDataReader rd) where T : class, new()
         {

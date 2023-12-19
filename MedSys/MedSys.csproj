@@ -132,6 +132,10 @@
     <Compile Include="MedNameListView.xaml.cs">
       <DependentUpon>MedNameListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlotSelect.xaml.cs">
+      <DependentUpon>PlotSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PlotSelectPlotting.cs" />
     <Compile Include="TextInputListView.xaml.cs">
       <DependentUpon>TextInputListView.xaml</DependentUpon>
     </Compile>
@@ -155,6 +159,10 @@
     <Page Include="MedNameListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PlotSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextInputListView.xaml">
       <SubType>Designer</SubType>
@@ -214,5 +222,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -33,6 +33,35 @@ namespace MedSys.Converters
         }
     }
 
+    public class TreeViewItemToIntOneWayToSourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if((int)value == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return Binding.DoNothing;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            
+            bool back = (bool)value;
+            if (back)
+            {
+                return parameter;
+            }
+            else
+            {
+                return 0;//Binding.DoNothing;
+            }
+        }
+    }
+
     public class CheckBoxesToListConverter : IValueConverter
     {
         
