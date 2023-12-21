@@ -1,0 +1,40 @@
+﻿<Window x:Class="MedSys.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MedSys"
+        mc:Ignorable="d"
+        Title="登录" ResizeMode="NoResize" Height="200" Width="400" >
+    <Window.DataContext>
+        <local:LoginDataContext/>
+    </Window.DataContext>
+    <Grid x:Name="GridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Text="服务器" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+        <TextBox x:Name="tbBaseUrl" Text="{Binding BaseURL}" Grid.Row="0" Grid.Column="1"  TextWrapping="Wrap" VerticalAlignment="Center" />
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Text="用户名" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+        <TextBlock  TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Text="密码" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+        <TextBox x:Name="tbUserName" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1"  TextWrapping="Wrap"  VerticalAlignment="Center" />
+        <PasswordBox x:Name="pbPassword" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"   />
+        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="登录" Grid.Column="1" VerticalAlignment="Center" Click="Button_Click" />
+            <CheckBox x:Name="cbRemember" Content="记住登录凭据" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="cbRemember_Checked" Unchecked="cbRemember_Unchecked"/>
+
+        </Grid>
+    </Grid>
+</Window>

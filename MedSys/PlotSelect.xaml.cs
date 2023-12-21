@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,11 @@ namespace MedSys
     public partial class PlotSelect : UserControl, INotifyPropertyChanged
     {
         TreeViewItemToIntOneWayToSourceConverter treeViewItemToIntOneWayConverter = new TreeViewItemToIntOneWayToSourceConverter();
+        IEnumerable<MethodInfo> PlottingMethods ;
         public PlotSelect()
         {
+            PlottingMethods = GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(Plotting), false).FirstOrDefault() != null);
             InitializeComponent();
-
         }
 
 
@@ -65,7 +67,10 @@ DependencyProperty.Register("BackingData",
             PlotSelect myClass = (PlotSelect)sender;
             myClass.BackingData = (List<med>)args.NewValue;
             myClass.PlotSelected = 0;
-            myClass.DiseaseTypePlot();
+            foreach(var m in myClass.PlottingMethods)
+            {
+                m.Invoke(myClass,null);
+            }
         }
 
         public bool EmptyList
