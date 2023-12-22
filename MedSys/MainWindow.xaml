@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MedSys" xmlns:local1="clr-namespace:MedSys.Converters"
         xmlns:ScottPlot="clr-namespace:ScottPlot;assembly=ScottPlot.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="MainWindow" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <local1:RadioIntToBoolConverter x:Key="radioBoolToIntConverter" />
         <local1:CheckBoxesToListConverter x:Key="checkBoxesToListConverter" />
@@ -15,8 +15,17 @@
     </Window.Resources>
 
 
-    <StackPanel>
-        <TabControl SelectedIndex="{Binding SelectedTabIndex}">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!--<<< Exact Height... won't resize -->
+            <RowDefinition Height="Auto" />
+            <!--<<< Will resize to the size of contents -->
+            <RowDefinition Height="*" />
+            <!--<<< Will resize taking all remaining space -->
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" SelectedIndex="{Binding SelectedTabIndex}" >
             <TabItem Header="普通筛选">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
@@ -165,7 +174,7 @@
                                     <CheckBox Name="FirstSuspect2018" Content="第一怀疑药2018"  IsChecked="{Binding Path=BaseMed, Converter={StaticResource baseMedConverter}, ConverterParameter=第一怀疑药2018}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </StackPanel>
-                            
+
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="剂型:"/>
                                 <TextBox Text="{Binding DosageForm}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -174,7 +183,7 @@
                                 <Label Content="关注类别:"/>
                                 <ComboBox Name="FocusType" Width="120"  ItemsSource="{Binding Path=FocusTypeEntries}" SelectedValue="{Binding Path=FocusTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </StackPanel>
-                            
+
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="医院、患者信息">
@@ -239,10 +248,10 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" >
             <Button Content="Json" Click="Button_Click"/>
             <Button Content="检索" Click="Button_Click_1"/>
         </StackPanel>
-        <local:PlotSelect BackingData="{Binding DataList, Mode=TwoWay}" />
-    </StackPanel>
+        <local:PlotSelect Grid.Row="2" BackingData="{Binding DataList, Mode=TwoWay}" />
+    </Grid>
 </Window>

@@ -10,8 +10,16 @@
     <UserControl.Resources>
         <local1:TreeViewItemToIntOneWayToSourceConverter x:Key="treeViewItemToIntOneWayConverter" />
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
-        <TreeView IsEnabled="{Binding  ElementName=PlotSelectControl, Path=NotEmptyList}">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            
+            <!--<<< Exact Height... won't resize -->
+            <ColumnDefinition Width="Auto" />
+            <!--<<< Will resize to the size of contents -->
+            <ColumnDefinition Width="*" />
+            <!--<<< Will resize taking all remaining space -->
+        </Grid.ColumnDefinitions>
+        <TreeView Grid.Column="0" IsEnabled="{Binding  ElementName=PlotSelectControl, Path=NotEmptyList}">
             <TreeViewItem Header="按患者信息统计" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TreeViewItem Header="按性别统计" IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=1, Mode=TwoWay}"/>
                 <TreeViewItem Header="按年龄统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=2, Mode=TwoWay}"/>
@@ -19,32 +27,35 @@
             <TreeViewItem Header="按报告基本信息统计" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TreeViewItem Header="按报告地区统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=3, Mode=TwoWay}"/>
                 <TreeViewItem Header="按报告类型统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=4, Mode=TwoWay}"/>
+                <TreeViewItem Header="按报告单位类别统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=5, Mode=TwoWay}"/>
+                <TreeViewItem Header="按报告单位统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=5, Mode=TwoWay}"/>
+                <TreeViewItem Header="按报告人职业统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=5, Mode=TwoWay}"/>
             </TreeViewItem>
         </TreeView>
-        <TabControl SelectedIndex="{Binding ElementName=PlotSelectControl, Path=PlotSelected}">
+        <TabControl Grid.Column="1" SelectedIndex="{Binding ElementName=PlotSelectControl, Path=PlotSelected}">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Visibility" Value="Hidden"/>
                 </Style>
             </TabControl.ItemContainerStyle>
             <TabItem TabIndex="0">
-                <Grid Width="640" Height="480" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" >
+                <Grid Margin="0,0,0,0" MinWidth="640" MinHeight="480"  Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" >
                     <Label Content="请选择图"  Visibility="{Binding ElementName=PlotSelectControl, Path=NotEmptyListVisibility}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
                     <Label Content="无数据" Visibility="{Binding ElementName=PlotSelectControl, Path= EmptyListVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem  TabIndex="1">
-                <ScottPlot:WpfPlot x:Name="GenderPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Width="640" Height="480" />
+                <ScottPlot:WpfPlot x:Name="GenderPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480"/>
             </TabItem>
             <TabItem TabIndex="2">
-                <ScottPlot:WpfPlot x:Name="AgePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Width="640" Height="480" />
+                <ScottPlot:WpfPlot x:Name="AgePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480"/>
             </TabItem>
             <TabItem TabIndex="3">
-                <ScottPlot:WpfPlot x:Name="ReportRegionPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Width="640" Height="480" />
+                <ScottPlot:WpfPlot x:Name="ReportRegionPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"   MinWidth="640" MinHeight="480" />
             </TabItem>
             <TabItem TabIndex="4">
-                <ScottPlot:WpfPlot x:Name="ReportTypePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Width="640" Height="480" />
+                <ScottPlot:WpfPlot x:Name="ReportTypePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
             </TabItem>
         </TabControl>
-    </StackPanel>
+    </Grid>
 </UserControl>
