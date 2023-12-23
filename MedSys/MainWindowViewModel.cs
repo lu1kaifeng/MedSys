@@ -14,7 +14,7 @@ namespace MedSys
 {
     public partial class MainWindowViewModel
     {
-        public List<med> Query()
+        public Task<List<med>> Query()
         {
             
                 List<SqlParameter> paramList = new List<SqlParameter>();
@@ -125,23 +125,25 @@ namespace MedSys
                 queryString += " and 不良反应结果 like @adverseEffectResultTypeEntry";
                 paramList.Add(new SqlParameter("@adverseEffectResultTypeEntry",AdverseEffectResultTypeEntry));
             }
-            List<med> medList = new List<med>();
-            using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddRange(paramList.ToArray());
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                
-                
-                while (reader.Read())
-                {    
-                    medList.Add(ConvertToObject<med>(reader));
-                }
-         
-            }
-            return medList;
+            return Task.Run(() => {
+                List<med> medList = new List<med>();
+                using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)
+                {
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddRange(paramList.ToArray());
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
+
+                    while (reader.Read())
+                    {
+                        medList.Add(ConvertToObject<med>(reader));
+                    }
+
+                }
+                return medList;
+            });
+           
         }
 
         private List<dataModel> _dataList = new List<dataModel>();

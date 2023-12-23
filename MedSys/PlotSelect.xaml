@@ -34,7 +34,7 @@
             </TreeViewItem>
         </TreeView>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
-        <TabControl Grid.Column="2" SelectedIndex="{Binding ElementName=PlotSelectControl, Path=PlotSelected}">
+        <TabControl Grid.Column="2" SelectedIndex="{Binding ElementName=PlotSelectControl, Path=PlotSelected}" Margin="0,-2,0,0">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Visibility" Value="Collapsed"/>

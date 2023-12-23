@@ -14,6 +14,8 @@ using static MedSys.TextInputListView;
 using System.Linq;
 using System.Data.Linq.SqlClient;
 using ScottPlot;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MedSys
 {
@@ -29,7 +31,7 @@ namespace MedSys
         public MainWindow()
         {
             InitializeComponent();
-          
+
             DataContext = viewModel;
         }
 
@@ -46,24 +48,23 @@ namespace MedSys
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var options1 = new JsonSerializerOptions
+            CriteriaSelector.IsEnabled = false;
+            viewModel.DataList = null;
+            Mouse.OverrideCursor = Cursors.Wait;
+            var json = viewModel.Query();
+            json.ContinueWith(x =>
             {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.All),
-                WriteIndented = false
-            };
-            using (medEntities context = new medEntities())
-            {
-                var query = from med in context.meds select med;
-                var json = viewModel.Query();
-                viewModel.DataList = json;
-                //Plot(json);
-                //MessageBox.Show(json);
-                // context.meds.Where((a) => SqlMethods.Like("",""));
-                return;
-            }
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    viewModel.DataList = x.Result;
+                    CriteriaSelector.IsEnabled = true;
+                    Mouse.OverrideCursor = null;
+                });
+            });
+
         }
 
-        
+
     }
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {
@@ -81,7 +82,7 @@ namespace MedSys
                 OnPropertyChanged();
             }
         }
-        
+
         public bool DatePickerEnabled
         {
             get
@@ -579,7 +580,7 @@ namespace MedSys
         private bool _otherUnique = false;
         public bool OtherUnique
         {
-            set { _otherUnique = value; OnPropertyChanged();}
+            set { _otherUnique = value; OnPropertyChanged(); }
             get { return _otherUnique; }
         }
         private bool _otherNoOutlier = false;
