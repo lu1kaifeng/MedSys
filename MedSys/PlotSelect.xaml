@@ -15,9 +15,9 @@
             
             <!--<<< Exact Height... won't resize -->
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="Auto" />
             <!--<<< Will resize to the size of contents -->
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
             <!--<<< Will resize taking all remaining space -->
         </Grid.ColumnDefinitions>
         <TreeView Grid.Column="0" IsEnabled="{Binding  ElementName=PlotSelectControl, Path=NotEmptyList}">

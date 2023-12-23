@@ -1,4 +1,5 @@
 ﻿using MedSys.Converters;
+using ScottPlot;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,8 +35,10 @@ namespace MedSys
         {
             PlottingMethods = GetType().GetMethods().Where(x => x.GetCustomAttributes(typeof(Plotting), false).FirstOrDefault() != null);
             InitializeComponent();
+            
         }
 
+        
 
         public static readonly DependencyProperty BackingDataProperty =
 DependencyProperty.Register("BackingData",

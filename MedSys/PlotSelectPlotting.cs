@@ -1,6 +1,7 @@
 ﻿using NumpyDotNet;
 using NumSharp.Utilities;
 using ScottPlot;
+using ScottPlot.Control;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -36,7 +37,8 @@ namespace MedSys
             var result = np.unique(np.array(genderBag.ToArray()),return_counts:true);
             double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
             string[] labels = (string[]) result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray(); ;
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray(); 
+            GenderPlot.Configuration.UseRenderQueue = true;
             GenderPlot.Plot.AddBar(bins, positions);
             GenderPlot.Plot.XTicks(positions, labels);
             GenderPlot.Plot.AxisAuto();
@@ -72,6 +74,7 @@ namespace MedSys
             {
                 edges[i] = (edges[i] + edges[i + 1]) / 2;
             }
+            AgePlot.Configuration.UseRenderQueue = true;
             edges = edges.Slice(0, edges.Length - 1);
             AgePlot.Plot.AddBar(dbins,edges);
             AgePlot.Refresh();
@@ -97,7 +100,8 @@ namespace MedSys
             var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
             double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
             string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray(); ;
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray(); 
+            ReportRegionPlot.Configuration.UseRenderQueue = true;
             ReportRegionPlot.Plot.AddBar(bins, positions);
             ReportRegionPlot.Plot.XTicks(positions, labels);
             ReportRegionPlot.Plot.AxisAuto();
@@ -124,7 +128,8 @@ namespace MedSys
             var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
             double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
             string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray(); ;
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray(); 
+            ReportTypePlot.Configuration.UseRenderQueue = true;
             ReportTypePlot.Plot.AddBar(bins, positions);
             ReportTypePlot.Plot.XTicks(positions, labels);
             ReportTypePlot.Plot.AxisAuto();
