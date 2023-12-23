@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <local1:RadioIntToBoolConverter x:Key="radioBoolToIntConverter" />
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
+    <StackPanel local:Spacing.Horizontal="5"  Orientation="Horizontal">
         <RadioButton  GroupName="{Binding ElementName=ExactOrContainControl, Path=GroupName}" Content="精确"   IsChecked="{Binding ElementName=ExactOrContainControl, Path=IsExact, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1, Mode=TwoWay}"/>
         <RadioButton  GroupName="{Binding ElementName=ExactOrContainControl,Path=GroupName}" Content="包含" IsChecked="{Binding ElementName=ExactOrContainControl, Path=IsExact, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0, Mode=TwoWay }"/>
     </StackPanel>

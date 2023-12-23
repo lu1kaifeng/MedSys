@@ -38,8 +38,14 @@
             <TabControl Grid.Row="0" Name="CriteriaSelector"  SelectedIndex="{Binding SelectedTabIndex}" >
                 <TabItem Header="普通筛选">
                     <ScrollViewer>
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
+                        <StackPanel local:MarginSetter.Margin="1" Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type StackPanel}">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+
+                                </Style>
+                            </StackPanel.Resources>
+                            <StackPanel  local:Spacing.Horizontal="5"  Orientation="Horizontal">
                                 <Label Content="时间类型:"/>
                                 <ComboBox Name="TimeType" Width="120" ItemsSource="{Binding Path=TimeTypeEntries}" SelectedValue="{Binding Path=TimeTypeEntry}" HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -51,18 +57,18 @@
                                 <DatePicker  Name="ToTimePicker" IsEnabled="{Binding Path=DatePickerEnabled}"  SelectedDate="{Binding Path=ToDate}" Text="至日期" HorizontalAlignment="Center" VerticalAlignment="Center"  />
 
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel local:Spacing.Horizontal="5"  Orientation="Horizontal">
                                 <Label Content="药品名称:"/>
                                 <ComboBox Name="MedNameType" Width="120" ItemsSource="{Binding Path=MedNameTypeEntries}" SelectedValue="{Binding Path=MedNameTypeEntry}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 <TextBox  Name="MedName" Text="{Binding Path=MedName}" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <!--<RadioButton Name="MedQueyTypeExact" Content="精确" GroupName="MedQueyType"  IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1}"/>
 <RadioButton Name="MedQueyTypeContain" Content="包含" GroupName="MedQueyType" IsChecked="{Binding Path=MedNameTypeExactOrContain, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0}"/>-->
-                                <local:ExactOrContain  GroupName="MedQueyType" IsExact="{Binding Path=MedNameTypeExactOrContain,Mode=OneWayToSource}" />
+                                <local:ExactOrContain  GroupName="MedQueyType" IsExact="{Binding Path=MedNameTypeExactOrContain,Mode=OneWayToSource}" VerticalContentAlignment="Center" />
                                 <Label Content="生产批号:"/>
                                 <TextBox Name="MedBatchNo" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel local:Spacing.Horizontal="5"  Orientation="Horizontal">
                                 <Label Content="生产厂家:"/>
 
                                 <TextBox Name="ManufacturerName" TextWrapping="Wrap" Text="{Binding Path=ManufacturerName}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -72,14 +78,14 @@
                                 <Label Content="批准文号:"/>
                                 <TextBox Name="ApprovalNo" Text="{Binding Path=ApprovalNo}" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel  local:Spacing.Horizontal="5"  Orientation="Horizontal">
                                 <Label Content="不良反应名称:"/>
                                 <TextBox Name="AdverseEffectName" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <Button Content="MedDRA搜索" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <Label Content="不良反应结果:"/>
                                 <ComboBox Name="AdverseEffectResult" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel  local:Spacing.Horizontal="5"  Orientation="Horizontal" VerticalAlignment="Center">
                                 <Label Content="报告对象:"/>
                                 <CheckBox Name="SubjectInstitution" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}" VerticalAlignment="Center"/>
                                 <CheckBox Name="SubjectHolderInitiated" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}" VerticalAlignment="Center"/>
@@ -93,9 +99,14 @@
 
                 <TabItem Header="高级筛选">
                     <ScrollViewer >
-                        <StackPanel>
+                        <StackPanel local:MarginSetter.Margin="1" >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type StackPanel}">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </StackPanel.Resources>
                             <GroupBox Header="数据范围">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                     <Label Content="报告对象:" VerticalAlignment="Center"/>
                                     <CheckBox Name="SubjectInstitutionAdvanced" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}" VerticalAlignment="Center"/>
                                     <CheckBox Name="SubjectHolderInitiatedAdvanced" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}" VerticalAlignment="Center"/>
@@ -107,7 +118,7 @@
                             </GroupBox>
                             <GroupBox Header="报告信息">
                                 <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="时间类型:"/>
                                         <ComboBox Name="TimeTypeAdvanced" Width="120" ItemsSource="{Binding Path=TimeTypeEntries}" SelectedValue="{Binding Path=TimeTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center">
 
@@ -119,7 +130,7 @@
                                         <DatePicker  Name="ToTimePickerAdvanced" IsEnabled="{Binding Path=DatePickerEnabled}"  SelectedDate="{Binding Path=ToDate}" Text="至日期" VerticalAlignment="Center" HorizontalAlignment="Center"  />
 
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="信息来源:"/>
                                         <ComboBox Name="InfoSource" Width="120"    ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}"-->
@@ -129,7 +140,7 @@
                         <RadioButton Content="预期（已知）"/>
                         <RadioButton Content="非预期（新的）"/>-->
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="报告编码:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding ReportNoFrom}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="至"/>
@@ -140,7 +151,7 @@
                         <RadioButton Content="严重"/>
                         <RadioButton Content="一般"/>-->
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal" VerticalAlignment="Center">
                                         <Label Content="境内外选择:"/>
                                         <ComboBox Name="IsDomestic" Width="120"  ItemsSource="{Binding Path=IsDomesticEntries}" SelectedValue="{Binding Path=IsDomesticEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--<RadioButton Content="全部"/>
@@ -153,7 +164,7 @@
                             </GroupBox>
                             <GroupBox Header="药品信息">
                                 <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="批准文号:"/>
                                         <TextBox Name="ApprovalNoAdvanced"  Text="{Binding Path=ApprovalNo}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="生产批号:"/>
@@ -162,25 +173,25 @@
                                         <ComboBox Name="MedType" Width="120" ItemsSource="{Binding Path=MedTypeEntries}" SelectedValue="{Binding Path=MedTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="药品名称：" />
                                         <local:MedNameListView Contents="{Binding Path=MedNameList}"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="生产厂家：" />
                                         <local:TextInputListView x:Name="ManufacturerNameControl" Contents="{Binding Path=ManufacturerNameList}"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="商品名称：" />
                                         <local:TextInputListView  x:Name="CommercialNameControl" Contents="{Binding Path=CommercialNameList}"/>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
+                                        <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                             <Label Content="药品分类:"/>
                                             <TextBox Name="MedClassification" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                             <Label Content="基本药物:"/>
                                             <CheckBox Name="BaseMed2012" Content="基药2012" IsChecked="{Binding Path=BaseMed, Converter={StaticResource baseMedConverter}, ConverterParameter=基药2012}" VerticalAlignment="Center"/>
                                             <CheckBox Name="BaseMed2018" Content="基药2018"  IsChecked="{Binding Path=BaseMed, Converter={StaticResource baseMedConverter}, ConverterParameter=基药2018}" VerticalAlignment="Center"/>
@@ -189,7 +200,7 @@
                                         </StackPanel>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="剂型:"/>
                                         <TextBox Text="{Binding DosageForm}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="给药途径:"/>
@@ -201,7 +212,7 @@
                                 </StackPanel>
                             </GroupBox>
                             <GroupBox Header="医院、患者信息">
-                                <StackPanel>
+                                <StackPanel local:Spacing.Horizontal="5">
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="患者姓名:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding PatientName}"  Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -219,7 +230,7 @@
                                         <TextBox TextWrapping="Wrap" Text="{Binding AgeTo}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="报告单位名称:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding ReportUnitName}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="医院名称:"/>
@@ -227,7 +238,7 @@
                                         <Label Content="原患疾病:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding PreexistingCondition}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="用药原因:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding MedReason}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
@@ -236,14 +247,14 @@
                             </GroupBox>
                             <GroupBox Header="不良反应信息">
                                 <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="不良反应名称:"/>
                                         <TextBox Name="AdverseEffectNameAdvanced" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Button Content="MedDRA搜索" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="不良反应结果:"/>
                                         <ComboBox Name="AdverseEffectResultAdvanced" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="SMQ名称:"/>
                                         <TextBox  Text="{Binding SMQName}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Button Content="MedDRA搜索" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -251,7 +262,7 @@
                                 </StackPanel>
                             </GroupBox>
                             <GroupBox Header="其他选项">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                     <CheckBox Name="OtherUnique" IsChecked="{Binding OtherUnique}" Content="剔除重复报告" VerticalAlignment="Center"  />
                                     <CheckBox Name="OtherNoOutlier" IsChecked="{Binding OtherNoOutlier}" Content="剔除不标准数据" VerticalAlignment="Center"  />
                                     <Label Content="评价意见状态：" VerticalAlignment="Center"/>
