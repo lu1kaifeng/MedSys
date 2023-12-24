@@ -64,7 +64,10 @@ namespace MedSys
 
         }
 
-
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new DataImportWindow().Show();
+        }
     }
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {

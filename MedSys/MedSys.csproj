@@ -132,6 +132,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters.cs" />
+    <Compile Include="DataGridPage.xaml.cs">
+      <DependentUpon>DataGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataImportWindow.xaml.cs">
+      <DependentUpon>DataImportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExactOrContain.xaml.cs">
       <DependentUpon>ExactOrContain.xaml</DependentUpon>
     </Compile>
@@ -164,6 +170,14 @@
       <DependentUpon>TextInputListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Typing.cs" />
+    <Page Include="DataGridPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataImportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ExactOrContain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

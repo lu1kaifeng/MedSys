@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="MedSys.DataGridPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"  Background="Transparent">
+    <UserControl.Resources>
+        <!--每页{0}/共{0}条-->
+        <Style x:Key="PageTextBlock1" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <!--首页上一页等-->
+        <Style x:Key="PageTextBlock2" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="23" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF000000" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Border CornerRadius="3" Background="Transparent" BorderBrush="#01544A" BorderThickness="1">
+            <Grid HorizontalAlignment="Stretch" Margin="5 0 1 0" VerticalAlignment="Top" Width="Auto" Height="25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="tbkRecords" Grid.Column="0" Style="{StaticResource PageTextBlock1}" Foreground="#01544A" Visibility="Visible" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Name="btnFirst" Text="  首页" IsEnabled="False" Style="{StaticResource PageTextBlock2}" MouseDown="btnFirst_MouseDown"/>
+                        <TextBlock Grid.Column="1" Name="btnPrev" Text="上一页" IsEnabled="False" Style="{StaticResource PageTextBlock2}" MouseDown="btnPrev_MouseDown" />
+                        <Grid Grid.Column="2" Name="grid" Visibility="Visible" >
+                            <TextBlock Text="第"    Style="{StaticResource PageTextBlock2}" Width="15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0"></TextBlock>
+                            <TextBox Width="30" Name="page" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"></TextBox>
+                            <TextBlock HorizontalAlignment="Left" Width="60" VerticalAlignment="Bottom" Name="countPage" Text="页/共页"  Style="{StaticResource PageTextBlock2}" Margin="55,0,0,0"></TextBlock>
+                            <Button Name="btnGO" Content="GO"  Width="25" Height="20"  VerticalAlignment="Center" Margin="115,0,10,0" Click="btnGO_Click"></Button>
+                        </Grid>
+                        <TextBlock  Grid.Column="3" Name="btnNext" Text="下一页" IsEnabled="False" Style="{StaticResource PageTextBlock2}"  MouseDown="btnNext_MouseDown"  />
+                        <TextBlock  Grid.Column="4" Name="btnLast" Text="未页" IsEnabled="False" Style="{StaticResource PageTextBlock2}" MouseDown="btnLast_MouseDown"/>
+                        
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
