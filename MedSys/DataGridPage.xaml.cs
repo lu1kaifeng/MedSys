@@ -13,6 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.Text.RegularExpressions;
+using static MedSys.MedNameListView;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace MedSys
 {
@@ -21,20 +24,32 @@ namespace MedSys
     /// </summary>
     public partial class DataGridPage : UserControl
     {
-       
+        public static readonly DependencyProperty PageProperty =
+DependencyProperty.Register("Page",
+  typeof(ObservableCollection<med>), typeof(DataGridPage),new PropertyMetadata());
+
+        public ObservableCollection<med> Page
+        {
+            get
+            {
+                return (ObservableCollection<med>)GetValue(PageProperty);
+            }
+            set
+            {
+                SetValue(PageProperty, value);
+            }
+
+        }
         public DataGridPage()
         {
             InitializeComponent();
-            ShowPages(1);
            
         }
         private medEntities db = new medEntities();
         //每页显示多少条
         private int pageNum = 10;
         //当前是第几页
-        private int pIndex = 1;
-        //对象
-        private DataGrid grdList;
+        private int pIndex = 0;
         //最大页数
         private int MaxIndex = 1;
         //一共多少条
@@ -47,10 +62,10 @@ namespace MedSys
         /// <param name="grd"></param>
         /// <param name="dtt"></param>
         /// <param name="Num"></param>
-        public void ShowPages( int Num)
+        public void InitPage()
         {     
             SetMaxIndex();
-            ReadDataTable();
+            btnNext_MouseDown(null,null);
         }
         #endregion
 
@@ -64,9 +79,17 @@ namespace MedSys
             {
                 page.Text = this.pIndex.ToString();
                 countPage.Text = "页/共" + MaxIndex + "页";
+                Page = null;
+                Task.Run(() =>
+                {
+                    var arr = (from o in db.meds orderby o.ID select o).Skip(pageNum * (pIndex - 1)).Take(pageNum).ToArray();
+                    Application.Current.Dispatcher.Invoke(() => {
+                        Page = new ObservableCollection<med>(arr);
+                    });
+                });
                 
             }
-            catch
+            catch(Exception e)
             {
                 MessageBox.Show("错误");
             }

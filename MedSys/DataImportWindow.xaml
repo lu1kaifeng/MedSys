@@ -4,15 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+            xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:local="clr-namespace:MedSys"  x:Class="MedSys.DataImportWindow" 
-        Title="DataImportWindow" Height="450" Width="800">
+        Title="DataImportWindow" Loaded="Window_Loaded">
     <Window.DataContext>
         <local:DataImportWindowDataContext />
     </Window.DataContext>
 
     <Grid>
-
-        <local:DataGridPage HorizontalAlignment="Left"  VerticalAlignment="Top" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <!--diag:PresentationTraceSources.TraceLevel=High-->
+        <local:DataGridPage IsEnabled="{Binding Loaded}" x:Name="Paginator" Grid.Row="1" Grid.Column="1"  Page="{Binding Path=CurrentPage,Mode=OneWayToSource}" HorizontalAlignment="Left"  VerticalAlignment="Top"  />
+        <DataGrid x:Name="Grid" IsEnabled="{Binding Loaded}" ItemsSource="{Binding CurrentPage,Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
