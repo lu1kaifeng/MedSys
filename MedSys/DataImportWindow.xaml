@@ -21,6 +21,14 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <!--diag:PresentationTraceSources.TraceLevel=High-->
+        <Grid Grid.Row="1" Grid.Column="0"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="由报表导入数据" Click="Button_Click"/>
+        </Grid>
         <local:DataGridPage IsEnabled="{Binding Loaded}" x:Name="Paginator" Grid.Row="1" Grid.Column="1"  Page="{Binding Path=CurrentPage,Mode=OneWayToSource}" HorizontalAlignment="Left"  VerticalAlignment="Top"  />
         <DataGrid x:Name="Grid" IsEnabled="{Binding Loaded}" ItemsSource="{Binding CurrentPage,Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 

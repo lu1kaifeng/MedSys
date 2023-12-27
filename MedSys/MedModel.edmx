@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="medModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="med">
           <Key>
             <PropertyRef Name="ID" />
@@ -67,10 +65,9 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
           <Property Name="对药物采取措施" Type="nvarchar" MaxLength="255" />
           <Property Name="相关器械" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应术语" Type="nvarchar" MaxLength="255" />
-          <Property Name="不良反应术语1" Type="nvarchar" MaxLength="255" />
+          <Property Name="系统不良反应术语" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应术语代码" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应发生时间" Type="nvarchar" MaxLength="255" />
-          <Property Name="不良反应发生时间1" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应持续时间" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应过程描述" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应结果" Type="nvarchar" MaxLength="255" />
@@ -123,120 +120,7 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityContainer Name="medModelStoreContainer">
-          <EntitySet Name="med" EntityType="Self.med" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [med].[报告表编码] AS [报告表编码], 
-    [med].[首次或跟踪报告] AS [首次或跟踪报告], 
-    [med].[是否境外报告] AS [是否境外报告], 
-    [med].[是否非预期] AS [是否非预期], 
-    [med].[报告类型] AS [报告类型], 
-    [med].[不良反应严重性] AS [不良反应严重性], 
-    [med].[报告单位类别] AS [报告单位类别], 
-    [med].[患者姓名] AS [患者姓名], 
-    [med].[性别] AS [性别], 
-    [med].[出生日期] AS [出生日期], 
-    [med].[年龄] AS [年龄], 
-    [med].[年龄单位] AS [年龄单位], 
-    [med].[国籍] AS [国籍], 
-    [med].[民族] AS [民族], 
-    [med].[种族] AS [种族], 
-    [med].[体重kg] AS [体重kg], 
-    [med].[身高cm] AS [身高cm], 
-    [med].[患者联系方式] AS [患者联系方式], 
-    [med].[疾病名称] AS [疾病名称], 
-    [med].[疾病名称代码] AS [疾病名称代码], 
-    [med].[相关疾病信息开始日期] AS [相关疾病信息开始日期], 
-    [med].[相关疾病信息结束日期] AS [相关疾病信息结束日期], 
-    [med].[报告当时疾病是否仍存在] AS [报告当时疾病是否仍存在], 
-    [med].[既往药品史] AS [既往药品史], 
-    [med].[既往药品史开始日期] AS [既往药品史开始日期], 
-    [med].[既往药品史结束日期] AS [既往药品史结束日期], 
-    [med].[治疗疾病药品史] AS [治疗疾病药品史], 
-    [med].[治疗疾病药品史代码] AS [治疗疾病药品史代码], 
-    [med].[医疗机构名称] AS [医疗机构名称], 
-    [med].[病历号或门诊号] AS [病历号或门诊号], 
-    [med].[既往药品不良反应事件] AS [既往药品不良反应事件], 
-    [med].[家族药品不良反应事件] AS [家族药品不良反应事件], 
-    [med].[相关重要信息] AS [相关重要信息], 
-    [med].[怀疑或并用] AS [怀疑或并用], 
-    [med].[药品序号] AS [药品序号], 
-    [med].[批准文号] AS [批准文号], 
-    [med].[商品名称] AS [商品名称], 
-    [med].[通用名称] AS [通用名称], 
-    [med].[规格] AS [规格], 
-    [med].[剂型] AS [剂型], 
-    [med].[持有人或生产厂家] AS [持有人或生产厂家], 
-    [med].[失效期或有效期至] AS [失效期或有效期至], 
-    [med].[生产批号] AS [生产批号], 
-    [med].[用法用量] AS [用法用量], 
-    [med].[给药途径] AS [给药途径], 
-    [med].[用药开始时间选项] AS [用药开始时间选项], 
-    [med].[用药开始时间] AS [用药开始时间], 
-    [med].[用药结束时间选项] AS [用药结束时间选项], 
-    [med].[用药结束时间] AS [用药结束时间], 
-    [med].[用药时间] AS [用药时间], 
-    [med].[治疗适应症术语] AS [治疗适应症术语], 
-    [med].[治疗适应症] AS [治疗适应症], 
-    [med].[是否存在以下情况] AS [是否存在以下情况], 
-    [med].[对药物采取措施] AS [对药物采取措施], 
-    [med].[相关器械] AS [相关器械], 
-    [med].[不良反应术语] AS [不良反应术语], 
-    [med].[不良反应术语1] AS [不良反应术语1], 
-    [med].[不良反应术语代码] AS [不良反应术语代码], 
-    [med].[不良反应发生时间] AS [不良反应发生时间], 
-    [med].[不良反应发生时间1] AS [不良反应发生时间1], 
-    [med].[不良反应持续时间] AS [不良反应持续时间], 
-    [med].[不良反应过程描述] AS [不良反应过程描述], 
-    [med].[不良反应结果] AS [不良反应结果], 
-    [med].[后遗症表现] AS [后遗症表现], 
-    [med].[死亡时间] AS [死亡时间], 
-    [med].[直接死因] AS [直接死因], 
-    [med].[是否尸检] AS [是否尸检], 
-    [med].[尸检结果] AS [尸检结果], 
-    [med].[停药减药后反应是否减轻或消失] AS [停药减药后反应是否减轻或消失], 
-    [med].[再次使用可疑药是否出现同样反应] AS [再次使用可疑药是否出现同样反应], 
-    [med].[对原患疾病影响] AS [对原患疾病影响], 
-    [med].[报告单位评价] AS [报告单位评价], 
-    [med].[初始报告人职业] AS [初始报告人职业], 
-    [med].[报告日期] AS [报告日期], 
-    [med].[报告来源] AS [报告来源], 
-    [med].[父母姓名] AS [父母姓名], 
-    [med].[父母性别] AS [父母性别], 
-    [med].[父母出生日期] AS [父母出生日期], 
-    [med].[父母年龄] AS [父母年龄], 
-    [med].[父母身高cm] AS [父母身高cm], 
-    [med].[父母体重kg] AS [父母体重kg], 
-    [med].[母亲末次月经时间] AS [母亲末次月经时间], 
-    [med].[妊娠相关描述项] AS [妊娠相关描述项], 
-    [med].[事件发生地] AS [事件发生地], 
-    [med].[首次获知时间] AS [首次获知时间], 
-    [med].[企业病例编码] AS [企业病例编码], 
-    [med].[最近一次获知时间] AS [最近一次获知时间], 
-    [med].[报告单位名称] AS [报告单位名称], 
-    [med].[报告单位联系人] AS [报告单位联系人], 
-    [med].[报告单位电话] AS [报告单位电话], 
-    [med].[报告单位地址] AS [报告单位地址], 
-    [med].[备注] AS [备注], 
-    [med].[国家中心接收时间] AS [国家中心接收时间], 
-    [med].[首次报告时间] AS [首次报告时间], 
-    [med].[最后一次跟踪报告时间] AS [最后一次跟踪报告时间], 
-    [med].[报告地区名称] AS [报告地区名称], 
-    [med].[最后修改时间] AS [最后修改时间], 
-    [med].[县评价] AS [县评价], 
-    [med].[市评价] AS [市评价], 
-    [med].[省评价] AS [省评价], 
-    [med].[国家评价] AS [国家评价], 
-    [med].[县评价人姓名] AS [县评价人姓名], 
-    [med].[市评价人姓名] AS [市评价人姓名], 
-    [med].[省评价人姓名] AS [省评价人姓名], 
-    [med].[国家评价人姓名] AS [国家评价人姓名], 
-    [med].[县评价时间] AS [县评价时间], 
-    [med].[市评价时间] AS [市评价时间], 
-    [med].[省评价时间] AS [省评价时间], 
-    [med].[国家评价时间] AS [国家评价时间], 
-    [med].[ID] AS [ID]
-    FROM [dbo].[med] AS [med]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="med" EntityType="Self.med" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -303,10 +187,9 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
           <Property Name="对药物采取措施" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="相关器械" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应术语" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="不良反应术语1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="系统不良反应术语" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应术语代码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应发生时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="不良反应发生时间1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应持续时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应过程描述" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应结果" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -426,10 +309,9 @@ warning 6002: The table/view 'med.dbo.med' does not have a primary key defined. 
                 <ScalarProperty Name="对药物采取措施" ColumnName="对药物采取措施" />
                 <ScalarProperty Name="相关器械" ColumnName="相关器械" />
                 <ScalarProperty Name="不良反应术语" ColumnName="不良反应术语" />
-                <ScalarProperty Name="不良反应术语1" ColumnName="不良反应术语1" />
+                <ScalarProperty Name="系统不良反应术语" ColumnName="系统不良反应术语" />
                 <ScalarProperty Name="不良反应术语代码" ColumnName="不良反应术语代码" />
                 <ScalarProperty Name="不良反应发生时间" ColumnName="不良反应发生时间" />
-                <ScalarProperty Name="不良反应发生时间1" ColumnName="不良反应发生时间1" />
                 <ScalarProperty Name="不良反应持续时间" ColumnName="不良反应持续时间" />
                 <ScalarProperty Name="不良反应过程描述" ColumnName="不良反应过程描述" />
                 <ScalarProperty Name="不良反应结果" ColumnName="不良反应结果" />

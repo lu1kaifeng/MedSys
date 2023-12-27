@@ -70,10 +70,9 @@ namespace MedSys
         public string 对药物采取措施 { get; set; }
         public string 相关器械 { get; set; }
         public string 不良反应术语 { get; set; }
-        public string 不良反应术语1 { get; set; }
+        public string 系统不良反应术语 { get; set; }
         public string 不良反应术语代码 { get; set; }
         public string 不良反应发生时间 { get; set; }
-        public string 不良反应发生时间1 { get; set; }
         public string 不良反应持续时间 { get; set; }
         public string 不良反应过程描述 { get; set; }
         public string 不良反应结果 { get; set; }

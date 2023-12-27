@@ -67,6 +67,13 @@ DependencyProperty.Register("Page",
             SetMaxIndex();
             btnNext_MouseDown(null,null);
         }
+
+        public void ResetPage()
+        {
+            this.pIndex = 0;
+            SetMaxIndex();
+            btnNext_MouseDown(null, null);
+        }
         #endregion
 
         #region 画数据
