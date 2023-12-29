@@ -2,6 +2,7 @@
 using FastMember;
 using Microsoft.Win32;
 using MiniExcelLibs;
+using NumSharp.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,6 +47,51 @@ namespace MedSys
                 OnPropertyChanged();
                 OnPropertyChanged("Loaded");
             }
+        }
+
+        private string _rangeSelectTxt = "";
+        public string RangeSelectTxt
+        {
+            get { return _rangeSelectTxt; }
+            set { 
+                _rangeSelectTxt = value;
+                OnPropertyChanged(); 
+            }
+        }
+
+        public HashSet<int> SelectRange
+        {
+            get
+            {
+                var set = new HashSet<int>();
+                foreach (var item in RangeSelectTxt.Split(';'))
+                {
+                    if(item == string.Empty)
+                    {
+                        continue;
+                    }
+                    
+                    var splitted = item.Split('-');
+                    if(splitted.Length > 1) {
+                        var start = long.Parse(splitted[0]);
+                        var end = long.Parse(splitted[1]);
+                        if(start <= end)
+                        {
+                            set.UnionWith(Enumerable.Range((int)(start), (int)end - (int)start + 1));
+                        }
+                        else
+                        {
+                            set.UnionWith(Enumerable.Range((int)(end), (int)start- (int)end + 1));
+                        }
+                    }
+                    else{
+                        set.Add(int.Parse(item));
+                    }
+                    
+                }
+                return set;
+            }
+        
         }
 
         public bool Loaded
@@ -119,6 +166,8 @@ namespace MedSys
 
         }
 
+        
+
         private T ConvertToObject<T>(IDictionary<string, object> rd, out HashSet<string> extraCol, out HashSet<string> missingCol) where T : class, new()
         {
             Type type = typeof(T);
@@ -149,6 +198,72 @@ namespace MedSys
                 }
             }
             return t;
+        }
+
+        private void MatchingStrBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var m =  new Regex("^((\\d+)?(-?)(\\d+)?)$");
+            var list = MatchingStrBox.Text.Insert(MatchingStrBox.CaretIndex,e.Text).Split(';');
+            var match = true;
+            foreach (var item in list)
+            {
+                match &= m.IsMatch(item);
+            }
+            e.Handled = !match;
+        }
+
+
+        private void MatchingStrBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            int i = 0;
+            int k = 0;
+            int newCaret = 0;
+            switch (e.Key)
+            {
+                case Key.Back: case Key.Delete:
+                    foreach (var item in MatchingStrBox.Text)
+                    {
+                        if (k == MatchingStrBox.CaretIndex)
+                        {
+                            break;
+                        }
+                        if (item == ';')
+                        {
+                            i++;
+                            newCaret = k;
+                        }
+                        k++;
+                    }
+                    vm.RangeSelectTxt = String.Join(";", MatchingStrBox.Text.Split(';').RemoveAt(i));
+                    MatchingStrBox.CaretIndex = newCaret;
+                    e.Handled = true;
+                    break;
+            }
+        }
+
+        private void Delete_Selected(object sender, RoutedEventArgs e)
+        {
+            using (var ctx = new medEntities())
+            {
+                var selected = (from med in ctx.meds where vm.SelectRange.Contains(med.ID) select med).ToList();
+                ctx.meds.RemoveRange(selected);
+                ctx.SaveChanges();
+            }
+        }
+
+        private void Export_Selected(object sender, RoutedEventArgs e)
+        {
+            using (var ctx = new medEntities())
+            {
+                var selected = (from med in ctx.meds where vm.SelectRange.Contains(med.ID) select med).ToList();
+                SaveFileDialog of = new SaveFileDialog();
+                of.Filter = "报表文件|*.xlsx";
+                of.ShowDialog();
+                if (of.FileName != null)
+                {
+                    MiniExcel.SaveAs(of.FileName, selected);
+                }
+            }
         }
     }
 }

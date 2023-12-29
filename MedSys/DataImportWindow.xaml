@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         xmlns:local="clr-namespace:MedSys"  x:Class="MedSys.DataImportWindow" 
         Title="DataImportWindow" Loaded="Window_Loaded">
     <Window.DataContext>
@@ -23,11 +24,18 @@
         <!--diag:PresentationTraceSources.TraceLevel=High-->
         <Grid Grid.Row="1" Grid.Column="0"  >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition Width="Auto"/>
-                
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Content="由报表导入数据" Click="Button_Click"/>
+            
+            <Button Grid.Column="4" Content="由报表导入数据" Click="Button_Click"/>
+            <TextBox x:Name="MatchingStrBox"  input:InputMethod.IsInputMethodEnabled="False" Width="120" Grid.Column="1" TextWrapping="Wrap" Text="{Binding RangeSelectTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="MatchingStrBox_PreviewTextInput" diag:PresentationTraceSources.TraceLevel="High" PreviewKeyDown="MatchingStrBox_PreviewKeyDown" HorizontalAlignment="Right"  />
+            <Button Grid.Column="2" Content="删除条目" Click="Delete_Selected"/>
+            <Button Grid.Column="3" Content="导出条目" Click="Export_Selected"/>
+
         </Grid>
         <local:DataGridPage IsEnabled="{Binding Loaded}" x:Name="Paginator" Grid.Row="1" Grid.Column="1"  Page="{Binding Path=CurrentPage,Mode=OneWayToSource}" HorizontalAlignment="Left"  VerticalAlignment="Top"  />
         <DataGrid x:Name="Grid" IsEnabled="{Binding Loaded}" ItemsSource="{Binding CurrentPage,Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
