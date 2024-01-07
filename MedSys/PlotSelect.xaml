@@ -29,8 +29,8 @@
                 <TreeViewItem Header="按报告地区统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=3, Mode=TwoWay}"/>
                 <TreeViewItem Header="按报告类型统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=4, Mode=TwoWay}"/>
                 <TreeViewItem Header="按报告单位类别统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=5, Mode=TwoWay}"/>
-                <TreeViewItem Header="按报告单位统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=5, Mode=TwoWay}"/>
-                <TreeViewItem Header="按报告人职业统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=5, Mode=TwoWay}"/>
+                <TreeViewItem Header="按报告单位统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=6, Mode=TwoWay}"/>
+                <TreeViewItem Header="按报告人职业统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=7, Mode=TwoWay}"/>
             </TreeViewItem>
         </TreeView>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
@@ -57,6 +57,15 @@
             </TabItem>
             <TabItem TabIndex="4">
                 <ScottPlot:WpfPlot  x:Name="ReportTypePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
+            </TabItem>
+            <TabItem TabIndex="5">
+                <ScottPlot:WpfPlot  x:Name="ReportInstitutionTypePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
+            </TabItem>
+            <TabItem TabIndex="6">
+                <ScottPlot:WpfPlot  x:Name="ReportInstitutionPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
+            </TabItem>
+            <TabItem TabIndex="7">
+                <ScottPlot:WpfPlot  x:Name="ReporterProfessionPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
             </TabItem>
         </TabControl>
     </Grid>

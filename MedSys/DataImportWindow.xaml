@@ -7,7 +7,7 @@
             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
     xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         xmlns:local="clr-namespace:MedSys"  x:Class="MedSys.DataImportWindow" 
-        Title="DataImportWindow" Loaded="Window_Loaded">
+        Title="DataImportWindow" Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
     <Window.DataContext>
         <local:DataImportWindowDataContext />
     </Window.DataContext>

@@ -136,6 +136,90 @@ namespace MedSys
             ReportTypePlot.Refresh();
         }
 
+        [Plotting]
+        public void ReportInstitutionTypePlotting()
+        {
+            List<med> data = BackingData;
+            if (data == null || data.Count == 0)
+            {
+                return;
+            }
+            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
+            Parallel.ForEach(data, med => {
+
+                if (med.报告单位类别 != string.Empty)
+                {
+                    regionBag.Add(med.报告单位类别);
+                }
+
+            });
+            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
+            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])result.data.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            ReportInstitutionTypePlot.Configuration.UseRenderQueue = true;
+            ReportInstitutionTypePlot.Plot.AddBar(bins, positions);
+            ReportInstitutionTypePlot.Plot.XTicks(positions, labels);
+            ReportInstitutionTypePlot.Plot.AxisAuto();
+            ReportInstitutionTypePlot.Refresh();
+        }
+
+        [Plotting]
+        public void ReportInstitutionPlotting()
+        {
+            List<med> data = BackingData;
+            if (data == null || data.Count == 0)
+            {
+                return;
+            }
+            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
+            Parallel.ForEach(data, med => {
+
+                if (med.报告单位名称 != string.Empty)
+                {
+                    regionBag.Add(med.报告单位名称);
+                }
+
+            });
+            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
+            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])result.data.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            ReportInstitutionPlot.Configuration.UseRenderQueue = true;
+            ReportInstitutionPlot.Plot.AddBar(bins, positions);
+            ReportInstitutionPlot.Plot.XTicks(positions, labels);
+            ReportInstitutionPlot.Plot.AxisAuto();
+            ReportInstitutionPlot.Refresh();
+        }
+
+
+        [Plotting]
+        public void ReporterProfessionPlotting()
+        {
+            List<med> data = BackingData;
+            if (data == null || data.Count == 0)
+            {
+                return;
+            }
+            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
+            Parallel.ForEach(data, med => {
+
+                if (med.初始报告人职业 != string.Empty)
+                {
+                    regionBag.Add(med.初始报告人职业);
+                }
+
+            });
+            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
+            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])result.data.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            ReporterProfessionPlot.Configuration.UseRenderQueue = true;
+            ReporterProfessionPlot.Plot.AddBar(bins, positions);
+            ReporterProfessionPlot.Plot.XTicks(positions, labels);
+            ReporterProfessionPlot.Plot.AxisAuto();
+            ReporterProfessionPlot.Refresh();
+        }
     }
 
     [AttributeUsage(AttributeTargets.Method)]
