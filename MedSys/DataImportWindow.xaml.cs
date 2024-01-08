@@ -119,10 +119,10 @@ namespace MedSys
             OpenFileDialog of = new OpenFileDialog();
             of.Filter = "报表文件|*.xlsx";
             of.Multiselect = false;
-            of.ShowDialog();
+            bool ifComplete = (bool)of.ShowDialog();
             HashSet<string> extraCol = null;
             HashSet<string> missingCol = null;
-            if (of.FileName != null)
+            if (ifComplete && of.FileName != null)
             {
                 var result = MiniExcel.Query(of.FileName, useHeaderRow: true).Select((ee) => ConvertToObject<med>(ee, out extraCol, out missingCol)).Cast<med>().ToList();
                 string message = "即将导入" + result.Count.ToString() + "条条目;\n";
