@@ -258,8 +258,8 @@ namespace MedSys
                 var selected = (from med in ctx.meds where vm.SelectRange.Contains(med.ID) select med).ToList();
                 SaveFileDialog of = new SaveFileDialog();
                 of.Filter = "报表文件|*.xlsx";
-                of.ShowDialog();
-                if (of.FileName != null)
+                bool dialogResult  = (bool)of.ShowDialog();
+                if (dialogResult)
                 {
                     MiniExcel.SaveAs(of.FileName, selected);
                 }
