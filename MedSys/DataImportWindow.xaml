@@ -7,7 +7,7 @@
             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
     xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         xmlns:local="clr-namespace:MedSys"  x:Class="MedSys.DataImportWindow" 
-        Title="DataImportWindow" Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
+        Title="数据管理" Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
     <Window.DataContext>
         <local:DataImportWindowDataContext />
     </Window.DataContext>
@@ -32,7 +32,31 @@
             </Grid.ColumnDefinitions>
             
             <Button Grid.Column="4" Content="由报表导入数据" Click="Button_Click"/>
-            <TextBox x:Name="MatchingStrBox"  input:InputMethod.IsInputMethodEnabled="False" Width="120" Grid.Column="1" TextWrapping="Wrap" Text="{Binding RangeSelectTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="MatchingStrBox_PreviewTextInput" diag:PresentationTraceSources.TraceLevel="High" PreviewKeyDown="MatchingStrBox_PreviewKeyDown" HorizontalAlignment="Right"  />
+            <TextBox x:Name="MatchingStrBox"   input:InputMethod.IsInputMethodEnabled="False" Width="120" Grid.Column="1" TextWrapping="Wrap" Text="{Binding RangeSelectTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="MatchingStrBox_PreviewTextInput" diag:PresentationTraceSources.TraceLevel="High" PreviewKeyDown="MatchingStrBox_PreviewKeyDown" HorizontalAlignment="Right"  >
+
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="输入示例：1;100-200" Foreground="LightGray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
             <Button Grid.Column="2" Content="删除条目" Click="Delete_Selected"/>
             <Button Grid.Column="3" Content="导出条目" Click="Export_Selected"/>
 

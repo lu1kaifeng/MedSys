@@ -55,6 +55,9 @@
     <Reference Include="MiniExcel, Version=1.31.3.0, Culture=neutral, PublicKeyToken=e7310002a53eac39, processorArchitecture=MSIL">
       <HintPath>..\packages\MiniExcel.1.31.3\lib\net45\MiniExcel.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NumpyDotNet, Version=0.9.86.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NumpyDotNet.0.9.86.1\lib\netstandard2.0\NumpyDotNet.dll</HintPath>
     </Reference>
@@ -153,6 +156,10 @@
     <Compile Include="med.cs">
       <DependentUpon>MedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MedDRAEntry.cs" />
+    <Compile Include="MedDRASelect.xaml.cs">
+      <DependentUpon>MedDRASelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MedModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,6 +214,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MedDRASelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MedNameListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -242,6 +253,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MedModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EmbeddedResource Include="meddra.json" />
     <None Include="MedModel.edmx.diagram">
       <DependentUpon>MedModel.edmx</DependentUpon>
     </None>

@@ -32,8 +32,8 @@
 
         <DockPanel Grid.Row="0" Grid.Column="0">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_文件" Click="MenuItem_Click">
-                    <MenuItem Header="_导入"/>
+                <MenuItem Header="_系统" Click="MenuItem_Click">
+                    <MenuItem Header="_数据管理"/>
           
                 </MenuItem>
             </Menu>
@@ -95,7 +95,8 @@
                             <StackPanel  local:Spacing.Horizontal="5"  Orientation="Horizontal">
                                 <Label Content="不良反应名称:"/>
                                 <TextBox Name="AdverseEffectName" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Button Content="MedDRA搜索" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                
+                                <local:MedDRASelect  Selection="{Binding Path=AdverseEffectName,Mode=OneWayToSource}"/>
                                 <Label Content="不良反应结果:"/>
                                 <ComboBox Name="AdverseEffectResult" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </StackPanel>
@@ -264,15 +265,16 @@
                                     <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="不良反应名称:"/>
                                         <TextBox Name="AdverseEffectNameAdvanced" Text="{Binding Path=AdverseEffectName}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        <Button Content="MedDRA搜索" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <!--<Button Content="MedDRA搜索" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+                                        <local:MedDRASelect  Selection="{Binding Path=AdverseEffectName,Mode=OneWayToSource}"/>
                                         <Label Content="不良反应结果:"/>
                                         <ComboBox Name="AdverseEffectResultAdvanced" Width="120"  ItemsSource="{Binding Path=AdverseEffectResultTypeEntries}" SelectedValue="{Binding Path=AdverseEffectResultTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </StackPanel>
-                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
+                                    <!--<StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="SMQ名称:"/>
                                         <TextBox  Text="{Binding SMQName}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Button Content="MedDRA搜索" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </StackPanel>
+                                    </StackPanel>-->
                                 </StackPanel>
                             </GroupBox>
                             <GroupBox Header="其他选项">

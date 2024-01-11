@@ -31,7 +31,7 @@ namespace MedSys
         public MainWindow()
         {
             InitializeComponent();
-
+            Console.WriteLine(MedDRAEntry.Entries);
             DataContext = viewModel;
         }
 
