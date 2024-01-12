@@ -30,7 +30,7 @@ namespace MedSys
 
         public static readonly DependencyProperty SelectionProperty =
     DependencyProperty.Register("Selection",
-         typeof(string), typeof(MedDRASelect));
+         typeof(string), typeof(MedDRASelect),new PropertyMetadata(""));
 
         public string Selection
         {

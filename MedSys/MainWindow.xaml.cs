@@ -68,6 +68,25 @@ namespace MedSys
         {
             new DataImportWindow().Show();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            CriteriaSelector.IsEnabled = false;
+            viewModel.DataList = null;
+            Mouse.OverrideCursor = Cursors.Wait;
+            var json = viewModel.Query();
+            json.ContinueWith(x =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    
+                    CriteriaSelector.IsEnabled = true;
+                    Mouse.OverrideCursor = null;
+                    new SignalDetectionWindow(x.Result).ShowDialog();
+                    //viewModel.DataList = x.Result;
+                });
+            });
+        }
     }
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {

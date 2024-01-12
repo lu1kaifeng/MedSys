@@ -182,6 +182,9 @@
       <DependentUpon>PlotSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlotSelectPlotting.cs" />
+    <Compile Include="SignalDetectionWindow.xaml.cs">
+      <DependentUpon>SignalDetectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextInputListView.xaml.cs">
       <DependentUpon>TextInputListView.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PlotSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignalDetectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
