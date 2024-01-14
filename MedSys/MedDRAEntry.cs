@@ -11,20 +11,21 @@ using System.Windows.Controls;
 
 namespace MedSys
 {
-    internal class MedDRAEntry
+    public class MedDRAEntry
     {
         [JsonProperty("Name")]
-        string Name;
+        public string Name { set; get; }
         [JsonProperty("NameEn")]
-        string NameEn;
+        public string NameEn { set; get; }
         [JsonProperty("Code")]
-        string Code;
+        public string Code { set; get; }
         [JsonProperty("Children")]
-        MedDRAEntry[] Children;
+        MedDRAEntry[] Children { set; get; }
         public static MedDRAEntry[] Entries;
         public static TreeViewItem[] TreeViewItems;
         public static Task LoadHandle;
-        
+        public static HashSet<MedDRAEntry> PreferredTerms = new HashSet<MedDRAEntry>();
+
         private TreeViewItem ToTreeViewItem(int layers=4)
         {
             var tvi = new TreeViewItem();
@@ -32,6 +33,7 @@ namespace MedSys
             tvi.Header = this.Name;
             if (Children == null || layers == 1) { 
                 tvi.Focusable = true;
+                PreferredTerms.Add(this);
                 return tvi; 
             }
             foreach(var mde in Children)

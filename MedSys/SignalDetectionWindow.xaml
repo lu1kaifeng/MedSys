@@ -7,6 +7,91 @@
         mc:Ignorable="d"
         Title="药品不良反应信号检测" Height="450" Width="800">
     <Grid>
-        
+        <TabControl x:Name="Tabs">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabItem  Name="Selection">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition  Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="MatchingStrBox" Text="{Binding Path=Filter, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" >
+
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="输入目标药物名称" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <DataGrid Grid.Column="0" Grid.Row="1"  AutoGenerateColumns="False"
+          ItemsSource="{Binding Path=Names, Mode=OneWay}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <CheckBox IsChecked="{Binding Path=DataContext.AllSelected,
+                   UpdateSourceTrigger=PropertyChanged,
+                   RelativeSource={RelativeSource FindAncestor,
+                       AncestorType={x:Type Window}}}" />
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox HorizontalAlignment="Center"
+                              IsChecked="{Binding Path=Selected,
+                                  UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
+                            <DataGridTextColumn Header="药品名" Binding="{Binding Path=Name}" />
+                            <DataGridTextColumn Header="报告数" Binding="{Binding Path=Count}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="2">
+                        <Button Content="下一步" HorizontalAlignment="Right" Click="Button_Click"></Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Name="Detection">
+                <DataGrid Grid.Column="0" Grid.Row="1"  AutoGenerateColumns="False"
+ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
+                    <DataGrid.Columns>
+                        
+                        <DataGridTextColumn Header="症状名称" Binding="{Binding Path=PreferredTerm.Name}" />
+                        <DataGridTextColumn Header="Preferred Term" Binding="{Binding Path=PreferredTerm.NameEn}" />
+                        <DataGridTextColumn Header="A" Binding="{Binding Path=A}" />
+                        <DataGridTextColumn Header="B" Binding="{Binding Path=B}" />
+                        <DataGridTextColumn Header="C" Binding="{Binding Path=C}" />
+                        <DataGridTextColumn Header="D" Binding="{Binding Path=D}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
     </Grid>
+    
 </Window>
