@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MedSys" xmlns:local1="clr-namespace:MedSys.Converters"
         xmlns:ScottPlot="clr-namespace:ScottPlot;assembly=ScottPlot.WPF"
         mc:Ignorable="d"
-        Title="MainWindow"  >
+        Title="MainWindow" WindowStartupLocation="CenterScreen" Height="640"  >
     <Window.Resources>
         <local1:RadioIntToBoolConverter x:Key="radioBoolToIntConverter" />
         <local1:CheckBoxesToListConverter x:Key="checkBoxesToListConverter" />

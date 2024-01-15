@@ -48,7 +48,7 @@ namespace MedSys
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            CriteriaSelector.IsEnabled = false;
+            this.IsEnabled = false;
             viewModel.DataList = null;
             Mouse.OverrideCursor = Cursors.Wait;
             var json = viewModel.Query();
@@ -57,7 +57,7 @@ namespace MedSys
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     viewModel.DataList = x.Result;
-                    CriteriaSelector.IsEnabled = true;
+                    this.IsEnabled = true;
                     Mouse.OverrideCursor = null;
                 });
             });
@@ -71,7 +71,7 @@ namespace MedSys
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            CriteriaSelector.IsEnabled = false;
+            this.IsEnabled = false;
             viewModel.DataList = null;
             Mouse.OverrideCursor = Cursors.Wait;
             var json = viewModel.Query();
@@ -80,7 +80,7 @@ namespace MedSys
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     
-                    CriteriaSelector.IsEnabled = true;
+                    this.IsEnabled = true;
                     Mouse.OverrideCursor = null;
                     new SignalDetectionWindow(x.Result).ShowDialog();
                     //viewModel.DataList = x.Result;

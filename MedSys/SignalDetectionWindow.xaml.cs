@@ -46,6 +46,7 @@ namespace MedSys
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     vm.DetectionResult = res;
+                    vm.dr = res;
                     Tabs.SelectedItem = Detection;
                     this.IsEnabled = true;
                     Mouse.OverrideCursor = null;
@@ -53,12 +54,25 @@ namespace MedSys
             });
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.Tabs.SelectedItem = Selection;
+        }
+
+        
     }
     public class SignalDetectionWindowViewModel : INotifyPropertyChanged
     {
 
         private void OnNameSelectionChanged(bool value)
         {
+            OnPropertyChanged(nameof(AnySelected));
             if (allSelected && !value)
             { // all are selected, and one gets turned off
                 allSelected = false;
@@ -70,8 +84,10 @@ namespace MedSys
                 OnPropertyChanged(nameof(AllSelected));
             }
         }
-        private List<SignalDetectionEntry> detectionResult;
-        public List<SignalDetectionEntry> DetectionResult
+
+        public List<SignalDetectionEntry> dr;
+        private IEnumerable<SignalDetectionEntry> detectionResult;
+        public IEnumerable<SignalDetectionEntry> DetectionResult
         {
             set
             {
@@ -102,6 +118,16 @@ namespace MedSys
             }
         }
 
+
+        public bool AnySelected
+        {
+            get
+            {
+                return (from n in Names where n.Selected select n.Name).Count() > 0;
+            }
+            
+        }
+
         public IEnumerable<med> SelectedEntities
         {
             get
@@ -122,9 +148,26 @@ namespace MedSys
             {
                 filter = value;
                 Names = new ObservableCollection<DrugName>(from dd in dnl where dd.Name.Contains(value) select dd);
+                
                 OnPropertyChanged();
             }
         }
+
+        private string resultFilter = "";
+        public string ResultFilter
+        {
+            get
+            {
+                return resultFilter;
+            }
+            set
+            {
+                resultFilter = value;
+                DetectionResult = (from dd in dr where dd.PreferredTerm.Name.Contains(value) select dd);
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<DrugName> names;
         public ObservableCollection<DrugName> Names
         {
@@ -158,7 +201,6 @@ namespace MedSys
             Names.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler
 ((sender, args) =>
 {
-
     OnPropertyChanged(nameof(SelectedEntities));
 });
         }
@@ -215,7 +257,7 @@ namespace MedSys
             }
         }
 
-        public double SE
+        public double RORSE
         {
             get
             {
@@ -223,18 +265,18 @@ namespace MedSys
             }
         }
 
-        public double P95CLPlus
+        public double RORP95CIPlus
         {
             get
             {
-                return Math.Exp(LnROR + 1.96 * SE);
+                return Math.Exp(LnROR + 1.96 * RORSE);
             }
         }
-         public double P95CLMinus
+         public double RORP95CIMinus
         {
             get
             {
-                return Math.Exp(LnROR - 1.96 * SE);
+                return Math.Exp(LnROR - 1.96 * RORSE);
             }
         }
 
@@ -254,6 +296,50 @@ namespace MedSys
             }
         }
 
+        public double PRRSE
+        {
+            get
+            {
+                return Math.Sqrt(1.0 / A - 1.0 / (A+B) + 1.0 / C - 1.0 / (C+D));
+            }
+        }
+
+        public double PRRP95CIPlus
+        {
+            get
+            {
+                return Math.Exp(LnPRR + 1.96 * PRRSE);
+            }
+        }
+        public double PRRP95CIMinus
+        {
+            get
+            {
+                return Math.Exp(LnPRR - 1.96 * PRRSE);
+            }
+        }
+        
+        public double MHRAX2
+        {
+            get
+            {
+                return Math.Pow(Math.Abs(A*D-B*C) - 0.5*(A+B+C+D),2)*(A+B+C+D)/((A+B)*(C+D)*(A+C)*(B+D));
+            }
+        }
+        public double IC
+        {
+            get
+            {
+                return Math.Log((A * (A + B + C + D) / ((A + B) * (A + C))),2);
+            }
+        }
+        public double EIC
+        {
+            get
+            {
+                return Math.Log((A + 1) * (A + B + C + D + 2) * (A + B + C + D + 2) / ((A + B + C + D + 2) * (A + B + 1) * (A + C + 1)), 2);
+            }
+        }
         public SignalDetectionEntry(MedDRAEntry PreferredTerm, int A, int B, int C, int D)
         {
             this.PreferredTerm = PreferredTerm;
