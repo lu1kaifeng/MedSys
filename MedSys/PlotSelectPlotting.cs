@@ -17,8 +17,9 @@ namespace MedSys
     partial class PlotSelect
     {
         [Plotting]
-        public void WeightPlotting()
+        public void GenderPlotting()
         {
+            GenderPlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -48,6 +49,7 @@ namespace MedSys
         [Plotting]
         public void AgePlotting()
         {
+            AgePlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -83,6 +85,7 @@ namespace MedSys
         [Plotting]
         public void ReportRegionPlotting()
         {
+            ReportRegionPlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -111,6 +114,7 @@ namespace MedSys
         [Plotting]
         public void ReportTypePlotting()
         {
+            ReportTypePlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -139,6 +143,7 @@ namespace MedSys
         [Plotting]
         public void ReportInstitutionTypePlotting()
         {
+            ReportInstitutionTypePlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -167,6 +172,7 @@ namespace MedSys
         [Plotting]
         public void ReportInstitutionPlotting()
         {
+            ReportInstitutionPlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -196,6 +202,7 @@ namespace MedSys
         [Plotting]
         public void ReporterProfessionPlotting()
         {
+            ReporterProfessionPlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -219,6 +226,37 @@ namespace MedSys
             ReporterProfessionPlot.Plot.XTicks(positions, labels);
             ReporterProfessionPlot.Plot.AxisAuto();
             ReporterProfessionPlot.Refresh();
+        }
+
+        [Plotting]
+        public void AdverseReactionNamePlotting() {
+
+            AdverseReactionNamePlot.Plot.Clear();
+            List<med> data = BackingData;
+            if (data == null || data.Count == 0)
+            {
+                return;
+            }
+            ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>();
+            Parallel.ForEach(MedDRAEntry.PreferredTerms, pt =>
+            {
+                int acc = 0;
+               
+                foreach(var a in data
+                    )
+                {
+                    if (a.系统不良反应术语.Contains(pt.Name)) acc++;
+                }
+                if(acc!=0)buckets.TryAdd(pt.Name, acc);
+            });
+            double[] bins = ((int[])buckets.Values.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])buckets.Keys.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            AdverseReactionNamePlot.Configuration.UseRenderQueue = true;
+            AdverseReactionNamePlot.Plot.AddBar(bins, positions);
+            AdverseReactionNamePlot.Plot.XTicks(positions, labels);
+            AdverseReactionNamePlot.Plot.AxisAuto();
+            AdverseReactionNamePlot.Refresh();
         }
     }
 
