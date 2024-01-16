@@ -34,7 +34,8 @@
             </TreeViewItem>
             <TreeViewItem Header="按不良反应信息统计" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TreeViewItem Header="按不良反应名称统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=8, Mode=TwoWay}"/>
-                
+                <TreeViewItem Header="按不良反应结果统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=9, Mode=TwoWay}"/>
+                <TreeViewItem Header="按损害系统统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=10, Mode=TwoWay}"/>
             </TreeViewItem>
         </TreeView>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
@@ -73,6 +74,12 @@
             </TabItem>
             <TabItem TabIndex="8">
                 <ScottPlot:WpfPlot  x:Name="AdverseReactionNamePlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
+            </TabItem>
+            <TabItem TabIndex="9">
+                <ScottPlot:WpfPlot  x:Name="AdverseReactionResultPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
+            </TabItem>
+            <TabItem TabIndex="10">
+                <ScottPlot:WpfPlot  x:Name="AdverseReactionDamagedSystemPlot" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" MinWidth="640" MinHeight="480" />
             </TabItem>
         </TabControl>
     </Grid>

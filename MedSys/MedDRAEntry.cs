@@ -20,7 +20,8 @@ namespace MedSys
         [JsonProperty("Code")]
         public string Code { set; get; }
         [JsonProperty("Children")]
-        MedDRAEntry[] Children { set; get; }
+        public MedDRAEntry[] Children { set; get; }
+        public MedDRAEntry Ancestor { set; get; } = null;
         public static MedDRAEntry[] Entries;
         public static TreeViewItem[] TreeViewItems;
         public static Task LoadHandle;
@@ -38,11 +39,28 @@ namespace MedSys
             }
             foreach(var mde in Children)
             {
-
+                mde.Ancestor = this;
                 tvi.Items.Add(mde.ToTreeViewItem(layers - 1));
             }
             
             return tvi;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is MedDRAEntry entry &&
+                   Name == entry.Name &&
+                   NameEn == entry.NameEn &&
+                   Code == entry.Code;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1303663881;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(NameEn);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Code);
+            return hashCode;
         }
 
         static MedDRAEntry()
