@@ -128,7 +128,7 @@ namespace MedSys
             get { return _toDate; }
         }
 
-        private List<string> _reportSubject = new List<string>();
+        private List<string> _reportSubject = new List<string>(Typing.ReportSubject);
         public List<string> ReportSubject
         {
             set

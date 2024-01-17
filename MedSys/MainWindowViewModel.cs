@@ -14,6 +14,15 @@ namespace MedSys
 {
     public partial class MainWindowViewModel
     {
+        public string EnumerableToOrClauses(IEnumerable<string> list,string columnName)
+        {
+            string where = " (";
+            foreach (var item in list)
+            {
+                where += "("+columnName+"=N\'"+item+"\') or ";
+            }
+            return where.Substring(0,where.Length-3)+") ";
+        }
         public Task<List<med>> Query()
         {
             
@@ -76,10 +85,9 @@ namespace MedSys
             {
                 if (MedName != string.Empty)
                 {
-                    if (MedNameTypeEntry == "通用名称")
-                    {
-                        queryString += " and 通用名称 like @medName";
-                    }
+                   
+                        queryString += " and "+ MedNameTypeEntry + " like @medName";
+                    
                     if (MedNameTypeExactOrContain)
                     {
                         paramList.Add(new SqlParameter("@medName", MedName));
@@ -91,7 +99,7 @@ namespace MedSys
                 }
                 if (ManufacturerName != string.Empty)
                 {
-                    queryString += " and 持有人/生产厂家 like @manufacturerName";
+                    queryString += " and 持有人或生产厂家 like @manufacturerName";
                     if (ManufacturerQueyTypeExactOrContain)
                     {
                         paramList.Add(new SqlParameter("@manufacturerName", ManufacturerName));
@@ -117,14 +125,19 @@ namespace MedSys
 
             if (AdverseEffectName != string.Empty)
             {
-                queryString += " and 不良反应术语 like @adverseEffectName";
-                paramList.Add(new SqlParameter("@adverseEffectName", AdverseEffectName));
+                queryString += " and 系统不良反应术语 like @adverseEffectName";
+                paramList.Add(new SqlParameter("@adverseEffectName", "%" + AdverseEffectName + "%"));
             }
             if(AdverseEffectResultTypeEntry != string.Empty)
             {
                 queryString += " and 不良反应结果 like @adverseEffectResultTypeEntry";
-                paramList.Add(new SqlParameter("@adverseEffectResultTypeEntry",AdverseEffectResultTypeEntry));
+                paramList.Add(new SqlParameter("@adverseEffectResultTypeEntry", "%" + AdverseEffectResultTypeEntry + "%"));
             }
+            if(ReportSubject.Count != 0)
+            {
+                queryString += " and "+EnumerableToOrClauses(ReportSubject,"报告单位类别");
+            }
+            
             return Task.Run(() => {
                 List<med> medList = new List<med>();
                 using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)

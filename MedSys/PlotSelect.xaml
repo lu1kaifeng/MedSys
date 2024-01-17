@@ -36,6 +36,21 @@
                 <TreeViewItem Header="按不良反应名称统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=8, Mode=TwoWay}"/>
                 <TreeViewItem Header="按不良反应结果统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=9, Mode=TwoWay}"/>
                 <TreeViewItem Header="按损害系统统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=10, Mode=TwoWay}"/>
+                <TreeViewItem Header="按既往不良反应统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=11, Mode=TwoWay}"/>
+                <TreeViewItem Header="按家族不良反应统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=12, Mode=TwoWay}"/>
+                <TreeViewItem Header="对原患疾病的影响统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=13, Mode=TwoWay}"/>
+            </TreeViewItem>
+            <TreeViewItem  Header="按药品信息统计" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TreeViewItem Header="按品种名称统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=14, Mode=TwoWay}"/>
+                <TreeViewItem Header="按通用名称（不带剂型）统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=15, Mode=TwoWay}"/>
+                <TreeViewItem Header="按通用名称（带剂型）统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=16, Mode=TwoWay}"/>
+                <TreeViewItem Header="按生产企业统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=17, Mode=TwoWay}"/>
+                <TreeViewItem Header="按剂型分组统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=18, Mode=TwoWay}"/>
+                <TreeViewItem Header="按剂型统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=19, Mode=TwoWay}"/>
+                <TreeViewItem Header="按给药途径统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=20, Mode=TwoWay}"/>
+                <TreeViewItem Header="按用法用量统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=21, Mode=TwoWay}"/>
+                <TreeViewItem Header="按生产批号统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=22, Mode=TwoWay}"/>
+                <TreeViewItem Header="按合并用药统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=23, Mode=TwoWay}"/>
             </TreeViewItem>
         </TreeView>
         <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
@@ -80,6 +95,47 @@
             </TabItem>
             <TabItem TabIndex="10">
                 <ScottPlot:WpfPlot  x:Name="AdverseReactionDamagedSystemPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="11">
+                <ScottPlot:WpfPlot  x:Name="PreviousAdverseReactionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="12">
+                <ScottPlot:WpfPlot  x:Name="FamilyAdverseReactionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="13">
+                <ScottPlot:WpfPlot  x:Name="EffectOnPreexistingConditionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+
+            
+            <TabItem TabIndex="14">
+                <ScottPlot:WpfPlot  x:Name="MedTypeNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="15">
+                <ScottPlot:WpfPlot  x:Name="GenericNameNoDosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="16">
+                <ScottPlot:WpfPlot  x:Name="GenericNameDosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="17">
+                <ScottPlot:WpfPlot  x:Name="ManufacturerPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="18">
+                <ScottPlot:WpfPlot  x:Name="DosageGroupPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="19">
+                <ScottPlot:WpfPlot  x:Name="DosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="20">
+                <ScottPlot:WpfPlot  x:Name="DeliveryPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="21">
+                <ScottPlot:WpfPlot  x:Name="QuantityPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="22">
+                <ScottPlot:WpfPlot  x:Name="BatchPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="23">
+                <ScottPlot:WpfPlot  x:Name="CombinedPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
         </TabControl>
     </Grid>

@@ -79,7 +79,7 @@ namespace MedSys
         public void ReportRegionPlotting()
         {
 
-            PlotBucketsIfExact((m) => m.报告地区名称, ReportRegionPlot);
+            PlotBucketsIfExact((m) => m.报告地区名称, ReportRegionPlot, valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
         }
 
         [Plotting]
@@ -99,7 +99,7 @@ namespace MedSys
         [Plotting]
         public void ReportInstitutionPlotting()
         {
-            PlotBucketsIfExact((m) => m.报告单位名称, ReportInstitutionPlot);
+            PlotBucketsIfExact((m) => m.报告单位名称, ReportInstitutionPlot,valComparer: Comparer<int>.Create((x,y)=>x==y?0:(x<y?1:-1)));
         }
 
 
@@ -172,6 +172,28 @@ namespace MedSys
         {
             PlotBucketsIfContain(Typing.AdverseEffectResultType.Skip(1), (a) => a.不良反应结果, AdverseReactionResultPlot);
         }
+        [Plotting]
+        public void PreviousAdverseReactionPlotting()
+        {
+            //PlotBucketsIfExact((m) => m.既往药品不良反应事件, PreviousAdverseReactionPlot);
+        }
+        [Plotting]
+        public void FamilyAdverseReactionPlotting()
+        {
+            //PlotBucketsIfExact((m) => m.家族药品不良反应事件, FamilyAdverseReactionPlot);
+        }
+        [Plotting]
+        public void EffectOnPreexistingConditionPlotting()
+        {
+            PlotBucketsIfExact((m) => m.对原患疾病影响, EffectOnPreexistingConditionPlot);
+        }
+        [Plotting]
+        public void MedInfoPlottings()
+        {
+            PlotBucketsIfExact((m)=>m.通用名称, GenericNameNoDosagePlot);
+            PlotBucketsIfExact(m => m.持有人或生产厂家, ManufacturerPlot);
+
+        }
 
         private void PlotBucketsIfContain(IEnumerable<string> labelList,Func<med,string> selector,WpfPlot targetPlot)
         {
@@ -211,7 +233,7 @@ namespace MedSys
             targetPlot.Refresh();
         }
 
-        private void PlotBucketsIfExact( Func<med, string> selector, WpfPlot targetPlot,IComparer<string> comparer=null)
+        private void PlotBucketsIfExact( Func<med, string> selector, WpfPlot targetPlot,IComparer<string> keyComparer=null, IComparer<int> valComparer = null)
         {
             targetPlot.Plot.Clear();
             List<med> data = BackingData;
@@ -225,7 +247,7 @@ namespace MedSys
                 Parallel.ForEach(data,
                     (a) =>
                     {
-
+                        if (selector(a) == null) return;
                         if (selector(a).Trim() != string.Empty)
                             lock (buckets)
                             {
@@ -242,9 +264,17 @@ namespace MedSys
                     });
             IEnumerable<int> vals;
             IEnumerable<string> keys;
-            if (comparer != null)
+            if (keyComparer != null || valComparer !=null)
             {
-                var sorted = buckets.OrderBy(i => i.Key, comparer);
+                IEnumerable<KeyValuePair<string, int>> sorted;
+                if (valComparer != null)
+                {
+                    sorted = buckets.OrderBy(i => i.Value, valComparer);
+                }
+                else
+                {
+                    sorted = buckets.OrderBy(i => i.Key, keyComparer);
+                }
                 vals = from s in sorted select s.Value;
                 keys = from s in sorted select s.Key;
             }
