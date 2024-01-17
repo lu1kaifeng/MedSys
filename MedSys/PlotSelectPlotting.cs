@@ -1,6 +1,4 @@
-﻿using NumpyDotNet;
-using NumSharp.Utilities;
-using ScottPlot;
+﻿using ScottPlot;
 using ScottPlot.Control;
 using System;
 using System.Collections.Concurrent;
@@ -20,220 +18,96 @@ namespace MedSys
         [Plotting]
         public void GenderPlotting()
         {
-            GenderPlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<string> genderBag = new ConcurrentBag<string>();
-            Parallel.ForEach(data, med =>
-            {
-
+            PlotBucketsIfExact((med) => {
                 if (med.性别 == "男" || med.性别 == "女")
                 {
-                    genderBag.Add(med.性别);
+                    return med.性别;
                 }
-
-            });
-
-            var result = np.unique(np.array(genderBag.ToArray()), return_counts: true);
-            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            GenderPlot.Configuration.UseRenderQueue = true;
-            GenderPlot.Plot.AddBar(bins, positions);
-            GenderPlot.Plot.XTicks(positions, labels);
-            GenderPlot.Plot.AxisAuto();
-            GenderPlot.Refresh();
+                else
+                {
+                    return string.Empty;
+                }
+            },GenderPlot);
         }
-
         [Plotting]
         public void AgePlotting()
         {
-            AgePlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<double> ageBag = new ConcurrentBag<double>();
-            Parallel.ForEach(data, med =>
-            {
+            
+            PlotBucketsIfExact((med) => {
                 double age = 0;
                 if (double.TryParse(med.年龄, out age))
                 {
                     if (med.年龄单位 == "月")
                     {
                         age /= 12;
+                    }if(med.年龄单位 == "天")
+                    {
+                        age /= 356;
+                    }
+                    else if(med.年龄单位 != "年")
+                    {
+                        return string.Empty;
                     }
                 }
-                ageBag.Add(age);
-            });
+                else
+                {
+                    return string.Empty;
+                }
+                return (((int)Math.Round((int)age / 10.0)) * 10).ToString();
 
-            var result = np.histogram(np.array(ageBag.ToArray()), 10, (0, 100));
-            double[] edges = (double[])result.bin_edges.ToArray();
-            System.Int64[] bins = (System.Int64[])result.hist.ToArray();
-            var dbins = bins.Select(x => (double)x).ToArray();
-            for (int i = 0; i < edges.Length - 1; i++)
+            }, AgePlot, Comparer<string>.Create((k1, k2) =>
             {
-                edges[i] = (edges[i] + edges[i + 1]) / 2;
-            }
-            AgePlot.Configuration.UseRenderQueue = true;
-            edges = edges.Slice(0, edges.Length - 1);
-            AgePlot.Plot.AddBar(dbins, edges);
-            AgePlot.Refresh();
+                var ik1 = int.Parse(k1);
+                var ik2 = int.Parse(k2);
+                if(ik1 == ik2)
+                {
+                    return 0;
+                }
+                if(ik1 > ik2)
+                {
+                    return 1;
+                }
+                if (ik1 < ik2)
+                {
+                    return -1;
+                }
+                return 0;
+            }));
         }
 
         [Plotting]
         public void ReportRegionPlotting()
         {
-            ReportRegionPlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
-            Parallel.ForEach(data, med =>
-            {
 
-                if (med.报告地区名称 != string.Empty)
-                {
-                    regionBag.Add(med.报告地区名称);
-                }
-
-            });
-            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
-            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            ReportRegionPlot.Configuration.UseRenderQueue = true;
-            ReportRegionPlot.Plot.AddBar(bins, positions);
-            ReportRegionPlot.Plot.XTicks(positions, labels);
-            ReportRegionPlot.Plot.AxisAuto();
-            ReportRegionPlot.Refresh();
+            PlotBucketsIfExact((m) => m.报告地区名称, ReportRegionPlot);
         }
 
         [Plotting]
         public void ReportTypePlotting()
         {
-            ReportTypePlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
-            Parallel.ForEach(data, med =>
-            {
-
-                if (med.报告类型 != string.Empty)
-                {
-                    regionBag.Add(med.报告类型);
-                }
-
-            });
-            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
-            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            ReportTypePlot.Configuration.UseRenderQueue = true;
-            ReportTypePlot.Plot.AddBar(bins, positions);
-            ReportTypePlot.Plot.XTicks(positions, labels);
-            ReportTypePlot.Plot.AxisAuto();
-            ReportTypePlot.Refresh();
+            
+            PlotBucketsIfExact((m)=>m.报告类型,ReportTypePlot);
         }
 
         [Plotting]
         public void ReportInstitutionTypePlotting()
         {
-            ReportInstitutionTypePlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
-            Parallel.ForEach(data, med =>
-            {
-
-                if (med.报告单位类别 != string.Empty)
-                {
-                    regionBag.Add(med.报告单位类别);
-                }
-
-            });
-            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
-            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            ReportInstitutionTypePlot.Configuration.UseRenderQueue = true;
-            ReportInstitutionTypePlot.Plot.AddBar(bins, positions);
-            ReportInstitutionTypePlot.Plot.XTicks(positions, labels);
-            ReportInstitutionTypePlot.Plot.AxisAuto();
-            ReportInstitutionTypePlot.Refresh();
+            
+            PlotBucketsIfExact((m) => m.报告单位类别, ReportInstitutionTypePlot);
         }
 
         [Plotting]
         public void ReportInstitutionPlotting()
         {
-            ReportInstitutionPlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
-            Parallel.ForEach(data, med =>
-            {
-
-                if (med.报告单位名称 != string.Empty)
-                {
-                    regionBag.Add(med.报告单位名称);
-                }
-
-            });
-            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
-            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            ReportInstitutionPlot.Configuration.UseRenderQueue = true;
-            ReportInstitutionPlot.Plot.AddBar(bins, positions);
-            ReportInstitutionPlot.Plot.XTicks(positions, labels);
-            ReportInstitutionPlot.Plot.AxisAuto();
-            ReportInstitutionPlot.Refresh();
+            PlotBucketsIfExact((m) => m.报告单位名称, ReportInstitutionPlot);
         }
 
 
         [Plotting]
         public void ReporterProfessionPlotting()
         {
-            ReporterProfessionPlot.Plot.Clear();
-            List<med> data = BackingData;
-            if (data == null || data.Count == 0)
-            {
-                return;
-            }
-            ConcurrentBag<string> regionBag = new ConcurrentBag<string>();
-            Parallel.ForEach(data, med =>
-            {
-
-                if (med.初始报告人职业 != string.Empty)
-                {
-                    regionBag.Add(med.初始报告人职业);
-                }
-
-            });
-            var result = np.unique(np.array(regionBag.ToArray()), return_counts: true);
-            double[] bins = ((System.Int64[])result.counts.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])result.data.ToArray();
-            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            ReporterProfessionPlot.Configuration.UseRenderQueue = true;
-            ReporterProfessionPlot.Plot.AddBar(bins, positions);
-            ReporterProfessionPlot.Plot.XTicks(positions, labels);
-            ReporterProfessionPlot.Plot.AxisAuto();
-            ReporterProfessionPlot.Refresh();
+            
+            PlotBucketsIfExact((m) => m.初始报告人职业, ReporterProfessionPlot);
         }
 
         [Plotting]
@@ -296,8 +170,12 @@ namespace MedSys
         [Plotting]
         public void AdverseReactionResultPlotting()
         {
+            PlotBucketsIfContain(Typing.AdverseEffectResultType.Skip(1), (a) => a.不良反应结果, AdverseReactionResultPlot);
+        }
 
-            AdverseReactionResultPlot.Plot.Clear();
+        private void PlotBucketsIfContain(IEnumerable<string> labelList,Func<med,string> selector,WpfPlot targetPlot)
+        {
+            targetPlot.Plot.Clear();
             List<med> data = BackingData;
 
             if (data == null || data.Count == 0)
@@ -305,28 +183,85 @@ namespace MedSys
                 return;
             }
             ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>();
-            foreach (var s in Typing.AdverseEffectResultType.Skip(1))
+            foreach (var s in labelList)
             {
                 buckets.TryAdd(s, 0);
             }
-            Parallel.ForEach(data,
+            foreach (var s in buckets.Keys)
+            {
+                Parallel.ForEach(data,
                     (a) =>
                     {
-                        foreach (var s in buckets.Keys)
-                        {
-                            if (a.不良反应结果.Contains(s)) buckets[s]++;
-                        }
+
+                        if (selector(a).Contains(s))
+                            lock (buckets)
+                            {
+                                buckets[s]++;
+                            }
+                        
                     });
+            }
             double[] bins = ((int[])buckets.Values.ToArray()).Select(x => (double)x).ToArray();
             string[] labels = (string[])buckets.Keys.ToArray();
             double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            AdverseReactionResultPlot.Configuration.UseRenderQueue = true;
-            AdverseReactionResultPlot.Plot.AddBar(bins, positions);
-            AdverseReactionResultPlot.Plot.XTicks(positions, labels);
-            AdverseReactionResultPlot.Plot.AxisAuto();
-            AdverseReactionResultPlot.Refresh();
+            targetPlot.Configuration.UseRenderQueue = true;
+            targetPlot.Plot.AddBar(bins, positions);
+            targetPlot.Plot.XTicks(positions, labels);
+            targetPlot.Plot.AxisAuto();
+            targetPlot.Refresh();
         }
 
+        private void PlotBucketsIfExact( Func<med, string> selector, WpfPlot targetPlot,IComparer<string> comparer=null)
+        {
+            targetPlot.Plot.Clear();
+            List<med> data = BackingData;
+
+            if (data == null || data.Count == 0)
+            {
+                return;
+            }
+            ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>();
+           
+                Parallel.ForEach(data,
+                    (a) =>
+                    {
+
+                        if (selector(a).Trim() != string.Empty)
+                            lock (buckets)
+                            {
+                                if (buckets.ContainsKey(selector(a).Trim()))
+                                {
+                                    buckets[selector(a).Trim()]++;
+                                }
+                                else
+                                {
+                                    buckets[selector(a).Trim()] = 0;
+                                }             
+                            }
+
+                    });
+            IEnumerable<int> vals;
+            IEnumerable<string> keys;
+            if (comparer != null)
+            {
+                var sorted = buckets.OrderBy(i => i.Key, comparer);
+                vals = from s in sorted select s.Value;
+                keys = from s in sorted select s.Key;
+            }
+            else
+            {
+                vals = buckets.Values;
+                keys = buckets.Keys;
+            }
+            double[] bins = ((int[])vals.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])keys.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            targetPlot.Configuration.UseRenderQueue = true;
+            targetPlot.Plot.AddBar(bins, positions);
+            targetPlot.Plot.XTicks(positions, labels);
+            targetPlot.Plot.AxisAuto();
+            targetPlot.Refresh();
+        }
 
     }
 
