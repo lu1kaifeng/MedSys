@@ -220,8 +220,8 @@
                                         <TextBox Text="{Binding DosageForm}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="给药途径:"/>
                                         <ComboBox Name="Delivery" Width="120"  ItemsSource="{Binding Path=DeliveryEntries}" SelectedValue="{Binding Path=DeliveryEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                        <Label Content="关注类别:"/>
-                                        <ComboBox Name="FocusType" Width="120"  ItemsSource="{Binding Path=FocusTypeEntries}" SelectedValue="{Binding Path=FocusTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <!--<Label Content="关注类别:"/>
+                                        <ComboBox Name="FocusType" Width="120"  ItemsSource="{Binding Path=FocusTypeEntries}" SelectedValue="{Binding Path=FocusTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
                                     </StackPanel>
 
                                 </StackPanel>

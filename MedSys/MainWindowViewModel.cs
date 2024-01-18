@@ -215,6 +215,14 @@ namespace MedSys
                 queryString += " and 治疗适应症术语 like @reason";
                 paramList.Add(new SqlParameter("@reason", "%"+MedReason+"%"));
             }
+            if (CommentStateCityCommented)
+            {
+                queryString += " and 市评价人姓名 not like N'' ";
+            }
+            if (CommentStateProvinceCommented)
+            {
+                queryString += " and 省评价人姓名 not like N'' ";
+            }
             return Task.Run(() => {
                 List<med> medList = new List<med>();
                 using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)
