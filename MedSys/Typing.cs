@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,9 @@ namespace MedSys
         public static string[] MedNameType = new string[] { "通用名称", "商品名称" };
         public static string[] TimeRangeType = new string[] { "自定义", "本周", "本月", "本季度", "本半年度", "本年度", "上周", "上月", "上季度", "上半年度", "上一年度" };
         public static string[] AdverseEffectResultType = new string[] { defaultStr, "好转", "不详", "未好转", "有后遗症", "死亡", "痊愈" };
-        public static string[] ReportEstimateType = new string[] { "全部", "预期（已知）", "非预期（新的）" };
-        public static string[] IsDomesticType = new string[] { "全部", "境外报告", "境内报告" };
-        public static string[] SexType = new string[] { "全部", "男", "女", "不详" };
+        public static string[] ReportEstimateType = new string[] { string.Empty, "是", "否" };
+        public static string[] IsDomesticType = new string[] { string.Empty, "是", "否" };
+        public static string[] SexType = new string[] { string.Empty, "男", "女", "不详" };
         public static string[] ReportTypeType = new string[] { "全部", "严重", "一般" };
         public static string[] InfoSourceType = new string[] { defaultStr, "监管机构", "患者/亲友", "医疗机构", "经营企业", "文献", "研究", "项目", "其他" };
         public static string[] MedTypeType = new string[] { "全部", "怀疑用药", "合并用药" };

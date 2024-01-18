@@ -146,10 +146,10 @@
 
                                     </StackPanel>
                                     <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
-                                        <Label Content="信息来源:"/>
+                                        <Label Content="报告来源:"/>
                                         <ComboBox Name="InfoSource" Width="120"    ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--ItemsSource="{Binding Path=InfoSourceEntries}" SelectedValue="{Binding Path=InfoSourceEntry}"-->
-                                        <Label Content="报告预期:"/>
+                                        <Label Content="是否非预期:"/>
                                         <ComboBox Name="ReportEstimate" Width="120" ItemsSource="{Binding Path=ReportEstimateEntries}" SelectedValue="{Binding Path=ReportEstimateEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--<RadioButton Content="全部"/>
                         <RadioButton Content="预期（已知）"/>
@@ -158,16 +158,16 @@
                                     <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="报告编码:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding ReportNoFrom}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        <Label Content="至"/>
+                                        <!--<Label Content="至"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding ReportNoTo}"  Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <Label Content="报告类型:"/>
-                                        <ComboBox Name="ReportType" Width="120"   ItemsSource="{Binding Path=ReportTypeEntries}" SelectedValue="{Binding Path=ReportTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        <ComboBox Name="ReportType" Width="120"   ItemsSource="{Binding Path=ReportTypeEntries}" SelectedValue="{Binding Path=ReportTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
                                         <!--<RadioButton Content="全部"/>
                         <RadioButton Content="严重"/>
                         <RadioButton Content="一般"/>-->
                                     </StackPanel>
                                     <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Label Content="境内外选择:"/>
+                                        <Label Content="是否境外报告:"/>
                                         <ComboBox Name="IsDomestic" Width="120"  ItemsSource="{Binding Path=IsDomesticEntries}" SelectedValue="{Binding Path=IsDomesticEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--<RadioButton Content="全部"/>
                         <RadioButton Content="境外报告"/>
@@ -196,12 +196,12 @@
                                         <Label Content="生产厂家：" />
                                         <local:TextInputListView x:Name="ManufacturerNameControl" Contents="{Binding Path=ManufacturerNameList}"/>
                                     </StackPanel>
-                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
+                                    <!--<StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="商品名称：" />
                                         <local:TextInputListView  x:Name="CommercialNameControl" Contents="{Binding Path=CommercialNameList}"/>
-                                    </StackPanel>
+                                    </StackPanel>-->
 
-                                    <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
+                                    <!--<StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                             <Label Content="药品分类:"/>
                                             <TextBox Name="MedClassification" Text="{Binding Path=MedBatchNo}" TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -213,7 +213,7 @@
                                             <CheckBox Name="FirstSuspect2012" Content="第一怀疑药2012"  IsChecked="{Binding Path=BaseMed, Converter={StaticResource baseMedConverter}, ConverterParameter=第一怀疑药2012}" VerticalAlignment="Center"/>
                                             <CheckBox Name="FirstSuspect2018" Content="第一怀疑药2018"  IsChecked="{Binding Path=BaseMed, Converter={StaticResource baseMedConverter}, ConverterParameter=第一怀疑药2018}" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                    </StackPanel>
+                                    </StackPanel>-->
 
                                     <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                         <Label Content="剂型:"/>
@@ -231,7 +231,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="患者姓名:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding PatientName}"  Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        <Label Content="至"/>
+                                        
                                         <Label Content="性别:"/>
                                         <ComboBox Name="Sex" Width="120" ItemsSource="{Binding Path=SexEntries}" SelectedValue="{Binding Path=SexEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--<RadioButton Content="全部"/>

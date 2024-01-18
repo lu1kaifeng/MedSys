@@ -48,6 +48,17 @@ namespace MedSys
         {
             public string Content { get; set; } = string.Empty;
             public bool IsExact { get; set; } = true;
+            public string ToWhereClause(string colName)
+            {
+                if (IsExact)
+                {
+                    return " (" + colName + " like N\'" + Content + "\') ";
+                }
+                else
+                {
+                    return " (" + colName + " like N\'%" + Content + "%\') ";
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

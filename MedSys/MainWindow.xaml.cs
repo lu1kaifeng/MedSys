@@ -439,7 +439,7 @@ namespace MedSys
             }
         }
 
-        private List<string> _baseMed = new List<string>();
+        private List<string> _baseMed = new List<string>(Typing.BaseMedType);
         public List<string> BaseMed
         {
             set

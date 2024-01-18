@@ -109,6 +109,13 @@ namespace MedSys
                         paramList.Add(new SqlParameter("@manufacturerName", "%" + ManufacturerName + "%"));
                     }
                 }
+            }
+            else
+            {
+                var filteredMedName = this.MedNameList.Where(e=>e.Content != string.Empty);
+                if (filteredMedName.Count() != 0 ) queryString+= " and ( "+string.Join(" or ", filteredMedName.Select((m)=>m.ToWhereClause()))+" ) ";
+                var filteredManuName = ManufacturerNameList.Where(e => e.Content != string.Empty);
+                if (filteredManuName.Count() != 0) queryString += " and ( " + string.Join(" or ", filteredManuName.Select((m) => m.ToWhereClause("持有人或生产厂家"))) + " ) ";
             }      
             
             if(ApprovalNo != string.Empty)
@@ -138,6 +145,76 @@ namespace MedSys
                 queryString += " and "+EnumerableToOrClauses(ReportSubject,"报告单位类别");
             }
             
+            if(InfoSourceEntry != string.Empty)
+            {
+                queryString += " and 报告来源 like @infoSource";
+                paramList.Add(new SqlParameter("@infoSource", "%" + InfoSourceEntry + "%"));
+            }
+            if(ReportEstimateEntry != string.Empty)
+            {
+                queryString += " and 是否非预期 like @reportEst";
+                paramList.Add(new SqlParameter("@reportEst", "%" + ReportEstimateEntry + "%"));
+            }
+            if(ReportNoFrom != string.Empty)
+            {
+                queryString += " and 报告表编码 like @reportId";
+                paramList.Add(new SqlParameter("@reportId",  ReportNoFrom + "%"));
+            }
+            if (IsDomesticEntry != string.Empty)
+            {
+                queryString += " and 是否境外报告 like @reportDomestic";
+                paramList.Add(new SqlParameter("@reportDomestic", "%" + IsDomesticEntry + "%"));
+            }
+            if(DosageForm != string.Empty)
+            {
+                queryString += " and 剂型 like @dosageForm";
+                paramList.Add(new SqlParameter("@dosageForm", DosageForm));
+            }
+            if (DeliveryEntry != string.Empty)
+            {
+                queryString += " and 给药途径 like @delivery";
+                paramList.Add(new SqlParameter("@delivery", DeliveryEntry));
+            }
+            if (PatientName != string.Empty)
+            {
+                queryString += " and 患者姓名 like @patient";
+                paramList.Add(new SqlParameter("@patient", PatientName));
+            }
+            if (SexEntry != string.Empty)
+            {
+                queryString += " and 性别 like @sex";
+                paramList.Add(new SqlParameter("@sex", SexEntry));
+            }
+            if(AgeFrom != string.Empty)
+            {
+                queryString += " and 年龄 >= @ageF";
+                paramList.Add(new SqlParameter("@ageF", int.Parse(AgeFrom)));
+            }
+            if (AgeTo != string.Empty)
+            {
+                queryString += " and 年龄 <= @ageT";
+                paramList.Add(new SqlParameter("@ageT", int.Parse(AgeTo)));
+            }
+            if(ReportUnitName != string.Empty)
+            {
+                queryString += " and 报告单位名称 like @reportUnit";
+                paramList.Add(new SqlParameter("@reportUnit", ReportUnitName));
+            }
+            if (HospitalName != string.Empty)
+            {
+                queryString += " and 医疗机构名称 like @reportHos";
+                paramList.Add(new SqlParameter("@reportHos", HospitalName));
+            }
+            if (PreexistingCondition != string.Empty)
+            {
+                queryString += " and 疾病名称 like @preexist";
+                paramList.Add(new SqlParameter("@preexist", PreexistingCondition));
+            }
+            if (MedReason != string.Empty)
+            {
+                queryString += " and 治疗适应症术语 like @reason";
+                paramList.Add(new SqlParameter("@reason", "%"+MedReason+"%"));
+            }
             return Task.Run(() => {
                 List<med> medList = new List<med>();
                 using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)

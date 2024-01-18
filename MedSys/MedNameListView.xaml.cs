@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,18 @@ namespace MedSys
 
             private readonly CollectionView _medNameTypeEntries = new CollectionView(Typing.MedNameType);
             private string _medNameTypeEntry = Typing.MedNameType[0];
+
+            public string ToWhereClause()
+            {
+                if (IsExact)
+                {
+                    return " (" + MedNameTypeEntry + " like N\'"+Content+"\') ";
+                }
+                else
+                {
+                    return " (" + MedNameTypeEntry + " like N\'%" + Content + "%\') ";
+                }
+            }
 
             public CollectionView MedNameTypeEntries
             {
