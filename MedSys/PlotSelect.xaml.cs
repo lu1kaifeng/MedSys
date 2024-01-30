@@ -70,9 +70,15 @@ DependencyProperty.Register("BackingData",
             PlotSelect myClass = (PlotSelect)sender;
             myClass.BackingData = (List<med>)args.NewValue;
             myClass.PlotSelected = 0;
-            foreach(var m in myClass.PlottingMethods)
+            try
             {
-                m.Invoke(myClass,null);
+                foreach (var m in myClass.PlottingMethods)
+                {
+                    m.Invoke(myClass, null);
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
