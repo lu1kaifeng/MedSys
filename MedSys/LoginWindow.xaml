@@ -11,7 +11,7 @@
     <Window.DataContext>
         <local:LoginDataContext/>
     </Window.DataContext>
-    <Grid Margin="10" local:MarginSetter.Margin="5" x:Name="GridMain">
+    <Grid Margin="5" local:MarginSetter.Margin="5" x:Name="GridMain">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />

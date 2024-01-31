@@ -32,9 +32,11 @@
 
         <DockPanel Grid.Row="0" Grid.Column="0">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_系统" Click="MenuItem_Click">
-                    <MenuItem Header="_数据管理"/>
-          
+                <MenuItem Header="_系统">
+                    <MenuItem Header="_数据管理"  Click="MenuItem_Click"/>
+                    <Separator />
+                    <MenuItem Header="_切换账户" Click="MenuItem_Click_1"/>
+                    <MenuItem Header="_退出" Click="MenuItem_Click_2"/>
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>

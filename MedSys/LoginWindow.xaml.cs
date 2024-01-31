@@ -60,6 +60,22 @@ namespace MedSys
         LoginDataContext LoginDataContext = new LoginDataContext();
         Dictionary<string, string> info = new Dictionary<string, string>();
         private static string SavePath = System.Environment.SpecialFolder.LocalApplicationData + "\\info.txt";
+
+
+        public static void NoAuto()
+        {
+            if (File.Exists(SavePath))
+            {
+                var info = InfoLoad();
+                info["autoLogin"] = false.ToString();
+                if (File.Exists(SavePath)) File.Delete(SavePath);
+                Directory.CreateDirectory(System.Environment.SpecialFolder.LocalApplicationData.ToString());
+                File.CreateText(SavePath).Close();
+                File.WriteAllLines(SavePath,
+                    info.Select(x => $"{x.Key},{x.Value}"));
+            }
+        }
+
         public LoginWindow()
         {
             if(File.Exists(SavePath))
@@ -80,7 +96,7 @@ namespace MedSys
             InitializeComponent();
             DataContext = LoginDataContext;
         }
-        private Dictionary<string, string> InfoLoad()
+        private static Dictionary<string, string> InfoLoad()
         {
             Dictionary<string,string> info= new Dictionary<string,string>();
             var lines = File.ReadLines(System.Environment.SpecialFolder.LocalApplicationData+"\\info.txt");

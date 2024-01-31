@@ -87,6 +87,19 @@ namespace MedSys
                 });
             });
         }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            LoginWindow.NoAuto();
+            new LoginWindow().Show();
+            this.Close();
+            
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {
