@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace MedSys.Converters
@@ -96,6 +97,30 @@ namespace MedSys.Converters
             }
             return stringList;
         }
+
+
     }
+
+    public class BoolVisualConvertion : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool? b = value as bool?;
+            if (b == null)
+            {
+                return Visibility.Hidden;
+            }
+            return b == true ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Visibility? v = value as Visibility?;
+            v = v == null ? Visibility.Hidden : Visibility.Visible;
+            return v;
+        }
+    }
+
+
 
 }

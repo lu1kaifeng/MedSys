@@ -3,6 +3,7 @@ using ScottPlot.Control;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -114,7 +115,7 @@ namespace MedSys
         public void AdverseReactionNamePlotting()
         {
 
-            AdverseReactionNamePlot.Plot.Clear();
+            //AdverseReactionNamePlot.Plot.Clear();
             List<med> data = BackingData;
             if (data == null || data.Count == 0)
             {
@@ -133,14 +134,19 @@ namespace MedSys
                 if (acc != 0) buckets.TryAdd(pt, acc);
 
             });
-            double[] bins = ((int[])buckets.Values.ToArray()).Select(x => (double)x).ToArray();
-            string[] labels = (string[])buckets.Keys.Select((r)=>r.Name).ToArray();
+            var sorted = buckets.OrderBy(i => i.Value, Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            var vals = from s in sorted select s.Value;
+            var keys = from s in sorted select s.Key;
+            double[] bins = ((int[])vals.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])keys.Select((r)=>r.Name).ToArray();
             double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            AdverseReactionNamePlot.Configuration.UseRenderQueue = true;
-            AdverseReactionNamePlot.Plot.AddBar(bins, positions);
-            AdverseReactionNamePlot.Plot.XTicks(positions, labels);
-            AdverseReactionNamePlot.Plot.AxisAuto();
-            AdverseReactionNamePlot.Refresh();
+            AdverseReactionNamePlot.PlotData = new PlotData(labels,bins,positions);
+            //AdverseReactionNamePlot.Configuration.UseRenderQueue = true;
+            //AdverseReactionNamePlot.Plot.AddBar(bins, positions);
+            //AdverseReactionNamePlot.Plot.XTicks(positions, labels);
+            //AdverseReactionNamePlot.Plot.AxisAuto();
+            //AdverseReactionNamePlot.Refresh();
+            
 
             ConcurrentDictionary<MedDRAEntry, int> socBuckets = new ConcurrentDictionary<MedDRAEntry, int>();
             Parallel.ForEach(buckets, (e) =>
@@ -170,7 +176,7 @@ namespace MedSys
         [Plotting]
         public void AdverseReactionResultPlotting()
         {
-            PlotBucketsIfContain(Typing.AdverseEffectResultType.Skip(1), (a) => a.不良反应结果, AdverseReactionResultPlot);
+             AdverseReactionResultPlot.PlotData = ContainBuckets(Typing.AdverseEffectResultType.Skip(1), (a) => a.不良反应结果, valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
         }
         [Plotting]
         public void PreviousAdverseReactionPlotting()
@@ -291,6 +297,119 @@ namespace MedSys
             targetPlot.Plot.XTicks(positions, labels);
             targetPlot.Plot.AxisAuto();
             targetPlot.Refresh();
+        }
+
+        private PlotData ExactBuckets(Func<med, string> selector,  IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
+        {
+
+            List<med> data = BackingData;
+
+            if (data == null || data.Count == 0)
+            {
+                return null;
+            }
+            ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>();
+
+            Parallel.ForEach(data,
+                (a) =>
+                {
+                    if (selector(a) == null) return;
+                    if (selector(a).Trim() != string.Empty)
+                        lock (buckets)
+                        {
+                            if (buckets.ContainsKey(selector(a).Trim()))
+                            {
+                                buckets[selector(a).Trim()]++;
+                            }
+                            else
+                            {
+                                buckets[selector(a).Trim()] = 0;
+                            }
+                        }
+
+                });
+            IEnumerable<int> vals;
+            IEnumerable<string> keys;
+            if (keyComparer != null || valComparer != null)
+            {
+                IEnumerable<KeyValuePair<string, int>> sorted;
+                if (valComparer != null)
+                {
+                    sorted = buckets.OrderBy(i => i.Value, valComparer);
+                }
+                else
+                {
+                    sorted = buckets.OrderBy(i => i.Key, keyComparer);
+                }
+                vals = from s in sorted select s.Value;
+                keys = from s in sorted select s.Key;
+            }
+            else
+            {
+                vals = buckets.Values;
+                keys = buckets.Keys;
+            }
+            double[] bins = ((int[])vals.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])keys.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            return new PlotData(labels, bins, positions);
+
+        }
+
+        private PlotData ContainBuckets(IEnumerable<string> labelList, Func<med, string> selector, IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
+        {
+
+            List<med> data = BackingData;
+
+            if (data == null || data.Count == 0)
+            {
+                return null;
+            }
+            ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>();
+            foreach (var s in labelList)
+            {
+                buckets.TryAdd(s, 0);
+            }
+            foreach (var s in buckets.Keys)
+            {
+                Parallel.ForEach(data,
+                    (a) =>
+                    {
+
+                        if (selector(a).Contains(s))
+                            lock (buckets)
+                            {
+                                buckets[s]++;
+                            }
+
+                    });
+            }
+            IEnumerable<int> vals;
+            IEnumerable<string> keys;
+            if (keyComparer != null || valComparer != null)
+            {
+                IEnumerable<KeyValuePair<string, int>> sorted;
+                if (valComparer != null)
+                {
+                    sorted = buckets.OrderBy(i => i.Value, valComparer);
+                }
+                else
+                {
+                    sorted = buckets.OrderBy(i => i.Key, keyComparer);
+                }
+                vals = from s in sorted select s.Value;
+                keys = from s in sorted select s.Key;
+            }
+            else
+            {
+                vals = buckets.Values;
+                keys = buckets.Keys;
+            }
+            double[] bins = ((int[])vals.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])keys.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            return new PlotData(labels, bins, positions);
+            
         }
 
     }

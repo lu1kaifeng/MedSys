@@ -46,6 +46,9 @@
     <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
     </Reference>
+    <Reference Include="Gu.Wpf.NumericInput, Version=0.5.5.0, Culture=neutral, PublicKeyToken=e6e2e1b32408e0fd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gu.Wpf.NumericInput.0.5.5\lib\net45\Gu.Wpf.NumericInput.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.2023.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -139,6 +142,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdvancedPlot.xaml.cs">
+      <DependentUpon>AdvancedPlot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters.cs" />
     <Compile Include="DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
@@ -183,6 +189,7 @@
       <DependentUpon>PlotSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlotSelectPlotting.cs" />
+    <Compile Include="ResizeAdorner.cs" />
     <Compile Include="SignalDetectionWindow.xaml.cs">
       <DependentUpon>SignalDetectionWindow.xaml</DependentUpon>
     </Compile>
@@ -190,6 +197,10 @@
       <DependentUpon>TextInputListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Typing.cs" />
+    <Page Include="AdvancedPlot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DataGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

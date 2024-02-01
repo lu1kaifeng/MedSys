@@ -30,9 +30,9 @@
         </Style>
 
     </UserControl.Resources>
-    <Grid>
-        <Border CornerRadius="3" Background="Transparent" BorderBrush="#01544A" BorderThickness="1">
-            <Grid HorizontalAlignment="Stretch" Margin="5 0 1 0" VerticalAlignment="Top" Width="Auto" Height="25">
+    <Grid VerticalAlignment="Center">
+        
+            <Grid HorizontalAlignment="Center" Margin="5 0 1 0" VerticalAlignment="Center" Width="Auto" Height="25">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -64,6 +64,6 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-        </Border>
+        
     </Grid>
 </UserControl>

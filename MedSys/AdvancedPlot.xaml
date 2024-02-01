@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="MedSys.AdvancedPlot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MedSys" 
+              xmlns:ScottPlot="clr-namespace:ScottPlot;assembly=ScottPlot.WPF" xmlns:numeric="http://gu.se/NumericInput"
+             
+             mc:Ignorable="d" 
+             
+             x:Name="AdvancedPlotControl" Loaded="AdvancedPlotControl_Loaded" 
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray Grid.Column="0" Grid.Row="0" >
+            <ToolBar>
+
+                <Button Content="保存">
+
+                </Button>
+
+            </ToolBar>
+            <ToolBar Visibility="{Binding ElementName=AdvancedPlotControl,Path=DisplayAllVisibility}">
+
+
+                <Label>显示前</Label>
+                <numeric:IntBox x:Name="TopBox" ValidationTrigger="PropertyChanged" CanValueBeNull="False" Value="{Binding Path=NumTop,ElementName=AdvancedPlotControl,UpdateSourceTrigger=PropertyChanged}" MinValue="1"/>
+
+                <Label>项,共</Label>
+                <Label x:Name="TotalLabel"></Label>
+                <Label>项</Label>
+            </ToolBar>
+
+            <ToolBar>
+                <Label>大小</Label>
+                <numeric:DoubleBox DecimalDigits="0" x:Name="WidthBox" ValidationTrigger="PropertyChanged" CanValueBeNull="False" Value="{Binding Path=Width,ElementName=InternalPlot,UpdateSourceTrigger=PropertyChanged}" />
+                <Label>X</Label>
+                <numeric:DoubleBox DecimalDigits="0" x:Name="HeightBox" ValidationTrigger="PropertyChanged" CanValueBeNull="False" Value="{Binding Path=Height,ElementName=InternalPlot,UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="最大化" Click="Button_Click"></Button>
+            </ToolBar>
+            <ToolBar>
+                <Label>图类型</Label>
+                <ComboBox Name="MedNameType"  ItemsSource="{Binding ElementName=AdvancedPlotControl,Path=PlotTypeEntries}" SelectedValue="{Binding ElementName=AdvancedPlotControl,Path=PlotTypeEntry}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </ToolBar>
+            
+        </ToolBarTray>
+
+
+        <ScottPlot:WpfPlot Grid.Column="0" Grid.Row="1"  x:Name="InternalPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+
+
+
+    </Grid>
+</UserControl>

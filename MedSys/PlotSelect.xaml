@@ -88,10 +88,12 @@
                 <ScottPlot:WpfPlot  x:Name="ReporterProfessionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="8">
-                <ScottPlot:WpfPlot  x:Name="AdverseReactionNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />
+                <local:AdvancedPlot x:Name="AdverseReactionNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <!--<ScottPlot:WpfPlot  x:Name="AdverseReactionNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />-->
             </TabItem>
             <TabItem TabIndex="9">
-                <ScottPlot:WpfPlot  x:Name="AdverseReactionResultPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />
+                <local:AdvancedPlot DisplayAll="True"  x:Name="AdverseReactionResultPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                
             </TabItem>
             <TabItem TabIndex="10">
                 <ScottPlot:WpfPlot  x:Name="AdverseReactionDamagedSystemPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
