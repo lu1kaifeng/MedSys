@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -24,6 +25,21 @@ using static MedSys.TextInputListView;
 
 namespace MedSys
 {
+    public class PlotDataArgs
+    {
+        public PlotDataArgs(List<med> backingData, string whereClause, SqlParameter[] paramList)
+        {
+            BackingData = backingData;
+            WhereClause = whereClause;
+            ParamList = paramList;
+        }
+
+        public List<med> BackingData { get; set; }
+        public string WhereClause { get; set; }
+
+        public SqlParameter[] ParamList { get; set; }
+    }
+
     /// <summary>
     /// Interaction logic for PlotSelect.xaml
     /// </summary>
@@ -42,16 +58,16 @@ namespace MedSys
 
         public static readonly DependencyProperty BackingDataProperty =
 DependencyProperty.Register("BackingData",
- typeof(List<med>), typeof(PlotSelect),
+ typeof(PlotDataArgs), typeof(PlotSelect),
     new FrameworkPropertyMetadata(
         null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, onBackingDataPropertyChangedCallback));
         private int _selected = 0;
 
-        public List<med> BackingData
+        public PlotDataArgs BackingData
         {
             get
             {
-                return (List<med>)GetValue(BackingDataProperty);
+                return (PlotDataArgs)GetValue(BackingDataProperty);
             }
             set
             {
@@ -68,7 +84,7 @@ DependencyProperty.Register("BackingData",
         private static void onBackingDataPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             PlotSelect myClass = (PlotSelect)sender;
-            myClass.BackingData = (List<med>)args.NewValue;
+            myClass.BackingData = (PlotDataArgs)args.NewValue;
             myClass.PlotSelected = 0;
             try
             {
@@ -86,7 +102,7 @@ DependencyProperty.Register("BackingData",
         {
             get
             {
-                return BackingData == null || BackingData.Count == 0;
+                return BackingData == null || BackingData.BackingData.Count == 0;
             }
 
         }
@@ -95,7 +111,7 @@ DependencyProperty.Register("BackingData",
         {
             get
             {
-                return BackingData != null && BackingData.Count > 0;
+                return BackingData != null && BackingData.BackingData.Count > 0;
             }
 
         }
@@ -104,7 +120,7 @@ DependencyProperty.Register("BackingData",
         {
             get
             {
-                return (BackingData == null || BackingData.Count == 0)?Visibility.Visible:Visibility.Hidden;
+                return (BackingData == null || BackingData.BackingData.Count == 0)?Visibility.Visible:Visibility.Hidden;
             }
 
         }
@@ -113,7 +129,7 @@ DependencyProperty.Register("BackingData",
         {
             get
             {
-                return (BackingData != null && BackingData.Count > 0 )? Visibility.Visible : Visibility.Hidden;
+                return (BackingData != null && BackingData.BackingData.Count > 0 )? Visibility.Visible : Visibility.Hidden;
             }
 
         }

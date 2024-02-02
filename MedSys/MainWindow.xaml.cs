@@ -82,7 +82,7 @@ namespace MedSys
                     
                     this.IsEnabled = true;
                     Mouse.OverrideCursor = null;
-                    new SignalDetectionWindow(x.Result).ShowDialog();
+                    new SignalDetectionWindow(x.Result.BackingData).ShowDialog();
                     //viewModel.DataList = x.Result;
                 });
             });

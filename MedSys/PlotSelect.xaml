@@ -67,25 +67,25 @@
                 </Grid>
             </TabItem>
             <TabItem  TabIndex="1">
-                <ScottPlot:WpfPlot  x:Name="GenderPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                <local:AdvancedPlot DisplayAll="True"  x:Name="GenderPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
             </TabItem>
             <TabItem TabIndex="2">
-                <ScottPlot:WpfPlot x:Name="AgePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot DisplayAll="True" x:Name="AgePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="3">
-                <ScottPlot:WpfPlot x:Name="ReportRegionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"   />
+                <local:AdvancedPlot x:Name="ReportRegionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"   />
             </TabItem>
             <TabItem TabIndex="4">
-                <ScottPlot:WpfPlot  x:Name="ReportTypePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />
+                <local:AdvancedPlot DisplayAll="True"  x:Name="ReportTypePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />
             </TabItem>
             <TabItem TabIndex="5">
-                <ScottPlot:WpfPlot  x:Name="ReportInstitutionTypePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot DisplayAll="True"  x:Name="ReportInstitutionTypePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="6">
-                <ScottPlot:WpfPlot  x:Name="ReportInstitutionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />
+                <local:AdvancedPlot  x:Name="ReportInstitutionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0"  />
             </TabItem>
             <TabItem TabIndex="7">
-                <ScottPlot:WpfPlot  x:Name="ReporterProfessionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot DisplayAll="True"  x:Name="ReporterProfessionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="8">
                 <local:AdvancedPlot x:Name="AdverseReactionNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
@@ -96,7 +96,7 @@
                 
             </TabItem>
             <TabItem TabIndex="10">
-                <ScottPlot:WpfPlot  x:Name="AdverseReactionDamagedSystemPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot  x:Name="AdverseReactionDamagedSystemPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="11">
                 <ScottPlot:WpfPlot  x:Name="PreviousAdverseReactionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
@@ -105,7 +105,7 @@
                 <ScottPlot:WpfPlot  x:Name="FamilyAdverseReactionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="13">
-                <ScottPlot:WpfPlot  x:Name="EffectOnPreexistingConditionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot DisplayAll="True" x:Name="EffectOnPreexistingConditionPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
 
             
@@ -113,13 +113,13 @@
                 <ScottPlot:WpfPlot  x:Name="MedTypeNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="15">
-                <ScottPlot:WpfPlot  x:Name="GenericNameNoDosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot x:Name="GenericNameNoDosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="16">
                 <ScottPlot:WpfPlot  x:Name="GenericNameDosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="17">
-                <ScottPlot:WpfPlot  x:Name="ManufacturerPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                <local:AdvancedPlot  x:Name="ManufacturerPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
             <TabItem TabIndex="18">
                 <ScottPlot:WpfPlot  x:Name="DosageGroupPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />

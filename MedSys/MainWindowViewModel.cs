@@ -23,14 +23,15 @@ namespace MedSys
             }
             return where.Substring(0,where.Length-3)+") ";
         }
-        public Task<List<med>> Query()
+        public Task<PlotDataArgs> Query()
         {
             
                 List<SqlParameter> paramList = new List<SqlParameter>();
             
                 DateTime fromDate = FromDate;
                 DateTime toDate = ToDate;
-                string queryString =
+                string queryString = "";
+                string queryStringSelect =
             "SELECT * from dbo.med where ";
                 queryString += TimeTypeEntry + "> @fromDate and "+TimeTypeEntry +" < @toDate";
                 if (TimeRangeEntry == "本周")
@@ -227,25 +228,22 @@ namespace MedSys
                 List<med> medList = new List<med>();
                 using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)
                 {
-                    SqlCommand command = new SqlCommand(queryString, connection);
+                    SqlCommand command = new SqlCommand(queryStringSelect+" "+queryString, connection);
                     command.Parameters.AddRange(paramList.ToArray());
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-
-
                     while (reader.Read())
                     {
                         medList.Add(ConvertToObject<med>(reader));
                     }
-
                 }
-                return medList;
+                return new PlotDataArgs(medList,queryString,paramList.ToArray());
             });
            
         }
 
-        private List<dataModel> _dataList = new List<dataModel>();
-        public List<dataModel> DataList
+        private PlotDataArgs _dataList;
+        public PlotDataArgs DataList
         {
             get
             {

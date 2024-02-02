@@ -19,7 +19,7 @@ namespace MedSys
         [Plotting]
         public void GenderPlotting()
         {
-            PlotBucketsIfExact((med) => {
+            GenderPlot.PlotData = ExactBuckets((med) => {
                 if (med.性别 == "男" || med.性别 == "女")
                 {
                     return med.性别;
@@ -28,13 +28,13 @@ namespace MedSys
                 {
                     return string.Empty;
                 }
-            },GenderPlot);
+            });
         }
         [Plotting]
         public void AgePlotting()
         {
-            
-            PlotBucketsIfExact((med) => {
+
+            AgePlot.PlotData = ExactBuckets((med) => {
                 double age = 0;
                 if (double.TryParse(med.年龄, out age))
                 {
@@ -56,7 +56,7 @@ namespace MedSys
                 }
                 return (((int)Math.Round((int)age / 10.0)) * 10).ToString();
 
-            }, AgePlot, Comparer<string>.Create((k1, k2) =>
+            },  Comparer<string>.Create((k1, k2) =>
             {
                 var ik1 = int.Parse(k1);
                 var ik2 = int.Parse(k2);
@@ -80,35 +80,35 @@ namespace MedSys
         public void ReportRegionPlotting()
         {
 
-            PlotBucketsIfExact((m) => m.报告地区名称, ReportRegionPlot, valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            ReportRegionPlot.PlotData = ExactBuckets((m) => m.报告地区名称, valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
         }
 
         [Plotting]
         public void ReportTypePlotting()
         {
-            
-            PlotBucketsIfExact((m)=>m.报告类型,ReportTypePlot);
+
+            ReportTypePlot.PlotData = ExactBuckets((m)=>m.报告类型);
         }
 
         [Plotting]
         public void ReportInstitutionTypePlotting()
         {
-            
-            PlotBucketsIfExact((m) => m.报告单位类别, ReportInstitutionTypePlot);
+
+            ReportInstitutionTypePlot.PlotData = ExactBuckets((m) => m.报告单位类别);
         }
 
         [Plotting]
         public void ReportInstitutionPlotting()
-        {
-            PlotBucketsIfExact((m) => m.报告单位名称, ReportInstitutionPlot,valComparer: Comparer<int>.Create((x,y)=>x==y?0:(x<y?1:-1)));
+        { 
+            ReportInstitutionPlot.PlotData = ExactBuckets((m) => m.报告单位名称,valComparer: Comparer<int>.Create((x,y)=>x==y?0:(x<y?1:-1)));
         }
 
 
         [Plotting]
         public void ReporterProfessionPlotting()
         {
-            
-            PlotBucketsIfExact((m) => m.初始报告人职业, ReporterProfessionPlot);
+
+            ReporterProfessionPlot.PlotData =  ExactBuckets((m) => m.初始报告人职业);
         }
 
         [Plotting]
@@ -116,7 +116,7 @@ namespace MedSys
         {
 
             //AdverseReactionNamePlot.Plot.Clear();
-            List<med> data = BackingData;
+            List<med> data = BackingData.BackingData;
             if (data == null || data.Count == 0)
             {
                 return;
@@ -162,15 +162,13 @@ namespace MedSys
                     socBuckets[ek] += e.Value;
                 }
             });
-            AdverseReactionDamagedSystemPlot.Plot.Clear();
-            bins = ((int[])socBuckets.Values.ToArray()).Select(x => (double)x).ToArray();
-            labels = (string[])socBuckets.Keys.Select((r) => r.Name).ToArray();
+            sorted = socBuckets.OrderBy(i => i.Value, Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            vals = from s in sorted select s.Value;
+            keys = from s in sorted select s.Key;
+            bins = ((int[])vals.ToArray()).Select(x => (double)x).ToArray();
+            labels = (string[])keys.Select((r) => r.Name).ToArray();
             positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
-            AdverseReactionDamagedSystemPlot.Configuration.UseRenderQueue = true;
-            AdverseReactionDamagedSystemPlot.Plot.AddBar(bins, positions);
-            AdverseReactionDamagedSystemPlot.Plot.XTicks(positions, labels);
-            AdverseReactionDamagedSystemPlot.Plot.AxisAuto();
-            AdverseReactionDamagedSystemPlot.Refresh();
+            AdverseReactionDamagedSystemPlot.PlotData = new PlotData(labels, bins, positions);
         }
 
         [Plotting]
@@ -191,20 +189,21 @@ namespace MedSys
         [Plotting]
         public void EffectOnPreexistingConditionPlotting()
         {
-            PlotBucketsIfExact((m) => m.对原患疾病影响, EffectOnPreexistingConditionPlot);
+            EffectOnPreexistingConditionPlot.PlotData = ExactBuckets((m) => m.对原患疾病影响);
         }
         [Plotting]
         public void MedInfoPlottings()
         {
-            PlotBucketsIfExact((m)=>m.通用名称, GenericNameNoDosagePlot);
-            PlotBucketsIfExact(m => m.持有人或生产厂家, ManufacturerPlot);
+            GenericNameNoDosagePlot.PlotData = ExactBuckets((m)=>m.通用名称,valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            ManufacturerPlot.PlotData = ExactBuckets(m => m.持有人或生产厂家,valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
 
         }
 
         private void PlotBucketsIfContain(IEnumerable<string> labelList,Func<med,string> selector,WpfPlot targetPlot)
         {
             targetPlot.Plot.Clear();
-            List<med> data = BackingData;
+            List<med> data = BackingData.
+                    BackingData;
 
             if (data == null || data.Count == 0)
             {
@@ -242,7 +241,7 @@ namespace MedSys
         private void PlotBucketsIfExact( Func<med, string> selector, WpfPlot targetPlot,IComparer<string> keyComparer=null, IComparer<int> valComparer = null)
         {
             targetPlot.Plot.Clear();
-            List<med> data = BackingData;
+            List<med> data = BackingData.BackingData;
 
             if (data == null || data.Count == 0)
             {
@@ -302,7 +301,7 @@ namespace MedSys
         private PlotData ExactBuckets(Func<med, string> selector,  IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
         {
 
-            List<med> data = BackingData;
+            List<med> data = BackingData.BackingData;
 
             if (data == null || data.Count == 0)
             {
@@ -359,7 +358,7 @@ namespace MedSys
         private PlotData ContainBuckets(IEnumerable<string> labelList, Func<med, string> selector, IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
         {
 
-            List<med> data = BackingData;
+            List<med> data = BackingData.BackingData;
 
             if (data == null || data.Count == 0)
             {
