@@ -224,22 +224,13 @@ namespace MedSys
             {
                 queryString += " and 省评价人姓名 not like N'' ";
             }
-            return Task.Run(() => {
-                List<med> medList = new List<med>();
-                using (SqlConnection connection = new medEntities().Database.Connection as SqlConnection)
-                {
-                    SqlCommand command = new SqlCommand(queryStringSelect+" "+queryString, connection);
-                    command.Parameters.AddRange(paramList.ToArray());
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        medList.Add(ConvertToObject<med>(reader));
-                    }
-                }
-                return new PlotDataArgs(medList,queryString,paramList.ToArray());
+            return Task.Run(() =>
+            {
+                var args = new PlotDataArgs( " where "+ queryString, paramList.ToArray());
+                var query = new medEntities().meds.SqlQuery(queryStringSelect + " " + queryString, args.ParamList);
+                args.BackingData = query.ToList();
+                return args;
             });
-           
         }
 
         private PlotDataArgs _dataList;
@@ -252,28 +243,6 @@ namespace MedSys
             set { _dataList = value; OnPropertyChanged(); }
         }
 
-        public T ConvertToObject<T>(SqlDataReader rd) where T : class, new()
-        {
-            Type type = typeof(T);
-            var accessor = TypeAccessor.Create(type);
-            var members = accessor.GetMembers();
-            var t = new T();
-
-            for (int i = 0; i < rd.FieldCount; i++)
-            {
-                if (!rd.IsDBNull(i))
-                {
-                    string fieldName = rd.GetName(i);
-
-                    if (members.Any(m => string.Equals(m.Name, fieldName, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        accessor[t, fieldName] = rd.GetValue(i);
-                    }
-                }
-            }
-
-            return t;
-        }
     }
 
 }

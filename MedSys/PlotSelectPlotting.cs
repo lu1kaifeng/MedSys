@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace MedSys
@@ -80,27 +81,27 @@ namespace MedSys
         public void ReportRegionPlotting()
         {
 
-            ReportRegionPlot.PlotData = ExactBuckets((m) => m.报告地区名称, valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            ReportRegionPlot.PlotData = ExactBucketsSQL("报告地区名称", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
         }
 
         [Plotting]
         public void ReportTypePlotting()
         {
 
-            ReportTypePlot.PlotData = ExactBuckets((m)=>m.报告类型);
+            ReportTypePlot.PlotData = ExactBucketsSQL("报告类型");
         }
 
         [Plotting]
         public void ReportInstitutionTypePlotting()
         {
 
-            ReportInstitutionTypePlot.PlotData = ExactBuckets((m) => m.报告单位类别);
+            ReportInstitutionTypePlot.PlotData = ExactBucketsSQL("报告单位类别");
         }
 
         [Plotting]
         public void ReportInstitutionPlotting()
         { 
-            ReportInstitutionPlot.PlotData = ExactBuckets((m) => m.报告单位名称,valComparer: Comparer<int>.Create((x,y)=>x==y?0:(x<y?1:-1)));
+            ReportInstitutionPlot.PlotData = ExactBucketsSQL("报告单位名称",valComparer: Comparer<int>.Create((x,y)=>x==y?0:(x<y?1:-1)));
         }
 
 
@@ -108,13 +109,13 @@ namespace MedSys
         public void ReporterProfessionPlotting()
         {
 
-            ReporterProfessionPlot.PlotData =  ExactBuckets((m) => m.初始报告人职业);
+            ReporterProfessionPlot.PlotData =  ExactBucketsSQL("初始报告人职业");
         }
 
         [Plotting]
         public void AdverseReactionNamePlotting()
         {
-
+            if (BackingData == null) return;
             //AdverseReactionNamePlot.Plot.Clear();
             List<med> data = BackingData.BackingData;
             if (data == null || data.Count == 0)
@@ -189,12 +190,12 @@ namespace MedSys
         [Plotting]
         public void EffectOnPreexistingConditionPlotting()
         {
-            EffectOnPreexistingConditionPlot.PlotData = ExactBuckets((m) => m.对原患疾病影响);
+            EffectOnPreexistingConditionPlot.PlotData = ExactBucketsSQL("对原患疾病影响");
         }
         [Plotting]
         public void MedInfoPlottings()
         {
-            GenericNameNoDosagePlot.PlotData = ExactBuckets((m)=>m.通用名称,valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            GenericNameNoDosagePlot.PlotData = ExactBucketsSQL("通用名称",valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
             ManufacturerPlot.PlotData = ExactBuckets(m => m.持有人或生产厂家,valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
 
         }
@@ -300,7 +301,8 @@ namespace MedSys
 
         private PlotData ExactBuckets(Func<med, string> selector,  IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
         {
-
+            if (BackingData == null) return null;
+            
             List<med> data = BackingData.BackingData;
 
             if (data == null || data.Count == 0)
@@ -355,9 +357,58 @@ namespace MedSys
 
         }
 
+        public class StatEntry
+        {
+            public string Key { set; get; }
+            public int Value { set; get; }
+        }
+        private PlotData ExactBucketsSQL(string colName, IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
+        {
+            if (BackingData == null)
+            {
+                return null;
+            }
+            var dbCtx = new medEntities();
+            var result = dbCtx.Database.SqlQuery<StatEntry>(
+                "select "+colName+" as 'Key',count("+colName+") 'Value' from dbo.med  " + BackingData.WhereClause+"  group by "+colName,BackingData.ParamList);
+            
+            Dictionary<string, int> buckets = new Dictionary<string, int>();
+            foreach(var r in result)
+            {
+                if(r.Key!=null)buckets.Add(r.Key,r.Value);
+            }
+            
+            IEnumerable<int> vals;
+            IEnumerable<string> keys;
+            if (keyComparer != null || valComparer != null)
+            {
+                IEnumerable<KeyValuePair<string, int>> sorted;
+                if (valComparer != null)
+                {
+                    sorted = buckets.OrderBy(i => i.Value, valComparer);
+                }
+                else
+                {
+                    sorted = buckets.OrderBy(i => i.Key, keyComparer);
+                }
+                vals = from s in sorted select s.Value;
+                keys = from s in sorted select s.Key;
+            }
+            else
+            {
+                vals = buckets.Values;
+                keys = buckets.Keys;
+            }
+            double[] bins = ((int[])vals.ToArray()).Select(x => (double)x).ToArray();
+            string[] labels = (string[])keys.ToArray();
+            double[] positions = ((int[])Enumerable.Range(0, labels.Length).ToArray()).Select(x => (double)x).ToArray();
+            return new PlotData(labels, bins, positions);
+
+        }
+
         private PlotData ContainBuckets(IEnumerable<string> labelList, Func<med, string> selector, IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
         {
-
+            if (BackingData == null) return null;
             List<med> data = BackingData.BackingData;
 
             if (data == null || data.Count == 0)

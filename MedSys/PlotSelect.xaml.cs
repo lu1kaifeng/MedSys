@@ -27,17 +27,28 @@ namespace MedSys
 {
     public class PlotDataArgs
     {
-        public PlotDataArgs(List<med> backingData, string whereClause, SqlParameter[] paramList)
+        public PlotDataArgs( string whereClause, SqlParameter[] paramList)
         {
-            BackingData = backingData;
+            
             WhereClause = whereClause;
             ParamList = paramList;
         }
 
         public List<med> BackingData { get; set; }
         public string WhereClause { get; set; }
+        private SqlParameter[] paramList = null;
 
-        public SqlParameter[] ParamList { get; set; }
+        public SqlParameter[] ParamList
+        {
+            get
+            {
+                return (from p in paramList select new SqlParameter(p.ParameterName,p.Value)).ToArray();
+            }
+            set
+            {
+                paramList = value;
+            }
+        }
     }
 
     /// <summary>

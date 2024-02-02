@@ -141,9 +141,9 @@ namespace MedSys
             if (DisplayAll) _numTop = PlotData.bins.Length;
             if (PlotTypeEntry == Typing.PlotType[0])
             {
-                var truncBins = PlotData.bins.Slice(0, _numTop);
-                var truncPositions = PlotData.positions.Slice(0, _numTop);
-                var truncLabels = PlotData.labels.Slice(0, _numTop);
+                var truncBins = PlotData.bins.Slice(0, _numTop>PlotData.bins.Length? PlotData.bins.Length: _numTop);
+                var truncPositions = PlotData.positions.Slice(0, _numTop > PlotData.bins.Length ? PlotData.bins.Length : _numTop);
+                var truncLabels = PlotData.labels.Slice(0, _numTop > PlotData.bins.Length ? PlotData.bins.Length : _numTop);
                 InternalPlot.Plot.Clear();
                 InternalPlot.Plot.Frameless(false);
                 InternalPlot.Configuration.UseRenderQueue = true;
@@ -156,9 +156,9 @@ namespace MedSys
             {
                 InternalPlot.Plot.Clear();
                 var plt = InternalPlot.Plot;
-                var truncBins = PlotData.bins.Slice(0, _numTop);
-                var truncLabels = PlotData.labels.Slice(0, _numTop);
-                if (_numTop != PlotData.bins.Length)
+                var truncBins = PlotData.bins.Slice(0, _numTop > PlotData.bins.Length ? PlotData.bins.Length : _numTop);
+                var truncLabels = PlotData.labels.Slice(0, _numTop > PlotData.bins.Length ? PlotData.bins.Length : _numTop);
+                if (_numTop < PlotData.bins.Length)
                 {
                     truncBins = truncBins.Append( PlotData.bins.Slice(_numTop,PlotData.bins.Length).Sum((eee)=>eee)).ToArray();
                     truncLabels = truncLabels.Append("其他").ToArray();
