@@ -138,6 +138,7 @@ namespace MedSys
         private void RefreshPlot()
         {
             if (PlotData == null) return;
+            if (PlotData.bins.Length == 0) return;
             if (DisplayAll) _numTop = PlotData.bins.Length;
             if (PlotTypeEntry == Typing.PlotType[0])
             {
