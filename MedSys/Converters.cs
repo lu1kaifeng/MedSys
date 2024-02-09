@@ -121,6 +121,25 @@ namespace MedSys.Converters
         }
     }
 
+    public class DoubleNaNToNullConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (double.IsNaN((double)value))
+            {
+                return null;
+            }
+            else return value;
+        }
 
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+            {
+                return double.NaN;
+            }
+            else return value;
+        }
+    }
 
 }

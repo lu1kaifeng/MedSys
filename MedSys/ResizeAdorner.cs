@@ -103,6 +103,8 @@ namespace MedSys
             var c = _adornedElement as FrameworkElement;
             var thumb = sender as FrameworkElement;
             double left, top, right, bottom, width, height;
+            UIElement container = VisualTreeHelper.GetParent(c) as UIElement;
+            Point relativeLocation = c.TranslatePoint(new Point(0, 0), container);
             if (thumb.HorizontalAlignment == HorizontalAlignment.Left)
             {
                 right = c.Margin.Right;
@@ -129,10 +131,12 @@ namespace MedSys
                 bottom = c.Margin.Bottom - e.VerticalChange;
                 height = (double.IsNaN(c.Height) ? c.ActualHeight : c.Height) + e.VerticalChange;
             }
+            
             if (thumb.HorizontalAlignment != HorizontalAlignment.Center)
             {
                 if (width >= 0)
                 {
+                    
                     //c.Margin = new Thickness(left, c.Margin.Top, right, c.Margin.Bottom);
                     c.Width = width;
                 }

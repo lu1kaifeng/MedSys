@@ -5,11 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MedSys" 
               xmlns:ScottPlot="clr-namespace:ScottPlot;assembly=ScottPlot.WPF" xmlns:numeric="http://gu.se/NumericInput"
-             
+             xmlns:converters="clr-namespace:MedSys.Converters"
+
              mc:Ignorable="d" 
              
              x:Name="AdvancedPlotControl" Loaded="AdvancedPlotControl_Loaded" 
              >
+
+    <UserControl.Resources>
+        <converters:DoubleNaNToNullConverter x:Key="nanConverter" />
+        
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -39,10 +45,12 @@
 
             <ToolBar>
                 <Label>大小</Label>
-                <numeric:DoubleBox DecimalDigits="0" x:Name="WidthBox" ValidationTrigger="PropertyChanged" CanValueBeNull="False" Value="{Binding Path=Width,ElementName=InternalPlot,UpdateSourceTrigger=PropertyChanged}" />
+                <numeric:DoubleBox Width="30" DecimalDigits="0" x:Name="WidthBox" ValidationTrigger="PropertyChanged" CanValueBeNull="True" Value="{Binding Path=Width,ElementName=InternalPlot,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource nanConverter}}" />
                 <Label>X</Label>
-                <numeric:DoubleBox DecimalDigits="0" x:Name="HeightBox" ValidationTrigger="PropertyChanged" CanValueBeNull="False" Value="{Binding Path=Height,ElementName=InternalPlot,UpdateSourceTrigger=PropertyChanged}"/>
+                <numeric:DoubleBox  Width="30" DecimalDigits="0" x:Name="HeightBox" ValidationTrigger="PropertyChanged" CanValueBeNull="True" Value="{Binding Path=Height,ElementName=InternalPlot,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource nanConverter}}"/>
                 <Button Content="最大化" Click="Button_Click"></Button>
+                <Button Content="4:3" Click="Button_Click_1" ></Button>
+                
             </ToolBar>
             <ToolBar>
                 <Label>图类型</Label>

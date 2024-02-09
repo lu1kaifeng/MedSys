@@ -24,6 +24,7 @@ using System.Reflection.Emit;
 using NumSharp.Utilities;
 using Color = System.Windows.Media.Color;
 using System.Drawing;
+using MedSys.Converters;
 
 namespace MedSys
 {
@@ -32,7 +33,7 @@ namespace MedSys
     /// </summary>
     public partial class AdvancedPlot : UserControl,INotifyPropertyChanged
     {
-
+        public DoubleNaNToNullConverter nanConverter = new DoubleNaNToNullConverter();
         public AdvancedPlot()
         {
             InitializeComponent();
@@ -167,8 +168,9 @@ namespace MedSys
                 var pie = plt.AddPie(truncBins);
                 pie.SliceLabels = truncLabels;
                 pie.ShowPercentages = true;
-                pie.ShowValues = true;
+                //pie.ShowValues = true;
                 pie.ShowLabels = true;
+                InternalPlot.Plot.Legend();
                 InternalPlot.Refresh();
             }
         }
@@ -194,6 +196,20 @@ namespace MedSys
         {
             InternalPlot.Height = Double.NaN;
             InternalPlot.Width = Double.NaN;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            InternalPlot.Height = Double.NaN;
+            InternalPlot.Width = Double.NaN;
+            if (InternalPlot.ActualWidth / InternalPlot.ActualHeight <= 4.0 / 3)
+            {
+                InternalPlot.Height = InternalPlot.ActualWidth * 3 / 4;
+            }
+            else
+            {
+                InternalPlot.Width = InternalPlot.ActualHeight * 4 / 3;
+            }
         }
     }
 
