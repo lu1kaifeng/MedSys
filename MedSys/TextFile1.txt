@@ -1,0 +1,2 @@
+﻿Windows And SQL Server Authentication
+Every DB has its own user corresponding to Logins 
