@@ -146,6 +146,9 @@
       <DependentUpon>AdvancedPlot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters.cs" />
+    <Compile Include="DataBrowser.xaml.cs">
+      <DependentUpon>DataBrowser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridPage.xaml.cs">
       <DependentUpon>DataGridPage.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,10 @@
     <Page Include="AdvancedPlot.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataGridPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +283,7 @@
     <None Include="MedModel.edmx.diagram">
       <DependentUpon>MedModel.edmx</DependentUpon>
     </None>
+    <None Include="med_template.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -21,6 +21,7 @@
             <!--<<< Will resize taking all remaining space -->
         </Grid.ColumnDefinitions>
         <TreeView Grid.Column="0" IsEnabled="{Binding  ElementName=PlotSelectControl, Path=NotEmptyList}">
+            <TreeViewItem Header="数据浏览"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=24, Mode=TwoWay}"/>
             <TreeViewItem Header="按患者信息统计" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TreeViewItem Header="按性别统计" IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=1, Mode=TwoWay}"/>
                 <TreeViewItem Header="按年龄统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=2, Mode=TwoWay}"/>
@@ -138,6 +139,9 @@
             </TabItem>
             <TabItem TabIndex="23">
                 <ScottPlot:WpfPlot  x:Name="CombinedPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+            </TabItem>
+            <TabItem TabIndex="24">
+                <local:DataBrowser x:Name="DataBrowse" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
             </TabItem>
         </TabControl>
     </Grid>
