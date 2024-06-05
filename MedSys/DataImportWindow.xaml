@@ -7,14 +7,14 @@
             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
     xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
         xmlns:local="clr-namespace:MedSys"  x:Class="MedSys.DataImportWindow" 
-        Title="数据管理" Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
+        Title="数据管理" Loaded="Window_Loaded" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:DataImportWindowDataContext />
     </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
