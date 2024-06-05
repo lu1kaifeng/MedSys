@@ -51,13 +51,15 @@ namespace MedSys
 
         public static string[] ReportSubject = new string[]
         {
-            "医疗机构",
-            "持有人自主上报",
-            "经营企业",
-            "持有人反馈上报",
+            
+            "生产企业",
+            "反馈上报",
             "其他"
         };
-
+        // "医疗机构",
+        // "持有人自主上报",
+        // "经营企业",
+        // "持有人反馈上报",
         public static string[] PlotType = new string[]
         {
             "条形图",
@@ -66,3 +68,4 @@ namespace MedSys
 
     }
 }
+

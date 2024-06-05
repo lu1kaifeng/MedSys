@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -122,9 +123,18 @@ namespace MedSys
             bool ifComplete = (bool)of.ShowDialog();
             HashSet<string> extraCol = null;
             HashSet<string> missingCol = null;
+            
             if (ifComplete && of.FileName != null)
             {
-                var result = MiniExcel.Query(of.FileName, useHeaderRow: true).Select((ee) => ConvertToObject<med>(ee, out extraCol, out missingCol)).Cast<med>().ToList();
+                var excelDialog = new ExcelColSelectDialog(
+                    (MiniExcel.Query(of.FileName, useHeaderRow: true).First() as IDictionary<string, object>).Keys);
+                bool diagResult =(bool) excelDialog.ShowDialog();
+                var alias = excelDialog.Alias;
+                if (!diagResult)
+                {
+                    return;
+                }
+                var result = MiniExcel.Query(of.FileName, useHeaderRow: true).Select((ee) => ConvertToObject<med>(ee, out extraCol, out missingCol,alias)).Cast<med>().ToList();
                 string message = "即将导入" + result.Count.ToString() + "条条目;\n";
                 if (extraCol.Count == 0)
                 {
@@ -155,12 +165,19 @@ namespace MedSys
                 var res = MessageBox.Show(message, "确认导入", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes)
                 {
-                    Mouse.OverrideCursor = Cursors.Wait;
-                    var entities = new medEntities();
-                    entities.meds.AddRange(result);
-                    entities.SaveChanges();
-                    Mouse.OverrideCursor = null;
-                    this.Paginator.ResetPage();
+                    try
+                    {
+                        Mouse.OverrideCursor = Cursors.Wait;
+                        var entities = new medEntities();
+                        entities.meds.AddRange(result);
+                        entities.SaveChanges();
+                        Mouse.OverrideCursor = null;
+                        this.Paginator.ResetPage();
+                    }
+                    catch (DataException de)
+                    {
+                        MessageBox.Show(de.Message);
+                    }
                 }
             }
 
@@ -168,8 +185,15 @@ namespace MedSys
 
         
 
-        private T ConvertToObject<T>(IDictionary<string, object> rd, out HashSet<string> extraCol, out HashSet<string> missingCol) where T : class, new()
+        private T ConvertToObject<T>(IDictionary<string, object> rd, out HashSet<string> extraCol, out HashSet<string> missingCol, IDictionary<string, string> alias) where T : class, new()
         {
+            IDictionary<string, object> rd1 = new Dictionary<string, object>();
+            foreach (var r in rd)
+            {
+                rd1.Add(alias.ContainsKey(r.Key) ? alias[r.Key] : r.Key, r.Value);
+            }
+
+            rd = rd1;
             Type type = typeof(T);
             var accessor = TypeAccessor.Create(type);
             var members = accessor.GetMembers();
@@ -184,7 +208,7 @@ namespace MedSys
             {
                 if (e.Value != string.Empty)
                 {
-                    string fieldName = e.Key;
+                    string fieldName = e.Key;//alias.ContainsKey(e.Key) ? alias[e.Key]:e.Key;
 
                     if (members.Any(m => string.Equals(m.Name, fieldName, StringComparison.OrdinalIgnoreCase)))
                     {

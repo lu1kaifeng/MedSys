@@ -158,6 +158,12 @@
     <Compile Include="ExactOrContain.xaml.cs">
       <DependentUpon>ExactOrContain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExcelColSelect.xaml.cs">
+      <DependentUpon>ExcelColSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelColSelectDialog.xaml.cs">
+      <DependentUpon>ExcelColSelectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -219,6 +225,14 @@
     <Page Include="ExactOrContain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExcelColSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExcelColSelectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

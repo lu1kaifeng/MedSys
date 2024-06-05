@@ -16,6 +16,7 @@ namespace MedSys
     {
         public string EnumerableToOrClauses(IEnumerable<string> list,string columnName)
         {
+            if (list.Contains("其他")) return " 1=1 ";
             string where = " (";
             foreach (var item in list)
             {

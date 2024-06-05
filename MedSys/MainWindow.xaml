@@ -125,10 +125,10 @@
                             <GroupBox Header="数据范围">
                                 <StackPanel local:Spacing.Horizontal="5" Orientation="Horizontal">
                                     <Label Content="报告对象:" VerticalAlignment="Center"/>
-                                    <CheckBox Name="SubjectInstitutionAdvanced" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}" VerticalAlignment="Center"/>
-                                    <CheckBox Name="SubjectHolderInitiatedAdvanced" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}" VerticalAlignment="Center"/>
-                                    <CheckBox Name="SubjectEnterpriseAdvanced" Content="经营企业"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=经营企业}" VerticalAlignment="Center"/>
-                                    <CheckBox Name="SubjectHolderFeedbackAdvanced" Content="持有人反馈上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人反馈上报}" VerticalAlignment="Center"/>
+                                    <!-- <CheckBox Name="SubjectInstitutionAdvanced" Content="医疗机构" IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=医疗机构}" VerticalAlignment="Center"/> -->
+                                    <!-- <CheckBox Name="SubjectHolderInitiatedAdvanced" Content="持有人自主上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=持有人自主上报}" VerticalAlignment="Center"/> -->
+                                    <CheckBox Name="SubjectEnterpriseAdvanced" Content="生产企业"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=生产企业}" VerticalAlignment="Center"/>
+                                    <CheckBox Name="SubjectHolderFeedbackAdvanced" Content="反馈上报"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=反馈上报}" VerticalAlignment="Center"/>
                                     <CheckBox Name="SubjectOtherAdvanced" Content="其他"  IsChecked="{Binding Path=ReportSubject, Converter={StaticResource checkBoxesToListConverter}, ConverterParameter=其他}" VerticalAlignment="Center"/>
 
                                 </StackPanel>

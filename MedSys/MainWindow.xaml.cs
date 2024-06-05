@@ -625,14 +625,14 @@ namespace MedSys
             get { return _otherNoOutlier; }
         }
 
-        private bool _commentStateCityCommented = true;
+        private bool _commentStateCityCommented = false;
         public bool CommentStateCityCommented
         {
             set { _commentStateCityCommented = value; OnPropertyChanged(); }
             get { return _commentStateCityCommented; }
         }
 
-        private bool _commentStateProvinceCommented = true;
+        private bool _commentStateProvinceCommented = false;
         public bool CommentStateProvinceCommented
         {
             set { _commentStateProvinceCommented = value; OnPropertyChanged(); }
