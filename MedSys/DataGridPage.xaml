@@ -37,8 +37,8 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Name="tbkRecords" Grid.Column="0" Style="{StaticResource PageTextBlock1}" Foreground="#01544A" Visibility="Visible" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                <TextBlock Name="tbkRecords" Grid.Column="0" Style="{StaticResource PageTextBlock1}" Foreground="#FF000000" Visibility="Visible" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Center">
                     <Grid>
                         <Grid.RowDefinitions >
                             <RowDefinition Height="30"></RowDefinition>

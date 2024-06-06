@@ -115,7 +115,7 @@ DependencyProperty.Register("Page",
         private void DisplayPagingInfo()
         {
             SolidColorBrush brush = new SolidColorBrush(Colors.Gray);
-            SolidColorBrush brush2 = new SolidColorBrush(Color.FromArgb(255, 1, 84, 74));
+            SolidColorBrush brush2 = new SolidColorBrush(Colors.Black);
             if (this.pIndex == 1)
             {
                 this.btnPrev.IsEnabled = false;
