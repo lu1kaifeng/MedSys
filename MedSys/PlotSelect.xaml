@@ -128,16 +128,16 @@
                         <ScottPlot:WpfPlot  x:Name="DosageGroupPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="19">
-                        <ScottPlot:WpfPlot  x:Name="DosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                        <local:AdvancedPlot  x:Name="DosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="20">
-                        <ScottPlot:WpfPlot  x:Name="DeliveryPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                        <local:AdvancedPlot  x:Name="DeliveryPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="21">
                         <ScottPlot:WpfPlot  x:Name="QuantityPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="22">
-                        <ScottPlot:WpfPlot  x:Name="BatchPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                        <local:AdvancedPlot  x:Name="BatchPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="23">
                         <ScottPlot:WpfPlot  x:Name="CombinedPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />

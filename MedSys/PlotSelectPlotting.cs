@@ -199,6 +199,33 @@ namespace MedSys
             ManufacturerPlot.PlotData = ExactBuckets(m => m.持有人或生产厂家,valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
 
         }
+
+
+        [Plotting]
+        public void DosagePlotting()
+        {
+            DosagePlot.PlotData = ExactBucketsSQL("用法用量", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+        }
+
+        [Plotting]
+        public void DeliveryPlotting()
+        {
+            DeliveryPlot.PlotData = ExactBucketsSQL("给药途径", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+        }
+
+
+        [Plotting]
+        public void BatchPlotting()
+        {
+            BatchPlot.PlotData = ExactBucketsSQL("生产批号", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+        }
+
+        [Plotting]
+        public void CombinedPlotting()
+        {
+
+        }
+
         [Plotting]
         public void DataBrowserInit()
         {
@@ -210,6 +237,9 @@ namespace MedSys
             }
             DataBrowse.Data = BackingData.BackingData;
         }
+
+
+
         private void PlotBucketsIfContain(IEnumerable<string> labelList,Func<med,string> selector,WpfPlot targetPlot)
         {
             targetPlot.Plot.Clear();
