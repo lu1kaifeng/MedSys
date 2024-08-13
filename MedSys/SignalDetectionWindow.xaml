@@ -50,7 +50,7 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <DataGrid x:Name="SelectionGrid" Grid.Column="0" Grid.Row="1"  AutoGenerateColumns="False"
+                    <DataGrid IsReadOnly="True" x:Name="SelectionGrid" Grid.Column="0" Grid.Row="1"  AutoGenerateColumns="False"
           ItemsSource="{Binding Path=Names, Mode=OneWay}" >
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
@@ -120,7 +120,7 @@
                     </TextBox>
                     <TabControl Grid.Column="0" Grid.Row="1">
                         <TabItem Header="统计数据">
-                            <DataGrid   AutoGenerateColumns="False"
+                            <DataGrid IsReadOnly="True"  AutoGenerateColumns="False"
 ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                                 <DataGrid.Columns>
 
@@ -134,7 +134,7 @@ ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                             </DataGrid>
                         </TabItem>
                         <TabItem Header="ROR">
-                            <DataGrid   AutoGenerateColumns="False"
+                            <DataGrid IsReadOnly="True"  AutoGenerateColumns="False"
 ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                                 <DataGrid.Columns>
 
@@ -149,7 +149,7 @@ ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                             </DataGrid>
                         </TabItem>
                         <TabItem Header="PRR">
-                            <DataGrid   AutoGenerateColumns="False"
+                            <DataGrid IsReadOnly="True"  AutoGenerateColumns="False"
 ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                                 <DataGrid.Columns>
 
@@ -164,7 +164,7 @@ ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                             </DataGrid>
                         </TabItem>
                         <TabItem Header="MHRA">
-                            <DataGrid AutoGenerateColumns="False"
+                            <DataGrid IsReadOnly="True" AutoGenerateColumns="False"
 ItemsSource="{Binding Path=DetectionResult, Mode=OneWay}">
                                 <DataGrid.Columns>
 
