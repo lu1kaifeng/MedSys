@@ -8,6 +8,7 @@
              >
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <!--<<< Will resize taking all remaining space -->
         </Grid.RowDefinitions>
@@ -15,7 +16,30 @@
             <ColumnDefinition Width="*" />
 
         </Grid.ColumnDefinitions>
+        <ToolBarTray Grid.Column="0" Grid.Row="0" >
+            <ToolBar>
 
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Data,Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0"/>
+                <Button Content="导出所选项" Click="Export_Selected">
+
+                </Button>
+                <Button Content="删除所选项" Click="Delete_Selected">
+
+                </Button>
+            </ToolBar>
+            </ToolBarTray>
+            <DataGrid IsReadOnly="True" SelectionMode="Extended"  x:Name="dataGrid" ItemsSource="{Binding Data,Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0">
+            <DataGrid.CommandBindings>
+                <CommandBinding Command="SelectAll" Executed="MyGrid_SelectAll"/>
+            </DataGrid.CommandBindings>
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    
+                        <CheckBox IsChecked="{Binding Path=IsSelected, Mode=TwoWay,
+                     RelativeSource={RelativeSource FindAncestor,
+                      AncestorType={x:Type DataGridRow}}}"/>
+                    
+                </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+        </DataGrid>
     </Grid>
 </UserControl>

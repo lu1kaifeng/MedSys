@@ -16,6 +16,10 @@ using System.Data.Linq.SqlClient;
 using ScottPlot;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
+using MiniExcelLibs;
+using System.Data;
+using FastMember;
 
 namespace MedSys
 {
@@ -33,6 +37,111 @@ namespace MedSys
             InitializeComponent();
             Console.WriteLine(MedDRAEntry.Entries);
             DataContext = viewModel;
+        }
+        private T ConvertToObject<T>(IDictionary<string, object> rd, out HashSet<string> extraCol, out HashSet<string> missingCol, IDictionary<string, string> alias) where T : class, new()
+        {
+            IDictionary<string, object> rd1 = new Dictionary<string, object>();
+            foreach (var r in rd)
+            {
+                rd1.Add(alias.ContainsKey(r.Key) ? alias[r.Key] : r.Key, r.Value);
+            }
+
+            rd = rd1;
+            Type type = typeof(T);
+            var accessor = TypeAccessor.Create(type);
+            var members = accessor.GetMembers();
+            var t = new T();
+            extraCol = new HashSet<string>();
+            missingCol = t.GetType()
+                .GetProperties()
+                .Select(field => field.Name)
+                .Where((e) => !rd.Keys.ToHashSet().Contains(e)).ToHashSet();
+            missingCol.Remove("ID");
+            foreach (var e in rd)
+            {
+                if (e.Value != string.Empty)
+                {
+                    string fieldName = e.Key;//alias.ContainsKey(e.Key) ? alias[e.Key]:e.Key;
+
+                    if (members.Any(m => string.Equals(m.Name, fieldName, StringComparison.OrdinalIgnoreCase)))
+                    {
+
+                        accessor[t, fieldName] = e.Value;
+                    }
+                    else
+                    {
+                        extraCol.Add(fieldName);
+                    }
+                }
+            }
+            return t;
+        }
+        private void Workbook_Export(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.Filter = "报表文件|*.xlsx";
+            of.Multiselect = false;
+            bool ifComplete = (bool)of.ShowDialog();
+            HashSet<string> extraCol = null;
+            HashSet<string> missingCol = null;
+
+            if (ifComplete && of.FileName != null)
+            {
+                var excelDialog = new ExcelColSelectDialog(
+                    (MiniExcel.Query(of.FileName, useHeaderRow: true).First() as IDictionary<string, object>).Keys);
+                bool diagResult = (bool)excelDialog.ShowDialog();
+                var alias = excelDialog.Alias;
+                if (!diagResult)
+                {
+                    return;
+                }
+                var result = MiniExcel.Query(of.FileName, useHeaderRow: true).Select((ee) => ConvertToObject<med>(ee, out extraCol, out missingCol, alias)).Cast<med>().ToList();
+                string message = "即将导入" + result.Count.ToString() + "条条目;\n";
+                if (extraCol.Count == 0)
+                {
+                    message += "无多余列；\n";
+                }
+                else
+                {
+                    message += "发现多余列：";
+                    foreach (var ec in extraCol)
+                    {
+                        message += "\n" + ec.ToString() + "";
+                    }
+                    message += "；";
+                }
+                if (missingCol.Count == 0)
+                {
+                    message += "无缺失列；\n";
+                }
+                else
+                {
+                    message += "发现缺失列：";
+                    foreach (var mc in missingCol)
+                    {
+                        message += "\n" + mc.ToString() + "";
+                    }
+                    message += "；";
+                }
+                var res = MessageBox.Show(message, "确认导入", MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        Mouse.OverrideCursor = Cursors.Wait;
+                        var entities = new medEntities();
+                        entities.meds.AddRange(result);
+                        entities.SaveChanges();
+                        Mouse.OverrideCursor = null;
+                        //this.Paginator.ResetPage();
+                    }
+                    catch (DataException de)
+                    {
+                        MessageBox.Show(de.Message);
+                    }
+                }
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MedSys"
         mc:Ignorable="d"
-        Title="请选择导入的列" SizeToContent="WidthAndHeight">
+        MaxHeight="500"
+        Title="请选择导入的列" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     
     <Grid 
     >
