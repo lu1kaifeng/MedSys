@@ -11,35 +11,51 @@
     <Window.DataContext>
         <local:LoginDataContext/>
     </Window.DataContext>
-    <Grid Margin="5" local:MarginSetter.Margin="5" x:Name="GridMain">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition    Height="Auto" />
             <RowDefinition   Height="Auto" />
-            <RowDefinition    Height="Auto" />
-            <RowDefinition   Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Text="服务器" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-        <TextBox Height="24" Width="200" x:Name="tbBaseUrl" Text="{Binding BaseURL}" Grid.Row="0" Grid.Column="1"  TextWrapping="Wrap" VerticalAlignment="Center" />
-        <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Text="用户名" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-        <TextBlock  TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Text="密码" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-        <TextBox  Height="24" Width="200" x:Name="tbUserName" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1"  TextWrapping="Wrap"  VerticalAlignment="Center" />
-        <PasswordBox  Height="24" Width="200" x:Name="pbPassword" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"   />
-        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Image Source="splash.png" Width="100" >
 
-                <ColumnDefinition Width="*" />
+            </Image>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Margin="5" local:MarginSetter.Margin="5" x:Name="GridMain">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Content="登录" Margin="5" FontSize="16" Grid.Column="1" VerticalAlignment="Center" Click="Button_Click" />
-            <StackPanel Grid.Column="0"  Orientation="Horizontal">
-                <CheckBox Margin="5" x:Name="cbRemember" Content="记住登录凭据" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="cbRemember_Checked" Unchecked="cbRemember_Unchecked"/>
-                <CheckBox Margin="5"  x:Name="cbAuto" Content="自动登录" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="cbAuto_Checked" Unchecked="cbAuto_Unchecked"/>
-            </StackPanel>
-            
+            <Grid.RowDefinitions>
+                <RowDefinition    Height="Auto" />
+                <RowDefinition   Height="Auto" />
+                <RowDefinition    Height="Auto" />
+                <RowDefinition   Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Text="服务器" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox Height="24" Width="200" x:Name="tbBaseUrl" Text="{Binding BaseURL}" Grid.Row="0" Grid.Column="1"  TextWrapping="Wrap" VerticalAlignment="Center" />
+            <TextBlock TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" Text="用户名" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+            <TextBlock  TextWrapping="Wrap" Grid.Row="2" Grid.Column="0" Text="密码" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox  Height="24" Width="200" x:Name="tbUserName" Text="{Binding UserName}" Grid.Row="1" Grid.Column="1"  TextWrapping="Wrap"  VerticalAlignment="Center" />
+            <PasswordBox  Height="24" Width="200" x:Name="pbPassword" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"   />
+            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="登录" Margin="5" FontSize="16" Grid.Column="1" VerticalAlignment="Center" Click="Button_Click" />
+                <StackPanel Grid.Column="0"  Orientation="Horizontal">
+                    <CheckBox Margin="5" x:Name="cbRemember" Content="记住登录凭据" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="cbRemember_Checked" Unchecked="cbRemember_Unchecked"/>
+                    <CheckBox Margin="5"  x:Name="cbAuto" Content="自动登录" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="cbAuto_Checked" Unchecked="cbAuto_Unchecked"/>
+                </StackPanel>
+
+            </Grid>
         </Grid>
     </Grid>
+        
 </Window>
