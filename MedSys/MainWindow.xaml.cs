@@ -20,6 +20,7 @@ using Microsoft.Win32;
 using MiniExcelLibs;
 using System.Data;
 using FastMember;
+using WPFProgressBar;
 
 namespace MedSys
 {
@@ -95,51 +96,101 @@ namespace MedSys
                 {
                     return;
                 }
-                var result = MiniExcel.Query(of.FileName, useHeaderRow: true).Select((ee) => ConvertToObject<med>(ee, out extraCol, out missingCol, alias)).Cast<med>().ToList();
-                string message = "即将导入" + result.Count.ToString() + "条条目;\n";
-                if (extraCol.Count == 0)
+
+                
+                var result = new List<med>();
+                var pBarWin = new ProgressBarWindow("数据预处理");
+                pBarWin.Show();
+                Task.Run(() =>
                 {
-                    message += "无多余列；\n";
-                }
-                else
-                {
-                    message += "发现多余列：";
-                    foreach (var ec in extraCol)
+                    var input = MiniExcel.Query(of.FileName, useHeaderRow: true);
+                    var total = input.Count();
+                    var done = 1;
+                    foreach (var row in input)
                     {
-                        message += "\n" + ec.ToString() + "";
+                        result.Add(ConvertToObject<med>(row, out extraCol, out missingCol, alias) as med);
+                        
+                        Application.Current.Dispatcher.Invoke(
+                            () =>
+                            {
+                                pBarWin.UpdateProgress((int)((float)done / (float)total * 100));
+                                done++;
+                            });
                     }
-                    message += "；";
-                }
-                if (missingCol.Count == 0)
-                {
-                    message += "无缺失列；\n";
-                }
-                else
-                {
-                    message += "发现缺失列：";
-                    foreach (var mc in missingCol)
-                    {
-                        message += "\n" + mc.ToString() + "";
-                    }
-                    message += "；";
-                }
-                var res = MessageBox.Show(message, "确认导入", MessageBoxButton.YesNo);
-                if (res == MessageBoxResult.Yes)
-                {
-                    try
-                    {
-                        Mouse.OverrideCursor = Cursors.Wait;
-                        var entities = new medEntities();
-                        entities.meds.AddRange(result);
-                        entities.SaveChanges();
-                        Mouse.OverrideCursor = null;
-                        //this.Paginator.ResetPage();
-                    }
-                    catch (DataException de)
-                    {
-                        MessageBox.Show(de.Message);
-                    }
-                }
+                    Application.Current.Dispatcher.Invoke(
+                        () =>
+                        {
+                            pBarWin.Close();
+                            string message = "即将导入" + result.Count.ToString() + "条条目;\n";
+                            if (extraCol.Count == 0)
+                            {
+                                message += "无多余列；\n";
+                            }
+                            else
+                            {
+                                message += "发现多余列：";
+                                foreach (var ec in extraCol)
+                                {
+                                    message += "\n" + ec.ToString() + "";
+                                }
+                                message += "；";
+                            }
+                            if (missingCol.Count == 0)
+                            {
+                                message += "无缺失列；\n";
+                            }
+                            else
+                            {
+                                message += "发现缺失列：";
+                                foreach (var mc in missingCol)
+                                {
+                                    message += "\n" + mc.ToString() + "";
+                                }
+                                message += "；";
+                            }
+                            var res = MessageBox.Show(message, "确认导入", MessageBoxButton.YesNo);
+                            if (res == MessageBoxResult.Yes)
+                            {
+                                try
+                                {
+
+                                    var pBarWinUpload = new ProgressBarWindow("数据上传");
+                                    pBarWinUpload.Show();
+                                    var entities = new medEntities();
+                                    Task.Run(() =>
+                                    {
+                                        for (int i = 0; i < result.Count; i += 1000)
+                                        {
+
+                                            entities.meds.AddRange(result.GetRange(i,
+                                                result.Count - i > 1000 ? 1000 : result.Count - i));
+                                            entities.SaveChanges();
+                                            Application.Current.Dispatcher.Invoke(
+                                                () =>
+                                                {
+                                                    pBarWinUpload.UpdateProgress(
+                                                        (int)((float)i / (float)result.Count * 100));
+                                                    
+                                                });
+                                        }
+                                        Application.Current.Dispatcher.Invoke(
+                                            () =>
+                                            {
+                                                    pBarWinUpload.Close();
+                                            });
+                                    });
+
+                                    //this.Paginator.ResetPage();
+                                }
+                                catch (DataException de)
+                                {
+                                    MessageBox.Show(de.Message);
+                                }
+                            }
+                        });
+                });
+                
+                
             }
 
         }

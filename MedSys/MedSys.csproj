@@ -204,6 +204,9 @@
       <DependentUpon>PlotSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlotSelectPlotting.cs" />
+    <Compile Include="ProgressBarWindow.xaml.cs">
+      <DependentUpon>ProgressBarWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResizeAdorner.cs" />
     <Compile Include="SignalDetectionWindow.xaml.cs">
       <DependentUpon>SignalDetectionWindow.xaml</DependentUpon>
@@ -267,6 +270,10 @@
     <Page Include="PlotSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProgressBarWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="SignalDetectionWindow.xaml">
       <SubType>Designer</SubType>
