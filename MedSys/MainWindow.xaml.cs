@@ -82,6 +82,7 @@ namespace MedSys
             OpenFileDialog of = new OpenFileDialog();
             of.Filter = "报表文件|*.xlsx";
             of.Multiselect = false;
+            of.Title = "选择符合模板格式的报表文件进行导入";
             bool ifComplete = (bool)of.ShowDialog();
             HashSet<string> extraCol = null;
             HashSet<string> missingCol = null;
