@@ -34,6 +34,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_系统">
                     <MenuItem Header="_数据导入"  Click="Workbook_Export"/>
+                    <MenuItem Header="_高级数据管理" Click="MenuItem_Click_3"  />
                     <Separator />
                     <MenuItem Header="_切换账户" Click="MenuItem_Click_1"/>
                     <MenuItem Header="_退出" Click="MenuItem_Click_2"/>

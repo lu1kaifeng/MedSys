@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFProgressBar"
         mc:Ignorable="d"
-        Title="ProgressBarWindow" Height="80" Width="400" WindowStartupLocation="CenterScreen">
+        Title="ProgressBarWindow" Height="80" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

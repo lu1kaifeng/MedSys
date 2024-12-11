@@ -101,7 +101,15 @@ DependencyProperty.Register("BackingData",
             {
                 foreach (var m in myClass.PlottingMethods)
                 {
-                    m.Invoke(myClass, null);
+                    try
+                    {
+                        m.Invoke(myClass, null);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    
                 }
             }catch (Exception ex)
             {

@@ -21,6 +21,7 @@ using MiniExcelLibs;
 using System.Data;
 using FastMember;
 using WPFProgressBar;
+using System.Data.Entity.Infrastructure;
 
 namespace MedSys
 {
@@ -158,6 +159,9 @@ namespace MedSys
                                     var pBarWinUpload = new ProgressBarWindow("数据上传");
                                     pBarWinUpload.Show();
                                     var entities = new medEntities();
+                                    entities.Configuration.ValidateOnSaveEnabled = false;
+                                    var _transactionContext = entities.Database.BeginTransaction();
+                                    entities.Database.ExecuteSqlCommand("SET ANSI_WARNINGS OFF");
                                     Task.Run(() =>
                                     {
                                         for (int i = 0; i < result.Count; i += 1000)
@@ -174,6 +178,9 @@ namespace MedSys
                                                     
                                                 });
                                         }
+                                        _transactionContext.Commit();
+                                        if (_transactionContext != null)
+                                            _transactionContext.Dispose();
                                         Application.Current.Dispatcher.Invoke(
                                             () =>
                                             {
@@ -260,6 +267,11 @@ namespace MedSys
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            new DataImportWindow().Show();
         }
     }
     public partial class MainWindowViewModel : INotifyPropertyChanged

@@ -3,6 +3,7 @@ using FastMember;
 using Microsoft.Win32;
 using MiniExcelLibs;
 using NumSharp.Utilities;
+using ScottPlot.Palettes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -287,6 +288,25 @@ namespace MedSys
                 {
                     MiniExcel.SaveAs(of.FileName, selected);
                 }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("清空所有数据", "危险：请确认清除所有数据", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                var med = new medEntities();
+
+                med.meds.SqlQuery("delete from meds");
+                using (var sc = med.Database.Connection)
+                using (var cmd = sc.CreateCommand())
+                {
+                    sc.Open();
+                    cmd.CommandText = "DELETE FROM med";
+                    cmd.ExecuteNonQuery();
+                }
+                this.Close();
             }
         }
     }

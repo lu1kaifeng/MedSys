@@ -29,9 +29,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
             <Button Grid.Column="4" Content="由报表导入数据" Click="Button_Click"/>
+            <Button Grid.Column="5" Content="清空数据" Click="Button_Click_1"/>
             <TextBox x:Name="MatchingStrBox"   input:InputMethod.IsInputMethodEnabled="False" Width="120" Grid.Column="1" TextWrapping="Wrap" Text="{Binding RangeSelectTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="MatchingStrBox_PreviewTextInput" diag:PresentationTraceSources.TraceLevel="High" PreviewKeyDown="MatchingStrBox_PreviewKeyDown" HorizontalAlignment="Right"  >
 
                 <TextBox.Style>

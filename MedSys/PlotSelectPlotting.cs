@@ -130,7 +130,7 @@ namespace MedSys
                 Parallel.ForEach(data,
                         (a) =>
                     {
-                        if (a.系统不良反应术语.Contains(pt.Name)) lock (thisLock) { acc++; };
+                        if (a.系统不良反应术语!=null && a.系统不良反应术语.Contains(pt.Name)) lock (thisLock) { acc++; };
                     });
                 if (acc != 0) buckets.TryAdd(pt, acc);
 
