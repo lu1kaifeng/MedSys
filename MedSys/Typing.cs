@@ -29,7 +29,7 @@ namespace MedSys
         public static string[] ReportEstimateType = new string[] { string.Empty, "是", "否" };
         public static string[] IsDomesticType = new string[] { string.Empty, "是", "否" };
         public static string[] SexType = new string[] { string.Empty, "男", "女", "不详" };
-        public static string[] ReportTypeType = new string[] { "全部", "严重", "一般" };
+        public static string[] ReportTypeType = new string[] { String.Empty, "严重", "一般" };
 
         public static string[] InfoSourceType = new string[]
             { defaultStr, "监管机构", "患者/亲友", "医疗机构", "经营企业", "文献", "研究", "项目", "其他" };

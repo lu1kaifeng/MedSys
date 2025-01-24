@@ -31,10 +31,21 @@ namespace MedSys
                 }
             });
         }
+
+        static string ageGroupTickFormatter(double position)
+        {
+            if (position > 0 && position % 10 == 0)
+            {
+                return (position - 9).ToString() + position.ToString()+"岁";
+            }
+
+            return "";
+        }
+
         [Plotting]
         public void AgePlotting()
         {
-
+            
             AgePlot.PlotData = ExactBuckets((med) => {
                 double age = 0;
                 if (double.TryParse(med.年龄, out age))
@@ -55,10 +66,14 @@ namespace MedSys
                 {
                     return string.Empty;
                 }
-                return (((int)Math.Round((int)age / 10.0)) * 10).ToString();
+
+                int rangeNum = (((int)Math.Round((int)age / 10.0)) * 10);
+                return rangeNum.ToString() + "-"+(rangeNum + 10).ToString()+"岁";
 
             },  Comparer<string>.Create((k1, k2) =>
             {
+                k1 = k1.Split('-')[0];
+                k2 = k2.Split('-')[0];
                 var ik1 = int.Parse(k1);
                 var ik2 = int.Parse(k2);
                 if(ik1 == ik2)
@@ -74,7 +89,7 @@ namespace MedSys
                     return -1;
                 }
                 return 0;
-            }));
+            }),noEmpty:true);
         }
 
         [Plotting]
@@ -195,6 +210,7 @@ namespace MedSys
         [Plotting]
         public void MedInfoPlottings()
         {
+            CommercialNamePlot.PlotData = ExactBucketsSQL("商品名称", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
             GenericNameNoDosagePlot.PlotData = ExactBucketsSQL("通用名称",valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
             ManufacturerPlot.PlotData = ExactBuckets(m => m.持有人或生产厂家,valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
 
@@ -204,7 +220,7 @@ namespace MedSys
         [Plotting]
         public void DosagePlotting()
         {
-            DosagePlot.PlotData = ExactBucketsSQL("用法用量", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
+            DosagePlot.PlotData = ExactBucketsSQL("剂型", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)));
         }
 
         [Plotting]
@@ -223,7 +239,7 @@ namespace MedSys
         [Plotting]
         public void CombinedPlotting()
         {
-
+            CombinedPlot.PlotData = ExactBucketsSQL("通用名称", valComparer: Comparer<int>.Create((x, y) => x == y ? 0 : (x < y ? 1 : -1)),additionalWhereClause: " 怀疑或并用 like N'%合并%'");
         }
 
         [Plotting]
@@ -339,7 +355,7 @@ namespace MedSys
             targetPlot.Refresh();
         }
 
-        private PlotData ExactBuckets(Func<med, string> selector,  IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
+        private PlotData ExactBuckets(Func<med, string> selector,  IComparer<string> keyComparer = null, IComparer<int> valComparer = null,Boolean noEmpty = false)
         {
             if (BackingData == null) return null;
             
@@ -349,7 +365,7 @@ namespace MedSys
             {
                 return null;
             }
-            ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>();
+            ConcurrentDictionary<string, int> buckets = new ConcurrentDictionary<string, int>(), newBuckets = new ConcurrentDictionary<string, int>();
 
             Parallel.ForEach(data,
                 (a) =>
@@ -369,6 +385,16 @@ namespace MedSys
                         }
 
                 });
+            if (noEmpty)
+            {
+                foreach (var pBucket in buckets)
+                {
+                    if (pBucket.Value != 0) newBuckets[pBucket.Key] = pBucket.Value;
+                }
+
+                buckets = newBuckets;
+            }
+
             IEnumerable<int> vals;
             IEnumerable<string> keys;
             if (keyComparer != null || valComparer != null)
@@ -402,15 +428,24 @@ namespace MedSys
             public string Key { set; get; }
             public int Value { set; get; }
         }
-        private PlotData ExactBucketsSQL(string colName, IComparer<string> keyComparer = null, IComparer<int> valComparer = null)
+        private PlotData ExactBucketsSQL(string colName, IComparer<string> keyComparer = null, IComparer<int> valComparer = null, string additionalWhereClause = "")
         {
             if (BackingData == null)
             {
                 return null;
             }
             var dbCtx = new medEntities();
+            var combinedWhere = BackingData.WhereClause;
+            if (combinedWhere.Contains("where") && !additionalWhereClause.Equals(""))
+            {
+                combinedWhere += " and " + additionalWhereClause;
+            }
+            else
+            {
+                combinedWhere += additionalWhereClause;
+            }
             var result = dbCtx.Database.SqlQuery<StatEntry>(
-                "select "+colName+" as 'Key',count("+colName+") 'Value' from dbo.med  " + BackingData.WhereClause+"  group by "+colName,BackingData.ParamList);
+                "select "+colName+" as 'Key',count("+colName+") 'Value' from dbo.med  " + combinedWhere+"  group by "+colName,BackingData.ParamList);
             
             Dictionary<string, int> buckets = new Dictionary<string, int>();
             foreach(var r in result)

@@ -148,8 +148,11 @@ namespace MedSys
                 var truncLabels = PlotData.labels.Slice(0, _numTop > PlotData.bins.Length ? PlotData.bins.Length : _numTop);
                 InternalPlot.Plot.Clear();
                 InternalPlot.Plot.Frameless(false);
+                InternalPlot.Plot.XAxis2.AxisTicks.IsVisible = false;
+                InternalPlot.Plot.YAxis2.AxisTicks.IsVisible = false;
                 InternalPlot.Configuration.UseRenderQueue = true;
-                InternalPlot.Plot.AddBar(truncBins, truncPositions);
+                var barPlot = InternalPlot.Plot.AddBar(truncBins, truncPositions);
+                barPlot.ShowValuesAboveBars = true;
                 InternalPlot.Plot.XTicks(truncPositions, truncLabels);
                 InternalPlot.Plot.AxisAuto();
                 InternalPlot.Refresh();
@@ -166,9 +169,13 @@ namespace MedSys
                     truncLabels = truncLabels.Append("其他").ToArray();
                 }
                 var pie = plt.AddPie(truncBins);
+                pie.ShowValues = true;
                 pie.SliceLabels = truncLabels;
                 pie.ShowPercentages = true;
-                //pie.ShowValues = true;
+                pie.Explode = true;
+                pie.SliceLabelPosition = 0.6;
+                pie.Size = .7;
+                pie.SliceLabelColors = pie.SliceFillColors;
                 pie.ShowLabels = true;
                 InternalPlot.Plot.Legend();
                 InternalPlot.Refresh();

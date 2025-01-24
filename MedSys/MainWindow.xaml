@@ -162,9 +162,9 @@
                                         <Label Content="报告编码:"/>
                                         <TextBox TextWrapping="Wrap" Text="{Binding ReportNoFrom}" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <!--<Label Content="至"/>
-                                        <TextBox TextWrapping="Wrap" Text="{Binding ReportNoTo}"  Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <TextBox TextWrapping="Wrap" Text="{Binding ReportNoTo}"  Width="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
                                         <Label Content="报告类型:"/>
-                                        <ComboBox Name="ReportType" Width="120"   ItemsSource="{Binding Path=ReportTypeEntries}" SelectedValue="{Binding Path=ReportTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
+                                        <ComboBox Name="ReportType" Width="120"   ItemsSource="{Binding Path=ReportTypeEntries}" SelectedValue="{Binding Path=ReportTypeEntry}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         <!--<RadioButton Content="全部"/>
                         <RadioButton Content="严重"/>
                         <RadioButton Content="一般"/>-->

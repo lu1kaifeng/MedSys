@@ -44,11 +44,12 @@
                         <TreeViewItem Header="对原患疾病的影响统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=13, Mode=TwoWay}"/>
                     </TreeViewItem>
                     <TreeViewItem  Header="按药品信息统计" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <TreeViewItem Header="按品种名称统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=14, Mode=TwoWay}"/>
-                        <TreeViewItem Header="按通用名称（不带剂型）统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=15, Mode=TwoWay}"/>
-                        <TreeViewItem Header="按通用名称（带剂型）统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=16, Mode=TwoWay}"/>
+                        
+                        <TreeViewItem Header="按通用名称统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=15, Mode=TwoWay}"/>
+                        <TreeViewItem Header="按商品名称统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=14, Mode=TwoWay}"/>
+                        <!--<TreeViewItem Header="按通用名称（带剂型）统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=16, Mode=TwoWay}"/>-->
                         <TreeViewItem Header="按生产企业统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=17, Mode=TwoWay}"/>
-                        <TreeViewItem Header="按剂型分组统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=18, Mode=TwoWay}"/>
+                        <!--<TreeViewItem Header="按剂型分组统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=18, Mode=TwoWay}"/>-->
                         <TreeViewItem Header="按剂型统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=19, Mode=TwoWay}"/>
                         <TreeViewItem Header="按给药途径统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=20, Mode=TwoWay}"/>
                         <TreeViewItem Header="按用法用量统计"  IsSelected="{Binding ElementName=PlotSelectControl, Path=PlotSelected, Converter={StaticResource treeViewItemToIntOneWayConverter}, ConverterParameter=21, Mode=TwoWay}"/>
@@ -113,7 +114,7 @@
 
 
                     <TabItem TabIndex="14">
-                        <ScottPlot:WpfPlot  x:Name="MedTypeNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                        <local:AdvancedPlot x:Name="CommercialNamePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="15">
                         <local:AdvancedPlot x:Name="GenericNameNoDosagePlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
@@ -140,7 +141,7 @@
                         <local:AdvancedPlot  x:Name="BatchPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     <TabItem TabIndex="23">
-                        <ScottPlot:WpfPlot  x:Name="CombinedPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
+                        <local:AdvancedPlot  x:Name="CombinedPlot" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,0,0" />
                     </TabItem>
                     
                 </TabControl>

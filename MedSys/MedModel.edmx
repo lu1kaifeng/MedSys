@@ -69,7 +69,7 @@
           <Property Name="不良反应术语代码" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应发生时间" Type="nvarchar" MaxLength="255" />
           <Property Name="不良反应持续时间" Type="nvarchar" MaxLength="255" />
-          <Property Name="不良反应过程描述" Type="text" />
+          <Property Name="不良反应过程描述" Type="nvarchar(max)" />
           <Property Name="不良反应结果" Type="nvarchar" MaxLength="255" />
           <Property Name="后遗症表现" Type="nvarchar" MaxLength="255" />
           <Property Name="死亡时间" Type="nvarchar" MaxLength="255" />
@@ -190,7 +190,7 @@
           <Property Name="不良反应术语代码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应发生时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="不良反应持续时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="不良反应过程描述" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="不良反应过程描述" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="不良反应结果" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="后遗症表现" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="死亡时间" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />

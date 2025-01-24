@@ -162,6 +162,12 @@ namespace MedSys
                 queryString += " and 报告表编码 like @reportId";
                 paramList.Add(new SqlParameter("@reportId",  ReportNoFrom + "%"));
             }
+
+            if (ReportTypeEntry != string.Empty)
+            {
+                queryString += " and 报告类型 like @reportType";
+                paramList.Add(new SqlParameter("@reportType", "%" + ReportTypeEntry + "%"));
+            }
             if (IsDomesticEntry != string.Empty)
             {
                 queryString += " and 是否境外报告 like @reportDomestic";
