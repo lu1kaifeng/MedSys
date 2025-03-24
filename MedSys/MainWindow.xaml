@@ -13,6 +13,9 @@
         <local1:CheckBoxesToListConverter x:Key="baseMedConverter" />
     </Window.Resources>
 
+    <Window.DataContext>
+        <local:MainWindowViewModel></local:MainWindowViewModel>
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
